@@ -1,5 +1,5 @@
 # LeWorkManager
-A worklaod management system for LeYanLab.  
+A workload management system for LeYanLab.  
 By  
 Qiu Shiyan  
 Sun Shichu
