@@ -1,0 +1,899 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">任务进度</h1>
+                        <a href="javascript:backTotask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回任务
+                        </a>
+                    </div>
+
+                    <p class="mb-4">上报任务的计划进度与实际进度</p>
+
+                    <!-- 计划进度 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">计划进度</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updatePlanProgress" onclick="getPlanId()">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 新增计划
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="planSchedules" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>计划序号</th>
+                                                <th>时间节点</th>
+                                                <th>子任务</th>
+                                                <th>完成度</th>
+                                                <th>文字描述</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际进度 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">实际进度</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updateRealSchedule" onclick="getRealId()">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 新增进度
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="realSchedules" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>进度序号</th>
+                                                <th>时间</th>
+                                                <th>子任务</th>
+                                                <th>实际完成度</th>
+                                                <th>文字描述</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!----------------- 模态框 ----------------->
+                    
+                    <!-- 计划新增 修改 Modal-->
+                    <div class="modal fade" id="updatePlanProgress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="planId">
+
+                                <div class="modal-header">
+                                    <h5 id="changePlanTitle" class="modal-title">计划修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- 时间节点 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>时间节点<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input type="text" class="form-control layui-input" id="planDateTime" placeholder="请输入时间节点">
+                                        </div>
+                                    </div>
+
+                                    <!-- 子任务 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>子任务<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%;margin-top:5px">
+                                            <select id="childTaskSelect" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                            
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- 预计完成度 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>预计完成度<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:65%">
+                                            <input id="planPercent" class="form-control" placeholder="请以百分数的形式输入">
+                                        </div>
+                                    </div>
+
+                                    <!-- 文字描述 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>文字描述：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <textarea id="planText" class="form-control" placeholder="请输入计划文字描述">
+                                        </textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changePlanButton" class="btn btn-primary" href="javascript:updatePlan()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际新增 修改 Modal-->
+                    <div class="modal fade" id="updateRealSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="realScheduleId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeRealTitle" class="modal-title">计划修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- 当前时间 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>当前时间<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input type="text" class="form-control layui-input" id="nowDateTime" placeholder="请输入当前时间" disabled="disabled">
+                                        </div>
+                                    </div>
+
+                                    <!-- 子任务 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>子任务<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%;margin-top:5px">
+                                            <select id="childTaskRealSelect" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                            
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- 实际完成进度 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>实际完成度<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:65%">
+                                            <input id="realPercent" class="form-control" placeholder="请以百分数的形式输入">
+                                        </div>
+                                    </div>
+
+                                    <!-- 文字描述 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>文字描述：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <textarea id="realText" class="form-control" placeholder="请输入计划文字描述">
+                                        </textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeRealButton" class="btn btn-primary" href="javascript:updateReal()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 计划进度删除确认 Modal-->
+                    <div class="modal fade" id="deletePlanSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">计划进度删除确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要删除此计划进度吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:deletePlanSchedule()">确认删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际进度删除确认 Modal-->
+                    <div class="modal fade" id="deleteRealSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">实际进度删除确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要删除此实际进度吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:deleteRealSchedule()">确认删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!----------------- 模态框 ----------------->
+
+                    <script type="text/javascript">
+                        // console.log(localStorage.getItem("taskId"))
+                        // console.log(localStorage.getItem("roleId"))
+
+                        // 获取子任务
+                        function getChildTasksById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getChildTasksById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        childTasks = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, childTask) {
+
+                                            // text
+                                            index = Number(i) + 1
+                                            var selectText = index + ": " + childTask.name
+
+                                            // 设置默认
+                                            if (childTask.id == 1)
+                                            {
+                                                $('#childTaskSelect').append
+                                                (
+                                                    $('<option>').text(selectText).attr('value', childTask.id).attr('selected', 'selected')
+                                                )
+                                                $('#childTaskRealSelect').append
+                                                (
+                                                    $('<option>').text(selectText).attr('value', childTask.id).attr('selected', 'selected')
+                                                )
+                                            }
+                                            else
+                                            {
+                                                $('#childTaskSelect').append
+                                                (
+                                                    $('<option>').text(selectText).attr('value', childTask.id)
+                                                )
+                                                $('#childTaskRealSelect').append
+                                                (
+                                                    $('<option>').text(selectText).attr('value', childTask.id)
+                                                )
+                                            }
+                                        })
+
+                                        // 回调
+                                        getPlanScheduleById()
+                                        getRealScheduleById()
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取子任务失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        getChildTasksById()
+
+                        /* 计划列表 */
+
+                        function getPlanScheduleById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getPlanScheduleById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: userInfoJson.id,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 拉取计划列表成功
+                                        // toastr.success('拉取计划列表成功')
+                                        // console.log(res_json.message)
+                                        planSchedules = res_json.message
+                                        checkPlanSchedule = res_json.checkPlanSchedule
+
+                                        // 填表
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, planSchedule) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+                                            // console.log(childTasks)
+                                            childTaskIndex = 0
+
+                                            $.each(childTasks, function(childTaskI, childTask) {
+                                                if (childTask.id == planSchedule.childTaskId)
+                                                {
+                                                    childTaskIndex = childTaskI
+                                                }
+                                            })
+
+                                            var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updatePlanProgress\" onclick=\"getPlanId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改 \
+                                                        </a> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deletePlanSchedule\" onclick=\"getPlanId(" + i + ")\"> \
+                                                            <span aria-hidden=\"true\">×</span> 删除 \
+                                                        </a> \
+                                                    </td>"
+
+                                            let str="<tr>"
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + planSchedule.planDateTime + "</td>"
+                                                + "<td> " + childTasks[childTaskIndex].name + "</td>"
+                                                + "<td> " + planSchedule.planPercent + "% </td>"
+                                                + "<td> " + planSchedule.planText + "</td>"
+                                                + buttonText +
+                                                + "</tr>";
+
+                                            $("#planSchedules").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 拉取计划列表，显示原因
+                                        console.log("拉取计划列表失败")
+                                        // toastr.error(res_json.message)
+                                        let str="<tr><td colspan=\"5\" align=\"center\"> 暂无计划进度 </td></tr>"
+                                        $("#planSchedules").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function getPlanId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // 修改
+                                // console.log(arguments[0])
+                                document.getElementById('planId').value = planSchedules[arguments[0]].id
+                                // console.log(planSchedules[arguments[0]].id)
+                                document.getElementById('planDateTime').value = planSchedules[arguments[0]].planDateTime
+                                // console.log(planSchedules[arguments[0]].childTaskId)
+                                $("#childTaskSelect").val(planSchedules[arguments[0]].childTaskId)
+                                document.getElementById('planPercent').value = planSchedules[arguments[0]].planPercent + "%"
+                                document.getElementById('planText').value = planSchedules[arguments[0]].planText
+                                document.getElementById('changePlanTitle').innerHTML = "计划修改"
+                                document.getElementById('changePlanButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                // 新增
+                                $("#planId").val("")
+                                document.getElementById('planText').value = ""
+                                document.getElementById('changePlanTitle').innerHTML = "计划新增"
+                                document.getElementById('changePlanButton').innerHTML = "确认新增"
+                            }
+                        }
+
+                        function updatePlan()
+                        {
+                            // 百分数验证
+                            var patt = new RegExp(/^\d+%$/);
+
+                            if (document.getElementById('planDateTime').value == "")
+                            {
+                                toastr.error("节点时间不能为空")
+                            }
+                            else if (document.getElementById('planPercent').value == "")
+                            {
+                                toastr.error("预计完成度不能为空")
+                            }
+                            else if (!patt.test(document.getElementById('planPercent').value))
+                            {
+                                toastr.error("预计完成度格式不正确")
+                            }
+                            else if (document.getElementById('planId').value == "")
+                            {
+                                // 新增
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewPlan.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: localStorage.getItem("taskId"),
+                                        roleId: localStorage.getItem("roleId"),
+                                        userId: userInfoJson.id,
+                                        planDateTime: document.getElementById('planDateTime').value,
+                                        childTaskId: $('#childTaskSelect option:selected').val(),
+                                        planPercent: document.getElementById('planPercent').value,
+                                        planText: document.getElementById('planText').value
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 新增成功
+                                            toastr.success('计划新增成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 新增失败，显示原因
+                                            console.log("计划新增失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                // 修改
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updatePlan.php",
+                                    type: "POST",
+                                    data:{
+                                        planId: document.getElementById('planId').value,
+                                        taskId: localStorage.getItem("taskId"),
+                                        roleId: localStorage.getItem("roleId"),
+                                        userId: userInfoJson.id,
+                                        planDateTime: document.getElementById('planDateTime').value,
+                                        childTaskId: $('#childTaskSelect option:selected').val(),
+                                        planPercent: document.getElementById('planPercent').value,
+                                        planText: document.getElementById('planText').value
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('计划修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            console.log("计划修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        function deletePlanSchedule()
+                        {
+                            // console.log(document.getElementById('planId').value)
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/deletePlan.php",
+                                type: "POST",
+                                data:{
+                                    planId: document.getElementById('planId').value,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 修改成功
+                                        toastr.success('计划进度删除成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 修改失败，显示原因
+                                        console.log("计划进度删除失败")
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+
+                        /* 计划列表 */
+
+                        /* 实际列表 */
+
+                        function getRealScheduleById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getRealScheduleById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: userInfoJson.id,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 拉取计划列表成功
+                                        // toastr.success('拉取计划列表成功')
+                                        // console.log(res_json.message)
+                                        realSchedules = res_json.message
+                                        checkRealSchedule = res_json.checkRealSchedule
+
+                                        // 填表
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, realSchedule) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateRealSchedule\" onclick=\"getRealId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改 \
+                                                        </a> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteRealSchedule\" onclick=\"getRealId(" + i + ")\"> \
+                                                            <span aria-hidden=\"true\">×</span> 删除 \
+                                                        </a> \
+                                                    </td>"
+
+                                            childTaskIndex = 0
+
+                                            $.each(childTasks, function(childTaskI, childTask) {
+                                                if (childTask.id == realSchedule.childTaskId)
+                                                {
+                                                    childTaskIndex = childTaskI
+                                                }
+                                            })
+
+                                            let str="<tr>"
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + realSchedule.realDateTime + "</td>"
+                                                + "<td> " + childTasks[childTaskIndex].name + "</td>"
+                                                + "<td> " + realSchedule.realPercent + "% </td>"
+                                                + "<td> " + realSchedule.realText + "</td>"
+                                                + buttonText +
+                                                + "</tr>";
+
+                                            $("#realSchedules").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 拉取计划列表，显示原因
+                                        console.log("拉取实际列表失败")
+                                        // toastr.error(res_json.message)
+                                        let str="<tr><td colspan=\"5\" align=\"center\"> 暂无实际进度 </td></tr>"
+                                        $("#realSchedules").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function getRealId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // 修改
+                                // console.log(arguments[0])
+                                document.getElementById('realScheduleId').value = realSchedules[arguments[0]].id
+                                // console.log(realSchedules[arguments[0]].id)
+                                document.getElementById('nowDateTime').value = realSchedules[arguments[0]].realDateTime
+                                // console.log(realSchedules[arguments[0]].childTaskId)
+                                $("#childTaskRealSelect").val(realSchedules[arguments[0]].childTaskId)
+                                document.getElementById('realPercent').value = realSchedules[arguments[0]].realPercent + "%"
+                                document.getElementById('realText').value = realSchedules[arguments[0]].realText
+                                document.getElementById('changeRealTitle').innerHTML = "进度修改"
+                                document.getElementById('changeRealButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                // 新增
+                                $("#realScheduleId").val("")
+                                document.getElementById('realText').value = ""
+                                document.getElementById('nowDateTime').value = getCurrentTime()
+                                document.getElementById('changeRealTitle').innerHTML = "进度新增"
+                                document.getElementById('changeRealButton').innerHTML = "确认新增"
+                            }
+                        }
+
+                        function updateReal()
+                        {
+                            // 百分数验证
+                            var patt = new RegExp(/^\d+%$/);
+
+                            if (document.getElementById('realPercent').value == "")
+                            {
+                                toastr.error("实际完成进度不能为空")
+                            }
+                            else if (!patt.test(document.getElementById('realPercent').value))
+                            {
+                                toastr.error("实际完成进度格式不正确")
+                            }
+                            else if (document.getElementById('realScheduleId').value == "")
+                            {
+                                // 新增
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewRealSchedule.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: localStorage.getItem("taskId"),
+                                        roleId: localStorage.getItem("roleId"),
+                                        userId: userInfoJson.id,
+                                        realDateTime: document.getElementById('nowDateTime').value,
+                                        childTaskId: $('#childTaskRealSelect option:selected').val(),
+                                        realPercent: document.getElementById('realPercent').value,
+                                        realText: document.getElementById('realText').value
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 新增成功
+                                            toastr.success('实际进度新增成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 新增失败，显示原因
+                                            console.log("实际进度新增失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                // 修改
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateRealSchedule.php",
+                                    type: "POST",
+                                    data:{
+                                        realScheduleId: document.getElementById('realScheduleId').value,
+                                        taskId: localStorage.getItem("taskId"),
+                                        roleId: localStorage.getItem("roleId"),
+                                        userId: userInfoJson.id,
+                                        realDateTime: document.getElementById('nowDateTime').value,
+                                        childTaskId: $('#childTaskRealSelect option:selected').val(),
+                                        realPercent: document.getElementById('realPercent').value,
+                                        realText: document.getElementById('realText').value
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('实际进度修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            console.log("实际进度修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        function deleteRealSchedule()
+                        {
+                            // console.log(document.getElementById('realScheduleId').value)
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/deleteRealSchedule.php",
+                                type: "POST",
+                                data:{
+                                    realScheduleId: document.getElementById('realScheduleId').value,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 修改成功
+                                        toastr.success('实际进度删除成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 修改失败，显示原因
+                                        console.log("实际进度删除失败")
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+
+                        /* 实际列表 */
+
+                        // 获取客户端当前时间
+                        function getCurrentTime()
+                        {
+                            var date = new Date();
+			
+                            var year = date.getFullYear();        //年 ,从 Date 对象以四位数字返回年份
+                            var month = date.getMonth() + 1;      //月 ,从 Date 对象返回月份 (0 ~ 11) ,date.getMonth()比实际月份少 1 个月
+                            var day = date.getDate();             //日 ,从 Date 对象返回一个月中的某一天 (1 ~ 31)
+                            
+                            var hours = date.getHours();          //小时 ,返回 Date 对象的小时 (0 ~ 23)
+                            var minutes = date.getMinutes();      //分钟 ,返回 Date 对象的分钟 (0 ~ 59)
+                            var seconds = date.getSeconds();      //秒 ,返回 Date 对象的秒数 (0 ~ 59)   
+                            
+                            //修改月份格式
+                            if (month >= 1 && month <= 9) {
+                                month = "0" + month;
+                                }
+                            
+                            //修改日期格式
+                            if (day >= 0 && day <= 9) {
+                                day = "0" + day;
+                                }
+                            
+                            //修改小时格式
+                            if (hours >= 0 && hours <= 9) {
+                                hours = "0" + hours;
+                                }
+                            
+                            //修改分钟格式
+                            if (minutes >= 0 && minutes <= 9) {
+                                minutes = "0" + minutes;
+                                }
+                            
+                            //修改秒格式
+                            if (seconds >= 0 && seconds <= 9) {
+                                seconds = "0" + seconds;
+                                }
+                            
+                            //获取当前系统时间  格式(yyyy-mm-dd hh:mm:ss)
+                            var currentFormatDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+                            return currentFormatDate
+                        }
+
+                        function backTotask()
+                        {
+                            localStorage.removeItem("roleId");
+                            // localStorage.setItem("nowPage", "taskInfo");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=taskInfo";
+                        }
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#planDateTime', //指定元素
+                            type: 'datetime'
+                        });
+                    </script>

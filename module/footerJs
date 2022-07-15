@@ -1,0 +1,127 @@
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    
+    <script type="text/javascript">
+        function logout()
+        {
+            localStorage.clear();
+            document.getElementById('nickName').innerHTML = ""
+            document.getElementById('avatarUrl').src = ""
+            document.getElementById('userInfo').style.display ="none"
+            document.getElementById('login').style.display ="block"
+            document.getElementById('regest').style.display ="block"
+            document.getElementById('mainPageUnlogin').style.display ="block"
+            document.getElementById('mainPageLogin').style.display ="none"
+            document.getElementById('adminDisplay').style.display ="none"
+            $('#logoutModal').modal('hide')
+            window.location.href = "index.php?nowPage=index";
+            // location.reload();
+        }
+
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+
+        function getJsonLength(jsonData)
+        {
+            var jsonLength = 0;
+            for(var item in jsonData){
+                    jsonLength++;
+            }
+            return jsonLength;
+        }
+        
+        if (localStorage.getItem("hasUserInfo"))
+        {
+            var userInfo = localStorage.getItem("userInfo")
+            var userInfoJson = JSON.parse(userInfo)
+            // console.log(userInfo)
+            console.log(userInfoJson)
+
+            document.getElementById('nickName').innerHTML = userInfoJson.nickName
+
+            // 更新图片
+            document.getElementById('avatarUrl').src = userInfoJson.avatarUrl
+
+            document.getElementById('userInfo').style.display ="block"
+            document.getElementById('login').style.display ="none"
+            document.getElementById('regest').style.display ="none"
+            document.getElementById('mainPageUnlogin').style.display ="none"
+            document.getElementById('mainPageLogin').style.display ="block"
+            if (userInfoJson.permit < 2)
+            {
+                document.getElementById('adminDisplay').style.display ="block"
+            }
+        }
+
+        /*
+        if (getQueryVariable("nowPage"))
+        {
+            localStorage.setItem("nowPage", getQueryVariable("nowPage"));
+        }
+        */
+
+        // console.log(getQueryVariable("nowPage"))
+        if (getQueryVariable("nowPage") == false)
+        {
+            window.location.href = "index.php?nowPage=index";
+        }
+
+        switch (getQueryVariable("nowPage"))
+        {
+            case "index": $("#mainPageLogin").load("panel/index"); $("li#indexNav").addClass("active"); break;
+            case "userInfo": $("#mainPageLogin").load("panel/userInfo"); break;
+            case "publishTasks": $("#mainPageLogin").load("panel/publishTasks"); $("li#publishTasksNav").addClass("active"); break;
+            case "joinedTasks": $("#mainPageLogin").load("panel/joinedTasks"); $("li#joinedTasksNav").addClass("active"); break;
+            case "createNewTask": $("#mainPageLogin").load("panel/createNewTask"); break;
+            case "manageTask": $("#mainPageLogin").load("panel/manageTask"); break;
+            case "taskInfo": $("#mainPageLogin").load("panel/taskInfo"); break;
+            case "schedule": $("#mainPageLogin").load("panel/schedule"); break;
+            case "scheduleView": $("#mainPageLogin").load("panel/scheduleView"); break;
+            case "score": $("#mainPageLogin").load("panel/score"); break;
+            case "headScore": $("#mainPageLogin").load("panel/headScore"); break;
+            case "checkTasks": $("#mainPageLogin").load("panel/checkTasks"); $("li#tasksAdminNav").addClass("active"); $("a#checkTasksNav").addClass("active"); $("div#collapseTasks").addClass("show"); break;
+        }
+
+        function userInfoSetting()
+        {
+            // localStorage.setItem("nowPage", "userInfo");
+            window.location.href = "index.php?nowPage=userInfo";
+            // location.reload();
+        }
+
+        function toIndex()
+        {
+            // localStorage.setItem("nowPage", "index");
+            window.location.href = "index.php?nowPage=index";
+            // location.reload();
+        }
+
+        function toPublishTasks()
+        {
+            // localStorage.setItem("nowPage", "publishTasks");
+            window.location.href = "index.php?nowPage=publishTasks";
+            // location.reload();
+        }
+
+        function toJoinedTasks()
+        {
+            // localStorage.setItem("nowPage", "joinedTasks");
+            window.location.href = "index.php?nowPage=joinedTasks";
+            // location.reload();
+        }
+
+        function toCheckTasks()
+        {
+            // localStorage.setItem("nowPage", "checkTasks");
+            window.location.href = "index.php?nowPage=checkTasks";
+            // location.reload();
+        }
+    </script>

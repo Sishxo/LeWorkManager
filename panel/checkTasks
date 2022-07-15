@@ -1,0 +1,540 @@
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">任务审核</h1>
+                    <p class="mb-4">管理员可以对未审核的任务进行审核</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">未审核的任务</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="uncheckedAllTasks_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="uncheckedAllTasks_lengthChange()">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input type="search" class="form-control form-control-sm" aria-controls="dataTable">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格本体 -->
+                                    <div class="row">
+                                        <div class="col-sm-12">    
+                                            <table class="table table-bordered" id="uncheckedAllTasksTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>任务序号</th>
+                                                        <th>任务分类</th>
+                                                        <th>任务标题</th>
+                                                        <th>任务标签</th>
+                                                        <th>发起人</th>
+                                                        <th>泺研币</th>
+                                                        <th>泺学分</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格下方 -->
+                                    <div class=row>
+                                        
+                                        <!-- 显示编号 -->
+                                        <div class="col-sm-12 col-md-5">
+                                            
+                                        </div>
+
+                                        <!-- 上一页 下一页 -->
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <a href="" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
+                                                            上一页
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">我审核通过的任务</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="checkedTasks_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input type="search" class="form-control form-control-sm" aria-controls="dataTable">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格本体 -->
+                                    <div class="row">
+                                        <div class="col-sm-12">    
+                                            <table class="table table-bordered" id="checkedTasksTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>任务序号</th>
+                                                        <th>任务分类</th>
+                                                        <th>任务标题</th>
+                                                        <th>任务标签</th>
+                                                        <th>发起人</th>
+                                                        <th>泺研币</th>
+                                                        <th>泺学分</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格下方 -->
+                                    <div class=row>
+                                        
+                                        <!-- 显示编号 -->
+                                        <div class="col-sm-12 col-md-5">
+                                        </div>
+
+                                        <!-- 上一页 下一页 -->
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 任务审核 Modal-->
+                    <div class="modal fade" id="checkTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="taskId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeChildTaskTitle" class="modal-title">任务审核</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font color="red">请对泺研币和泺学分进行二次确认，如有不同以管理员修改为准</font>
+                                    <!-- 泺研币 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>泺研币<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="taskMoneyChanged" class="form-control" placeholder="请输入泺研币数量">
+                                        </div>
+                                    </div>
+
+                                    <!-- 泺学分 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>泺学分<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="taskPointChanged" class="form-control" placeholder="请输入泺学分数量">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeChildTaskButton" class="btn btn-primary" href="javascript:checkTask()">确认通过</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <script type="text/javascript">
+                        // 初始化页码
+                        var uncheckedPage = 1  // 未审核任务页码
+                        var checkedPage = 1    // 已审核任务页码
+
+                        $('[data-toggle="tooltip"]').tooltip()
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+
+                                    // 储存
+                                    taskType = res_json.message
+
+                                    // 回调
+                                    getUncheckedPublicTasks()
+                                    getCheckedPublicTasks()
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+
+                        // 获取未审核数据
+                        function getUncheckedPublicTasks()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/uncheckedAllTasks.php",
+                                type: "POST",
+                                data:{
+                                    page: uncheckedPage,
+                                    length: $('#uncheckedAllTasks_length option:selected').val()
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        uncheckedAllTasksList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, task) {
+                                            // 显示标签
+                                            var taskLabelText = ""
+                                            $.each(task.labels, function(i, taskLabel) {
+                                                // console.log(taskLabel.label)
+                                                taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                                // console.log(taskLabelText)
+                                            })
+                                            if (taskLabelText == "")
+                                            {
+                                                taskLabelText = "无"
+                                            }
+
+                                            // console.log(task)
+                                            var index = (uncheckedPage - 1) * $('#uncheckedAllTasks_length option:selected').val() + Number(i) + 1
+                                            // console.log(index)
+                                            
+                                            // console.log(task.projectType)
+                                            // console.log(taskType['0'])
+                                            // console.log(taskType[task.projectType - 1])
+                                            // console.log(taskType[task.projectType - 1].projectType)
+
+                                            // 显示提示框
+                                            // taskNameText = "<span data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + task.introduction + "\">" + task.proName + "</span>"
+                                            taskNameText = task.proName
+                                            // console.log(taskNameText)
+
+                                            // 按钮
+                                            var buttonText = "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 审核 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td>" + taskType[task.projectType - 1].projectType + "</td>"
+                                                + "<td>" + taskNameText + "</td>"                        
+                                                + "<td>" + taskLabelText + "</td>"
+                                                + "<td>" + task.headPersonName + "</td>"
+                                                + "<td>" + task.taskMoney + "</td>"
+                                                + "<td>" + task.taskPoint + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#uncheckedAllTasksTable").append(str);
+
+                                            // console.log(str)
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        // console.log("拉取任务列表失败")
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无未审核的任务 </td></tr>"
+                                        $("#uncheckedAllTasksTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 每页显示条数修改
+                        function uncheckedAllTasks_lengthChange()
+                        {
+                            document.getElementById('uncheckedAllTasksTable').innerHTML = "<thead> \
+                                                    <tr> \
+                                                        <th>任务序号</th> \
+                                                        <th>任务分类</th> \
+                                                        <th>任务标题</th> \
+                                                        <th>任务标签</th> \
+                                                        <th>发起人</th> \
+                                                        <th>泺研币</th> \
+                                                        <th>泺学分</th> \
+                                                        <th>操作</th> \
+                                                    </tr> \
+                                                </thead> \
+                                                <tbody> \
+                                                </tbody>"
+                            getUncheckedPublicTasks()
+                        }
+
+                        // 子任务模态框获取数据
+                        function getTaskId(i)
+                        {
+                            // console.log(arguments)
+                            $("#taskId").val(uncheckedAllTasksList[i].id)
+                            $("#taskMoneyChanged").val(uncheckedAllTasksList[i].taskMoney)
+                            $("#taskPointChanged").val(uncheckedAllTasksList[i].taskPoint)
+                        }
+
+                        function checkTask()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            if (document.getElementById('taskMoneyChanged').value == "")
+                            {
+                                toastr.error('泺研币数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskMoneyChanged').value))
+                            {
+                                toastr.error('泺研币数量只能为自然数')
+                            }
+                            else if (document.getElementById('taskPointChanged').value == "")
+                            {
+                                toastr.error('泺学分数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskPointChanged').value))
+                            {
+                                toastr.error('泺学分数量只能为自然数')
+                            }
+                            else
+                            {
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/checkTask.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: document.getElementById('taskId').value,
+                                        taskMoney: document.getElementById('taskMoneyChanged').value,
+                                        taskPoint: document.getElementById('taskPointChanged').value,
+                                        userId: userInfoJson.id
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 成功
+                                            toastr.success('任务审核成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 失败，显示原因
+                                            console.log("任务审核失败")
+                                            
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        // 获取已审核数据
+                        function getCheckedPublicTasks()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/checkedTasks.php",
+                                type: "POST",
+                                data:{
+                                    page: checkedPage,
+                                    length: $('#checkedTasks_length option:selected').val(),
+                                    userId: userInfoJson.id
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        checkedTasksList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, task) {
+                                            // 显示标签
+                                            var taskLabelText = ""
+                                            $.each(task.labels, function(i, taskLabel) {
+                                                // console.log(taskLabel.label)
+                                                taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                                // console.log(taskLabelText)
+                                            })
+                                            if (taskLabelText == "")
+                                            {
+                                                taskLabelText = "无"
+                                            }
+
+                                            // console.log(task)
+                                            var index = (checkedPage - 1) * $('#checkedTasks_length option:selected').val() + Number(i) + 1
+                                            // console.log(index)
+
+                                            // 显示提示框
+                                            taskNameText = "<span data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + task.introduction + "\">" + task.proName + "</span>"
+                                            // console.log(taskNameText)
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td>" + taskType[task.projectType - 1].projectType + "</td>"
+                                                + "<td>" + taskNameText + "</td>"                        
+                                                + "<td>" + taskLabelText + "</td>"
+                                                + "<td>" + task.headPersonName + "</td>"
+                                                + "<td>" + task.taskMoney + "</td>"
+                                                + "<td>" + task.taskPoint + "</td>"
+                                                + "</tr>";
+
+                                            $("#checkedTasksTable").append(str);
+
+                                            // console.log(str)
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        // console.log("拉取任务列表失败")
+                                        let str="<tr><td colspan=\"7\" align=\"center\"> 暂无我审核通过的任务 </td></tr>"
+                                        $("#checkedTasksTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        
+                    </script>

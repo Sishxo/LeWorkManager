@@ -1,0 +1,644 @@
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">个人信息</h1>
+
+                    <p class="mb-4">在本页面中，您可以更改您的个人信息</p>
+
+                    <!-- 积分模块 -->
+                    <div class="row">
+
+                        <!-- 当月泺学分 -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                本月泺学分
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 累计泺学分 -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                累计泺学分
+                                            </div>
+                                            <div id="taskPoint" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 泺研币 -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                泺研币
+                                            </div>
+                                            <div id="taskMoney" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fab fa-btc fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 本月工作量 -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                本月工作量（任务数量）
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 基础个人信息 -->
+                    <div class="card shadow mb-4">
+
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">基础个人信息</h6>
+                            </div>
+                            <div style="float:right">
+                                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#changeNameModal">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 修改信息
+                                </a>
+                            </div>
+                            <div style="margin-right:5px;float:right">
+                                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#changePasswdModal">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 修改密码
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 头像 -->
+                                <img class="img-profile rounded-circle" id="avatarUrlInfo" height="132" width="132" onerror = "javascript:this.src='img/global/undraw_profile.svg'"
+                                    src="">
+                                
+                                <br>
+
+                                <!-- 昵称 -->
+                                <div style="height:40px">
+                                    用户昵称：<font id="nickNameInfo"></font>
+                                </div>
+
+                                <!-- 真实姓名 -->
+                                <div style="height:40px">
+                                    真实姓名：<font id="name" style="height:30px"></font>
+                                </div>
+
+                                <!-- 用户权限 -->
+                                <div style="height:40px">
+                                    用户权限：<font id="permit" style="height:30px"></font>
+                                </div>
+
+                                <!-- 登录邮箱 -->
+                                <div style="height:40px">
+                                    登录邮箱：<font id="email" style="height:30px"></font>
+
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                                    data-toggle="modal" data-target="#changeEmailModal"><i
+                                    class="fas fa-pen fa-sm text-white-50"></i> 修改邮箱</a>
+                                </div>
+
+                                <!-- 手机号 -->
+                                <div style="height:40px">
+                                    手机号码：<font id="mobile" style="height:30px"></font>
+
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                                    data-toggle="modal" data-target="#changeMobileModal"><i
+                                    class="fas fa-pen fa-sm text-white-50"></i> 修改手机</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 详细个人信息 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">详细个人信息</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 专业 -->
+                                <div style="height:40px">
+                                    擅长专业：<font id="subject"></font>
+                                </div>
+
+                                <!-- 研究方向 -->
+                                <div style="height:40px">
+                                    研究方向：<font id="mobile"></font>
+                                </div>
+
+                                <!-- 爱好 -->
+                                <div style="height:40px">
+                                    个人爱好：<font id="hobby"></font>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 修改个人信息 昵称和真实姓名 Modal-->
+                    <div class="modal fade" id="changeNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">基础个人信息修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                
+                                    <!-- 昵称 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>用户昵称：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="nickNameChanged" class="form-control" placeholder="请输入用户昵称">
+                                        </div>
+                                    </div>
+
+                                    <!-- 真实姓名 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>真实姓名：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="nameChanged" class="form-control" placeholder="请输入真实姓名">
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:changeNames()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 邮箱修改 Modal -->
+                    <div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">登录邮箱修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 登录邮箱 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>登录邮箱：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="emailChanged" class="form-control" placeholder="请输入登录邮箱">
+                                        </div>
+                                    </div>
+
+                                    <!-- 验证码 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>验证码：</font>
+                                        </div>
+
+                                        <div style="float:left;width:55%;margin-left:6.5%">
+                                            <input id="emailVerifiCode" class="form-control" placeholder="请输入电子邮箱接收到的验证码">
+                                        </div>
+                                        
+                                        <div style="float:right;margin-top:1%">
+                                            <a href="javascript:getEmailVerifiCode()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">获取验证码</a>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:changeEmail()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 手机号修改 Modal-->
+                    <div class="modal fade" id="changeMobileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">登录手机号码修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 登录手机号码 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>手机号码：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="mobileChanged" class="form-control" placeholder="请输入手机号码">
+                                        </div>
+                                    </div>
+
+                                    <!-- 验证码 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>验证码：</font>
+                                        </div>
+
+                                        <div style="float:left;width:55%;margin-left:6.5%">
+                                            <input id="mobileVerifiCode" class="form-control" placeholder="请输入手机接收到的短信验证码">
+                                        </div>
+                                        
+                                        <div style="float:right;margin-top:1%">
+                                            <a href="javascript:getMobileVerifiCode()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">获取验证码</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:changeMobile()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 密码修改 Modal-->
+                    <div class="modal fade" id="changePasswdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">登录密码修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 原登录密码 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>原登录密码：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <input type="password" id="oldPasswd" class="form-control" placeholder="请输入原登录密码">
+                                        </div>
+                                    </div>
+
+                                    <!-- 新登录密码 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>新登录密码：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <input type="password" id="newPasswd" class="form-control" placeholder="请输入新登录密码">
+                                        </div>
+                                    </div>
+
+                                    <!-- 新登录密码验证 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>新密码验证：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <input type="password" id="newPasswdValid" class="form-control" placeholder="请再输入一次新登录密码">
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <font color="red">新密码中必须包含字母（区分大小写）、数字<br>至少8个字符，最多30个字符</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:changePasswd()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        document.getElementById('avatarUrlInfo').src = userInfoJson.avatarUrl
+                        document.getElementById('nickNameInfo').innerHTML = userInfoJson.nickName
+                        document.getElementById('name').innerHTML = userInfoJson.name
+                        document.getElementById('email').innerHTML = userInfoJson.email
+                        document.getElementById('mobile').innerHTML = userInfoJson.mobile
+                        if (userInfoJson.permit == 0)
+                        {
+                            document.getElementById('permit').innerHTML = "超级管理员"
+                        }
+                        else if (userInfoJson.permit == 1)
+                        {
+                            document.getElementById('permit').innerHTML = "管理员"
+                        }
+                        else if (userInfoJson.permit == 2)
+                        {
+                            document.getElementById('permit').innerHTML = "普通用户"
+                        }
+                        else
+                        {
+                            document.getElementById('permit').innerHTML = "未认证用户"
+                        }
+                        document.getElementById('hobby').innerHTML = userInfoJson.hobbies
+                        document.getElementById('subject').innerHTML = ""
+                        document.getElementById('nickNameChanged').value = userInfoJson.nickName
+                        document.getElementById('nameChanged').value = userInfoJson.name
+                        document.getElementById('emailChanged').value = userInfoJson.email
+                        document.getElementById('mobileChanged').value = userInfoJson.mobile
+                        document.getElementById('taskMoney').innerHTML = userInfoJson.taskMoney
+                        document.getElementById('taskPoint').innerHTML = userInfoJson.taskPoint
+
+                        function changeNames()
+                        {
+                            if (document.getElementById('nickNameChanged').value == "")
+                            {
+                                toastr.error('用户昵称不能为空')
+                            }
+                            else if (document.getElementById('nameChanged').value == "")
+                            {
+                                toastr.error('真实姓名不能为空')
+                            }
+                            else
+                            {
+                                // ajax
+                                // console.log(userInfoJson.username)
+                                // console.log(document.getElementById("nickNameChanged").value)
+                                // console.log(document.getElementById("nameChanged").value)
+
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/changeNames.php",
+                                    type: "POST",
+                                    data:{
+                                        username: userInfoJson.username,
+                                        nickNameChanged: document.getElementById("nickNameChanged").value,
+                                        nameChanged: document.getElementById("nameChanged").value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('基础个人信息修改成功')
+                                            // console.log(res_json.message)
+
+                                            // 本地储存
+                                            userInfoJson.nickName = document.getElementById("nickNameChanged").value
+                                            userInfoJson.name = document.getElementById("nameChanged").value
+                                            localStorage.setItem("userInfo", JSON.stringify(userInfoJson))
+                                            
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            } 
+                        }
+
+                        function changeEmail()
+                        {
+                            // 电子邮件格式验证 正则表达式
+                            var rightEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+
+                            if (document.getElementById('emailChanged').value == "")
+                            {
+                                toastr.error('登录邮箱不能为空')
+                            }
+                            else if (!rightEmail.test(document.getElementById('emailChanged').value))
+                            {
+                                toastr.error('输入的电子邮箱格式不正确')
+                            }
+                            else
+                            {
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/changeEmail.php",
+                                    type: "POST",
+                                    data:{
+                                        username: userInfoJson.username,
+                                        emailChanged: document.getElementById("emailChanged").value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('登录邮箱修改成功')
+                                            // console.log(res_json.message)
+
+                                            // 本地储存
+                                            userInfoJson.email = document.getElementById("emailChanged").value
+                                            localStorage.setItem("userInfo", JSON.stringify(userInfoJson))
+                                            
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        function changeMobile()
+                        {
+                            // 手机号码格式验证 正则表达式
+                            var rightMobile = /^1[3|4|5|7|8][0-9]\d{8,11}$/
+
+                            if (document.getElementById('mobileChanged').value == "")
+                            {
+                                toastr.error('手机号码不能为空')
+                            }
+                            else if (!rightMobile.test(document.getElementById('mobileChanged').value))
+                            {
+                                toastr.error('输入的手机号码格式不正确')
+                            }
+                            else
+                            {
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/changeMobile.php",
+                                    type: "POST",
+                                    data:{
+                                        username: userInfoJson.username,
+                                        mobileChanged: document.getElementById("mobileChanged").value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('手机号码修改成功')
+                                            // console.log(res_json.message)
+
+                                            // 本地储存
+                                            userInfoJson.mobile = document.getElementById("mobileChanged").value
+                                            localStorage.setItem("userInfo", JSON.stringify(userInfoJson))
+                                            
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        function getEmailVerifiCode()
+                        {
+                            toastr.error('该功能尚未开放，请直接点击“确认修改”按钮')
+                        }
+
+                        function changePasswd()
+                        {
+                            var pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
+
+                            if (document.getElementById('oldPasswd').value != userInfoJson.passwd)
+                            {
+                                toastr.error('原登录密码不正确')
+                            }
+                            else if (document.getElementById('newPasswd').value == "")
+                            {
+                                toastr.error('新登密码不能为空')
+                            }
+                            else if (document.getElementById('newPasswd').value == document.getElementById('oldPasswd').value)
+                            {
+                                toastr.error('新旧登密码不能相同')
+                            }
+                            else if (!pwdRegex.test(document.getElementById('newPasswd').value))
+                            {
+                                toastr.error('密码复杂度太低')
+                            }
+                            else if (document.getElementById('newPasswd').value != document.getElementById('newPasswdValid').value)
+                            {
+                                toastr.error('两次输入的新密码不一致')
+                            }
+                            else
+                            {
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/changePasswd.php",
+                                    type: "POST",
+                                    data:{
+                                        username: userInfoJson.username,
+                                        passwdChanged: document.getElementById("newPasswd").value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 修改成功
+                                            toastr.success('密码修改成功')
+                                            // console.log(res_json.message)
+
+                                            // 本地储存
+                                            userInfoJson.passwd = document.getElementById("newPasswd").value
+                                            localStorage.setItem("userInfo", JSON.stringify(userInfoJson))
+                                            
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 修改失败，显示原因
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        function getMobileVerifiCode()
+                        {
+                            toastr.error('该功能尚未开放，请直接点击“确认修改”按钮')
+                        }
+                    </script>

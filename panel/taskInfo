@@ -1,0 +1,812 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">任务详情</h1>
+                        <a href="javascript:toIndex()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回列表
+                        </a>
+                    </div>
+                    
+                    <p class="mb-4">通过查看任务详情，了解任务详细情况，并决定是否报名参加</p>
+
+                    <!-- 任务基础信息管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block">
+                                <h6 class="m-0 font-weight-bold text-primary">任务基础信息</h6>
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 任务标题 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标题：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <font id="taskTitle"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 任务类型 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务类型：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:10%">
+                                        <font id="taskTypeSelect"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 任务标签 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标签：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <div id="taskLabels"></div>
+                                    </div>
+                                </div>
+
+                                <!-- 泺研币 -->
+                                <div style="margin-bottom:8px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺研币：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%;margin-top: 10px">
+                                        <font id="taskMoney"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 泺学分 -->
+                                <div style="margin-bottom:8px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺学分：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%;margin-top: 10px">
+                                        <font id="taskPoint"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 计划开始时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划开始时间：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <font id="beginDateTime"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 计划结束时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划结束时间：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <font id="endDateTime"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 联系电话 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>联系电话：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <font id="phone"></font>
+                                    </div>
+                                </div>
+
+                                <!-- 任务简介 -->
+                                <div style="padding-top:8px;margin-bottom:8px">
+                                    <font>任务简介：</font>
+                                </div>
+                                
+                                <div class="document-editor">
+                                    <div id="toolbar-container" class="document-editor__toolbar"></div>
+                                    <div class="document-editor__editable-container">
+                                        <div id="taskIntro" class="document-editor__editable">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 子任务 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block">
+                                <h6 class="m-0 font-weight-bold text-primary">子任务详情</h6>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="childTasks" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>子任务序号</th>
+                                                <th>子任务内容</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 角色 DataTales -->
+                    <div class="card shadow mb-4">
+
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">角色详情</h6>
+                            </div>
+                            <div style="float:right" id="scoreButton">
+                                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="toScore()">
+                                    <i class="fas fa-upload fa-sm text-white-50"></i> 成员互评
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="roles" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>角色序号</th>
+                                                <th>角色名称</th>
+                                                <th>最多参与人数</th>
+                                                <th>期望参与人数</th>
+                                                <th>报名开始时间</th>
+                                                <th>报名截止时间</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 报名后显示 DataTales -->
+                    <div class="card shadow mb-4" style="display:none">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">报名管理</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 指派任务
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>报名序号</th>
+                                                <th>报名人</th>
+                                                <th>报名角色</th>
+                                                <th>报名时间</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!------------------------- Modal 模态框 --------------------->
+
+                    <!-- 报名信息确认 Modal-->
+                    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">任务领取确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- 传参 -->
+                                    <input type="hidden" id="roleId">
+
+                                    <font>您确定要领取此任务吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:signUpTask()">确认领取</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 退出任务确认 Modal-->
+                    <div class="modal fade" id="dropOutTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">任务退出确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- 传参 -->
+                                    <input type="hidden" id="signUpId">
+
+                                    <font>您确定要退出此任务吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:dropOutTask()">确认退出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JS脚本 -->
+                    <script type="text/javascript">
+                        // console.log(localStorage.getItem("taskId"))
+                        // var taskType
+                        // var taskInfo
+                        // var taskLabels
+                        // var childTasks
+                        // var roles
+
+                        // 复杂输入框
+                        DecoupledEditor
+                            .create( document.querySelector( '#taskIntro' ), {
+                                //工具栏，可选择添加或去除
+                                //toolbar: ['headings', 'bold', 'italic', 'blockQuote', 'bulletedList', 'numberedList', 'link', 'ImageUpload', 'undo'],
+                                //editor加载中文简体，默认是英文
+                                language: 'zh-cn',
+                                ckfinder: {
+                                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                                }
+                            } )
+                            .then( taskIntro => {
+                                const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                                toolbarContainer.appendChild( taskIntro.ui.view.toolbar.element );
+
+                                taskIntro.isReadOnly = true
+
+                                window.taskIntro = taskIntro
+                            } )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+                                    taskType = res_json.message
+
+                                    // 回调
+                                    getTaskInfoById()
+                                    getSignUpsById()
+                                    getTaskLabelsById()
+                                    getChildTasksById()
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+                        
+                        // 获取任务基础信息
+                        function getTaskInfoById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getTaskInfoById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        taskInfo = res_json.message
+
+                                        // 显示到文本框
+                                        document.getElementById('taskTitle').innerHTML = taskInfo.proName
+                                        document.getElementById('taskMoney').innerHTML = taskInfo.taskMoney
+                                        document.getElementById('taskPoint').innerHTML = taskInfo.taskPoint
+                                        // document.getElementById('taskIntro').innerHTML = taskInfo.introduction
+                                        taskIntro.setData(taskInfo.introduction)
+                                        document.getElementById('beginDateTime').innerHTML = taskInfo.startTime
+                                        document.getElementById('endDateTime').innerHTML = taskInfo.endTime
+                                        document.getElementById('phone').innerHTML = taskInfo.phone
+
+                                        // 显示类型到下拉菜单
+                                        // console.log(res_json.message)
+                                        $.each(taskType, function(i, taskType) {
+                                            // console.log(taskType)
+                                            // 设置默认
+                                            if (taskType.id == taskInfo.projectType)
+                                            {
+                                                document.getElementById('taskTypeSelect').innerHTML = taskType.projectType
+                                            }
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取任务类型失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 报名信息获取 -------------*/
+
+                        // 获取报名信息
+                        function getSignUpsById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getSignUpsById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    userId: userInfoJson.id
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        signUpMessage = res_json.message[0]
+                                        // console.log(signUpMessage)
+
+                                        // 回调
+                                        getRolesById()
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取报名信息失败")
+
+                                        // 回调
+                                        getRolesById()
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 报名信息获取 -------------*/
+
+                        /* ------------- 任务标签 -------------*/
+
+                        // 获取任务标签
+                        function getTaskLabelsById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getTaskLabelsById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        
+                                        // 显示标签
+                                        var taskLabelText = ""
+                                        $.each(res_json.message, function(i, taskLabel) {
+                                            // console.log(taskLabel.label)
+                                            taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                            // console.log(taskLabelText)
+                                        })
+                                        document.getElementById('taskLabels').innerHTML = taskLabelText
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取标签失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 任务标签 -------------*/
+
+                        /* ------------- 子任务 -------------*/
+
+                        // 获取子任务
+                        function getChildTasksById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getChildTasksById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        childTasks = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, childTask) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + childTask.name + " </td>"                        
+                                                + "</tr>";
+
+                                            $("#childTasks").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取子任务失败")
+                                        let str="<tr><td colspan=\"2\" align=\"center\"> 暂无子任务 </td></tr>"
+                                        $("#childTasks").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 子任务 -------------*/
+
+                        /* ------------- 角色 -------------*/
+
+                        // 获取角色信息
+                        function getRolesById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getRolesById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        roles = res_json.message
+                                        var currentTime = getCurrentTime()
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, role) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            // ButtonText 按钮文字
+                                            if (typeof signUpMessage != "undefined") 
+                                            {
+                                                // 如果报名了，就显示退出
+                                                document.getElementById('scoreButton').style = "float:right"
+                                                if (role.id == signUpMessage.roleId)
+                                                {
+                                                    // console.log(currentTime)
+                                                    // console.log(taskInfo.endTime)
+                                                    // 这一行
+                                                    var buttonText = "<td> \
+                                                                <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" onclick=\"toProgress(" + i + ")\"> \
+                                                                    <i class=\"fas fa-upload fa-sm text-white-50\"></i> 上报进度 \
+                                                                </a> \
+                                                                <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#dropOutTask\" onclick=\"getsignUpId(" + signUpMessage.id + ", " + signUpMessage.roleId + ")\"> \
+                                                                    <i class=\"fas fa-minus-circle fa-sm text-white-50\"></i> 退出任务 \
+                                                                </a> \
+                                                            </td>"
+                                                }
+                                                else
+                                                {
+                                                    // 不是这一行
+                                                    // 按照时间分
+                                                    if (role.signUpEndTime > currentTime)
+                                                    {
+                                                        var buttonText = "<td> \
+                                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#signUpModal\" onclick=\"getRoleId(" + i + ")\"> \
+                                                                            <i class=\"fas fa-plus-circle fa-sm text-white-50\"></i> 主动领取 \
+                                                                        </a> \
+                                                                    </td>"
+                                                    }
+                                                    else
+                                                    {
+                                                        var buttonText = "<td> \
+                                                                        <button class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" disabled> \
+                                                                            <i class=\"fas fa-plus-circle fa-sm text-white-50\"></i> 已经截止 \
+                                                                        </button> \
+                                                                    </td>"
+                                                    }
+                                                }
+                                                
+                                            }
+                                            else
+                                            {
+                                                // 否则，就按照时间显示
+                                                document.getElementById('scoreButton').style = "display:none"
+                                                // 按照时间分
+                                                if (role.signUpEndTime > currentTime)
+                                                {
+                                                    var buttonText = "<td> \
+                                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#signUpModal\" onclick=\"getRoleId(" + i + ")\"> \
+                                                                        <i class=\"fas fa-plus-circle fa-sm text-white-50\"></i> 主动领取 \
+                                                                    </a> \
+                                                                </td>"
+                                                }
+                                                else
+                                                {
+                                                    var buttonText = "<td> \
+                                                                    <button class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" disabled> \
+                                                                        <i class=\"fas fa-plus-circle fa-sm text-white-50\"></i> 已经截止 \
+                                                                    </button> \
+                                                                </td>"
+                                                }
+                                            }
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + role.roleName + " </td>"
+                                                + "<td> " + role.wantPersonNum + " </td>"
+                                                + "<td> " + role.leastPersonNum + " </td>"
+                                                + "<td> " + role.signUpBeginTime + " </td>"
+                                                + "<td> " + role.signUpEndTime + " </td>"                        
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#roles").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取角色失败")
+                                        document.getElementById('scoreButton').style = "display:none"
+                                        let str="<tr><td colspan=\"7\" align=\"center\"> 暂无角色 </td></tr>"
+                                        $("#roles").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 角色模态框获取数据
+                        function getRoleId()
+                        {
+                            // console.log(arguments)
+                            $("#roleId").val(roles[arguments[0]].id)
+                        }
+
+                        /* ------------- 角色 -------------*/
+
+                        // 退出任务模态框
+                        function getsignUpId()
+                        {
+                            $("#signUpId").val(arguments[0])
+                            $("#roleId").val(arguments[1])
+                        }
+
+                        // 退出任务
+                        function dropOutTask()
+                        {
+                            // console.log(document.getElementById('signUpId').value)
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/dropSignUp.php",
+                                type: "POST",
+                                data:{
+                                    signUpId: document.getElementById('signUpId').value,
+                                    roleId: document.getElementById('roleId').value
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 删除成功
+                                        toastr.success('退出任务成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 发布失败，显示原因
+                                        // console.log("退出任务失败")
+                                        toastr.error('退出任务失败')
+                                    }
+                                }
+                            })
+                        }
+
+                        // 任务领取
+                        function signUpTask()
+                        {
+                            // 自己不能领取自己创建的任务？
+                            // ajax
+                            // 修改任务基础信息
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/signUpTask.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    userId: userInfoJson.id,
+                                    roleId: document.getElementById('roleId').value,
+                                    nowTime: getCurrentTime()
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 发布成功
+                                        toastr.success('任务领取成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 刷新
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 显示原因
+                                        // console.log("任务领取失败")
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            // console.log("1")
+                        }
+
+                        // 获取客户端当前时间
+                        function getCurrentTime()
+                        {
+                            var date = new Date();
+			
+                            var year = date.getFullYear();        //年 ,从 Date 对象以四位数字返回年份
+                            var month = date.getMonth() + 1;      //月 ,从 Date 对象返回月份 (0 ~ 11) ,date.getMonth()比实际月份少 1 个月
+                            var day = date.getDate();             //日 ,从 Date 对象返回一个月中的某一天 (1 ~ 31)
+                            
+                            var hours = date.getHours();          //小时 ,返回 Date 对象的小时 (0 ~ 23)
+                            var minutes = date.getMinutes();      //分钟 ,返回 Date 对象的分钟 (0 ~ 59)
+                            var seconds = date.getSeconds();      //秒 ,返回 Date 对象的秒数 (0 ~ 59)   
+                            
+                            //修改月份格式
+                            if (month >= 1 && month <= 9) {
+                                month = "0" + month;
+                                }
+                            
+                            //修改日期格式
+                            if (day >= 0 && day <= 9) {
+                                day = "0" + day;
+                                }
+                            
+                            //修改小时格式
+                            if (hours >= 0 && hours <= 9) {
+                                hours = "0" + hours;
+                                }
+                            
+                            //修改分钟格式
+                            if (minutes >= 0 && minutes <= 9) {
+                                minutes = "0" + minutes;
+                                }
+                            
+                            //修改秒格式
+                            if (seconds >= 0 && seconds <= 9) {
+                                seconds = "0" + seconds;
+                                }
+                            
+                            //获取当前系统时间  格式(yyyy-mm-dd hh:mm:ss)
+                            var currentFormatDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+                            return currentFormatDate
+                        }
+
+                        // 去进度页面
+                        function toProgress(i)
+                        {
+                            localStorage.setItem("roleId", roles[i].id);
+                            // localStorage.setItem("nowPage", "schedule");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=schedule";
+                        }
+
+                        function toScore()
+                        {
+                            // localStorage.setItem("nowPage", "score");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=score";
+                        }
+                    </script>

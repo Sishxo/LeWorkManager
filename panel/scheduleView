@@ -1,0 +1,558 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">任务进度</h1>
+                        <a href="javascript:backTotask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回任务
+                        </a>
+                    </div>
+
+                    <p class="mb-4">上报任务的计划进度与实际进度</p>
+
+                    <!-- 计划进度 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">计划进度</h6>
+                            </div>
+                            <div id="planScheduleCompleteButton" style="float:right">
+                                
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="planSchedules" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>计划序号</th>
+                                                <th>时间节点</th>
+                                                <th>子任务</th>
+                                                <th>完成度</th>
+                                                <th>文字描述</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际进度 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">实际进度</h6>
+                            </div>
+                            <div id="realScheduleCompleteButton" style="float:right">
+                                
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="realSchedules" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>进度序号</th>
+                                                <th>时间</th>
+                                                <th>子任务</th>
+                                                <th>实际完成度</th>
+                                                <th>文字描述</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!----------------- 模态框 ----------------->
+                    
+                    <!-- 计划完整度确认 Modal-->
+                    <div class="modal fade" id="confirmPlanComplete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">计划进度完整度确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要确认此计划进度完整吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:confirmPlanComplete()">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际进度完整度确认 Modal-->
+                    <div class="modal fade" id="confirmRealComplete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">实际进度完整度确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要确认此实际进度完整吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:confirmRealComplete()">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实际进度真实性确认 Modal-->
+                    <div class="modal fade" id="confirmRealReal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- 传参 -->
+                                    <input type="hidden" id="realScheduleId">
+                                    <h5 class="modal-title" id="exampleModalLabel">实际进度真实性确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要确认此实际进度真实吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:confirmRealReal()">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!----------------- 模态框 ----------------->
+
+                    <script type="text/javascript">
+                        // console.log(localStorage.getItem("taskId"))
+                        // console.log(localStorage.getItem("roleId"))
+
+                        // 获取子任务
+                        function getChildTasksById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getChildTasksById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        childTasks = res_json.message
+
+                                        // 回调
+                                        getSignUpById()
+                                        getPlanScheduleById()
+                                        getRealScheduleById()
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取子任务失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        getChildTasksById()
+
+                        /* 获取报名信息 */
+                        function getSignUpById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getSignUpById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: localStorage.getItem("userId"),
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+
+                                    if (res_json.code == 200)
+                                    {
+                                        // 赋值
+                                        // console.log(res_json.message)
+                                        checkPlanScheduleCode = res_json.message[0].checkPlanSchedule
+                                        checkRealScheduleCode = res_json.message[0].checkRealSchedule
+
+                                        if (checkPlanScheduleCode == 1)
+                                        {
+                                            // 已确认完整性
+                                            document.getElementById('planScheduleCompleteButton').innerHTML = " \
+                                                <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\"> \
+                                                    <i class=\"fas fa-check fa-sm text-white-50\"></i> 完整度已确认 \
+                                                </button> \
+                                            "
+
+                                        }
+                                        else
+                                        {
+                                            // 未确认完整性
+                                            document.getElementById('planScheduleCompleteButton').innerHTML = " \
+                                                <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#confirmPlanComplete\"> \
+                                                    <i class=\"fas fa-check fa-sm text-white-50\"></i> 完整度确认 \
+                                                </a> \
+                                            "
+                                        }
+
+                                        if (checkRealScheduleCode == 1)
+                                        {
+                                            // 已确认完整性
+                                            document.getElementById('realScheduleCompleteButton').innerHTML = " \
+                                                <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\"> \
+                                                    <i class=\"fas fa-check fa-sm text-white-50\"></i> 完整度已确认 \
+                                                </button> \
+                                            "
+
+                                        }
+                                        else
+                                        {
+                                            // 未确认完整性
+                                            document.getElementById('realScheduleCompleteButton').innerHTML = " \
+                                                <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#confirmRealComplete\"> \
+                                                    <i class=\"fas fa-check fa-sm text-white-50\"></i> 完整度确认 \
+                                                </a> \
+                                            "
+                                        }
+                                    }
+                                    else
+                                    {
+                                        console.log("获取报名信息失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        /* 计划列表 */
+
+                        function getPlanScheduleById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getPlanScheduleById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: localStorage.getItem("userId"),
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 拉取计划列表成功
+                                        // toastr.success('拉取计划列表成功')
+                                        console.log(res_json.message)
+                                        planSchedules = res_json.message
+                                        checkPlanSchedule = res_json.checkPlanSchedule
+
+                                        // 填表
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, planSchedule) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            childTaskIndex = 0
+
+                                            $.each(childTasks, function(childTaskI, childTask) {
+                                                if (childTask.id == planSchedule.childTaskId)
+                                                {
+                                                    childTaskIndex = childTaskI
+                                                }
+                                            })
+
+                                            let str="<tr>"
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + planSchedule.planDateTime + "</td>"
+                                                + "<td> " + childTasks[childTaskIndex].name + "</td>"
+                                                + "<td> " + planSchedule.planPercent + "% </td>"
+                                                + "<td> " + planSchedule.planText + "</td>"
+                                                + "</tr>";
+
+                                            $("#planSchedules").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 拉取计划列表，显示原因
+                                        console.log("拉取计划列表失败")
+                                        // toastr.error(res_json.message)
+                                        let str="<tr><td colspan=\"5\" align=\"center\"> 暂无计划进度 </td></tr>"
+                                        $("#planSchedules").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function confirmPlanComplete()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/confirmPlanComplete.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: localStorage.getItem("userId"),
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+
+                                    if (res_json.code == 200)
+                                    {
+                                        toastr.success(res_json.message)
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+
+                        /* 计划列表 */
+
+                        /* 实际列表 */
+
+                        function getRealScheduleById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getRealScheduleById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: localStorage.getItem("userId"),
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                        
+                                    if (res_json.code == 200)
+                                    {
+                                        // 拉取计划列表成功
+                                        // toastr.success('拉取计划列表成功')
+                                        // console.log(res_json.message)
+                                        realSchedules = res_json.message
+                                        checkRealSchedule = res_json.checkRealSchedule
+
+                                        // 填表
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, realSchedule) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            if (realSchedule.adminCheck == 1)
+                                            {
+                                                // 已确认
+                                                var buttonText = "<td> \
+                                                        <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\"> \
+                                                            <i class=\"fas fa-check fa-sm text-white-50\"></i> 已验证真实 \
+                                                        </button> \
+                                                    </td>"
+                                            }
+                                            else
+                                            {
+                                                // 未确认
+                                                var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#confirmRealReal\" onclick=\"getRealId(" + i + ")\"> \
+                                                            <i class=\"fas fa-check fa-sm text-white-50\"></i> 验证真实 \
+                                                        </a> \
+                                                    </td>"
+                                            }
+
+                                            childTaskIndex = 0
+
+                                            $.each(childTasks, function(childTaskI, childTask) {
+                                                if (childTask.id == realSchedule.childTaskId)
+                                                {
+                                                    childTaskIndex = childTaskI
+                                                }
+                                            })
+                                            
+
+                                            let str="<tr>"
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + realSchedule.realDateTime + "</td>"
+                                                + "<td> " + childTasks[childTaskIndex].name + "</td>"
+                                                + "<td> " + realSchedule.realPercent + "% </td>"
+                                                + "<td> " + realSchedule.realText + "</td>"
+                                                + buttonText +
+                                                + "</tr>";
+
+                                            $("#realSchedules").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 拉取计划列表，显示原因
+                                        console.log("拉取实际列表失败")
+                                        // toastr.error(res_json.message)
+                                        let str="<tr><td colspan=\"5\" align=\"center\"> 暂无实际进度 </td></tr>"
+                                        $("#realSchedules").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function confirmRealComplete()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/confirmRealComplete.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    roleId: localStorage.getItem("roleId"),
+                                    userId: localStorage.getItem("userId"),
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+
+                                    if (res_json.code == 200)
+                                    {
+                                        toastr.success(res_json.message)
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+
+                        function getRealId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // 修改
+                                // console.log(arguments[0])
+                                document.getElementById('realScheduleId').value = realSchedules[arguments[0]].id
+                            }
+                            else
+                            {
+                                // 新增
+                                $("#realScheduleId").val("")
+                            }
+                        }
+
+                        function confirmRealReal()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/confirmRealReal.php",
+                                type: "POST",
+                                data:{
+                                    realScheduleId: document.getElementById('realScheduleId').value,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+
+                                    if (res_json.code == 200)
+                                    {
+                                        toastr.success(res_json.message)
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+                        /* 实际列表 */
+
+                        // 返回
+                        function backTotask()
+                        {
+                            localStorage.removeItem("roleId");
+                            localStorage.removeItem("userId");
+                            // localStorage.setItem("nowPage", "manageTask");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=manageTask";
+                        }
+                    </script>

@@ -1,0 +1,506 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">负责人评价</h1>
+                        <a href="javascript:backTotask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回任务
+                        </a>
+                    </div>
+
+                    <p class="mb-4">项目负责人对成员进行评价，修改评分，确认最终分值</p>
+
+                    <!-- 评分 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block">
+                                <h6 class="m-0 font-weight-bold text-primary">负责人评价</h6>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="taskMembers" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>任务参与成员</th>
+                                                <th>评价情况</th>
+                                                <th>评价得分</th>
+                                                <th>文字评价</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 评分 DataTales -->
+                    <div class="card shadow mb-4">
+
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">最终得分</h6>
+                            </div>
+                            <div style="float:right">
+                                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#moneyPointCheck">
+                                    <i class="fas fa-check fa-sm text-white-50"></i> 复核确认
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="taskMembersScore" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>任务参与成员</th>
+                                                <th>评价人数</th>
+                                                <th>平均得分</th>
+                                                <th>泺研币</th>
+                                                <th>泺学分</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 模态框 -->
+                    <!-- 评价 -->
+
+                    <!-- 评价新增 修改 Modal-->
+                    <div class="modal fade" id="updateScore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="markedPersonId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeScoreTitle" class="modal-title">评价修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <!-- 打分 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>评价打分<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <input id="score" class="form-control" placeholder="请输入100以内自然数">
+                                        </div>
+                                    </div>
+
+                                    <!-- 文字评价 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>文字评价：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <textarea id="markText" class="form-control" placeholder="请输入文字评价">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeScoreButton" class="btn btn-primary" href="javascript:updateScore()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 报名信息确认 Modal-->
+                    <div class="modal fade" id="moneyPointCheck" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">积分复核确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定目前的积分分配方案正确？</font><br>
+                                    <font color="red">注意：一旦您点击确定，积分将划拨到账，并不能再次修改<br>请慎重点击！</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:moneyPointCheck()">确认领取</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+
+                        // 获取项目信息
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskInfoById.php",
+                            type: "POST",
+                            data:{
+                                taskId: localStorage.getItem("taskId"),
+                            },
+                            success:function(res){
+                                var res_json = JSON.parse(res)
+                                if (res_json.code == 200)
+                                {
+                                    scoreCheck = res_json.message.scoreCheck
+
+                                    // 回调
+                                    getTaskMembers()
+                                    getAutoScore()
+                                }
+                            }
+                        })
+
+                        // 获取项目成员数据
+                        function getTaskMembers()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getTaskMembers.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    userId: userInfoJson.id,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        taskMembersList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, taskMember) {
+                                            
+                                            // 判断按钮
+                                            if (taskMember.hasScored == "已评价")
+                                            {
+                                                // 修改
+                                                if (scoreCheck == 1)
+                                                {
+                                                    // 禁止修改
+                                                    var buttonText = "<td> \
+                                                        <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateScore\" onclick=\"getScoreId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改评价 \
+                                                        </button> \
+                                                    </td>"
+                                                }
+                                                else
+                                                {
+                                                    var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateScore\" onclick=\"getScoreId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改评价 \
+                                                        </a> \
+                                                    </td>"
+                                                }
+                                            }
+                                            else
+                                            {
+                                                // 评价
+                                                if (scoreCheck == 1)
+                                                {
+                                                    // 禁止修改
+                                                    var buttonText = "<td> \
+                                                        <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateScore\" onclick=\"getScoreId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 评价打分 \
+                                                        </button> \
+                                                    </td>"
+                                                }
+                                                else
+                                                {
+                                                    var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateScore\" onclick=\"getScoreId(" + i + ")\"> \
+                                                            <i class=\"fas fa-pen fa-sm text-white-50\"></i> 评价打分 \
+                                                        </a> \
+                                                    </td>"
+                                                }
+                                            }
+
+                                            // console.log(taskMember)
+                                            var index = Number(i) + 1
+                                            // console.log(index)
+
+                                            let str="<tr>"            
+                                                + "<td>" + index +"</td>"
+                                                + "<td>" + taskMember.userRealName + "</td>"
+                                                + "<td>" + taskMember.hasScored + "</td>"
+                                                + "<td>" + taskMember.score + "</td>"
+                                                + "<td>" + taskMember.markText + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#taskMembers").append(str);
+
+                                            // console.log(str)
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("拉取任务列表失败")
+                                        let str="<tr><td colspan=\"7\" align=\"center\"> 暂无任务参与成员 </td></tr>"
+                                        $("#taskMembers").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function getAutoScore()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getAutoScore.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    userId: userInfoJson.id,
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        taskMembersScoreList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, taskMember) {
+                                            
+                                            // 判断按钮
+                                            // 修改
+                                            if (scoreCheck == 1)
+                                            {
+                                                var buttonText = "<td> \
+                                                    <button disabled class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 手动修改 \
+                                                    </button> \
+                                                </td>"
+                                            }
+                                            else
+                                            {
+                                                var buttonText = "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateMoneyPoint\" onclick=\"getScoreId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 手动修改 \
+                                                    </a> \
+                                                </td>"
+                                            }
+
+                                            // console.log(taskMember)
+                                            var index = Number(i) + 1
+                                            // console.log(index)
+
+                                            let str="<tr>"            
+                                                + "<td>" + index +"</td>"
+                                                + "<td>" + taskMember.userRealName + "</td>"
+                                                + "<td>" + taskMember.markPersonNumber + "</td>"
+                                                + "<td>" + taskMember.avarageScore + "</td>"
+                                                + "<td>" + taskMember.autoTaskMoney + "</td>"
+                                                + "<td>" + taskMember.autoTaskPoint + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#taskMembersScore").append(str);
+
+                                            // console.log(str)
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("拉取任务列表失败")
+                                        let str="<tr><td colspan=\"7\" align=\"center\"> 暂无任务参与成员 </td></tr>"
+                                        $("#taskMembersScore").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        /* 评价打分 */
+
+                        function getScoreId(i)
+                        {
+                            if (taskMembersList[i].hasScored == "已评价")
+                            {
+                                // 已评价
+                                document.getElementById('markedPersonId').value = taskMembersList[i].userId
+                                document.getElementById('score').value = taskMembersList[i].score
+                                document.getElementById('markText').value = taskMembersList[i].markText
+                                document.getElementById('changeScoreTitle').innerHTML = "评价修改"
+                                document.getElementById('changeScoreButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                // 未评价
+                                document.getElementById('markedPersonId').value = taskMembersList[i].userId
+                                document.getElementById('score').value = 0
+                                document.getElementById('markText').value = ""
+                                document.getElementById('changeScoreTitle').innerHTML = "评价打分"
+                                document.getElementById('changeScoreButton').innerHTML = "确认打分"
+                            }
+                        }
+
+                        function updateScore()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            if (document.getElementById('score').value == "")
+                            {
+                                toastr.error('评价打分不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('score').value))
+                            {
+                                toastr.error('评价打分只能为自然数')
+                            }
+                            else if (Number(document.getElementById('score').value) > 100)
+                            {
+                                toastr.error('评价打分不能超过100')
+                            }
+                            else if (scoreCheck == 1)
+                            {
+                                toastr.error('评价打分已经截止')
+                            }
+                            else
+                            {
+                                // ajax
+                                // 评价打分
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateScore.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: localStorage.getItem("taskId"),
+                                        score: document.getElementById('score').value,
+                                        markText: document.getElementById('markText').value,
+                                        markPersonId: userInfoJson.id,
+                                        markedPersonId: document.getElementById('markedPersonId').value,
+                                        changeScoreTitle: document.getElementById('changeScoreTitle').innerHTML,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 打分成功
+                                            toastr.success('评价打分成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 打分失败，显示原因
+                                            // console.log("评价打分失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        // 积分复核
+                        function moneyPointCheck()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/moneyPointCheck.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    dateTime: getNowTime(),
+                                    checkAdminId: userInfoJson.id,
+                                    moneyPointInfo: taskMembersScoreList,
+                                },
+                                success:function(res){
+                                    console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+
+                                    if (res_json.code == 200)
+                                    {
+                                        // 复核成功
+                                        toastr.success('积分复核确认成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 复核失败，显示原因
+                                        // console.log("积分复核确认失败")
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+                        }
+
+                        // 获取系统当前时间
+                        function getNowTime() {
+                            let dateTime
+                            let yy = new Date().getFullYear()
+                            let mm = new Date().getMonth() + 1
+                            let dd = new Date().getDate()
+                            let hh = new Date().getHours()
+                            let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes()
+                                :
+                                new Date().getMinutes()
+                            let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds()
+                                :
+                                new Date().getSeconds()
+                            dateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss
+                            // console.log(dateTime)
+                            return dateTime
+                        }
+
+                        function backTotask()
+                        {
+                            window.location.href = "index.php?nowPage=manageTask";
+                            // localStorage.setItem("nowPage", "manageTask");
+                            // location.reload();
+                        }
+                    </script>

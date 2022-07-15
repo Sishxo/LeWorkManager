@@ -1,0 +1,303 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">发布新任务</h1>
+                        <a href="javascript:toPublishTasks()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回列表
+                        </a>
+                    </div>
+                    <p class="mb-4">请输入新任务的各项基本信息，详细信息请在创建任务后在任务管理页面进行完善</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">新任务信息</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="javascript:createNewTask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 提交发布
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 新任务标题 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标题<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input id="taskTitle" class="form-control" placeholder="请输入任务标题" />
+                                    </div>
+                                </div>
+
+                                <!-- 任务类型 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务类型<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:10%">
+                                        <select id="taskType" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 泺研币 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺研币<font color="red">*</font>：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input type="number" id="taskMoney" class="form-control" placeholder="请输入泺研币数量" />
+                                    </div>
+                                </div>
+
+                                <!-- 泺学分 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺学分<font color="red">*</font>：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input type="number" id="taskPoint" class="form-control" placeholder="请输入泺学分数量" />
+                                    </div>
+                                </div>
+
+                                <!-- 计划开始时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划开始时间<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="beginDateTime">
+                                    </div>
+                                </div>
+
+                                <!-- 计划结束时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划结束时间<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="endDateTime">
+                                    </div>
+                                </div>
+
+                                <!-- 任务简介 -->
+                                <div style="padding-top:8px;margin-bottom:8px">
+                                    <font>任务简介：</font>
+                                </div>
+
+                                <div class="document-editor">
+                                    <div id="toolbar-container" class="document-editor__toolbar"></div>
+                                    <div class="document-editor__editable-container">
+                                        <div id="taskIntro" class="document-editor__editable">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JS脚本 -->
+                    <script type="text/javascript">
+                        // 默认文本区域为空
+                        document.getElementById('taskIntro').value = ""
+                        document.getElementById('taskMoney').value = 0
+                        document.getElementById('taskPoint').value = 0
+
+                        // 复杂输入框
+                        DecoupledEditor
+                            .create( document.querySelector( '#taskIntro' ), {
+                                //工具栏，可选择添加或去除
+                                //toolbar: ['headings', 'bold', 'italic', 'blockQuote', 'bulletedList', 'numberedList', 'link', 'ImageUpload', 'undo'],
+                                //editor加载中文简体，默认是英文
+                                language: 'zh-cn',
+                                ckfinder: {
+                                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                                }
+                            } )
+                            .then( taskIntro => {
+                                const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                                toolbarContainer.appendChild( taskIntro.ui.view.toolbar.element );
+
+                                window.taskIntro = taskIntro
+
+                                // console.log(Array.from( taskIntro.ui.componentFactory.names() ))
+                            } )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+
+                                    // 显示到下拉菜单
+                                    $('#taskType').append
+                                    (
+                                        $('<option>').text("-- 未分类 --").attr('value', 0).attr('selected', 'selected')
+                                    )
+                                    $.each(res_json.message, function(i, taskType) {
+                                        // console.log(taskType)
+                                        $('#taskType').append
+                                        (
+                                            $('<option>').text(taskType.projectType).attr('value', taskType.id)
+                                        )
+                                    })
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+
+                        // 获取系统当前时间
+                        function getNowTime() {
+                            let dateTime
+                            let yy = new Date().getFullYear()
+                            let mm = new Date().getMonth() + 1
+                            let dd = new Date().getDate()
+                            let hh = new Date().getHours()
+                            let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes()
+                                :
+                                new Date().getMinutes()
+                            let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds()
+                                :
+                                new Date().getSeconds()
+                            dateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss
+                            // console.log(dateTime)
+                            return dateTime
+                        }
+                        
+                        // 提交创建新任务
+                        function createNewTask()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            // 判断
+                            if (document.getElementById('taskTitle').value == "")
+                            {
+                                toastr.error('任务标题不能为空')
+                            }
+                            else if (document.getElementById('taskMoney').value == "")
+                            {
+                                toastr.error('泺研币数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskMoney').value))
+                            {
+                                toastr.error('泺研币数量只能为自然数')
+                            }
+                            else if (document.getElementById('taskPoint').value == "")
+                            {
+                                toastr.error('泺学分数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskPoint').value))
+                            {
+                                toastr.error('泺学分数量只能为自然数')
+                            }
+                            else if (document.getElementById('beginDateTime').value == "")
+                            {
+                                toastr.error('任务开始时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value == "")
+                            {
+                                toastr.error('任务结束时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value <= document.getElementById('beginDateTime').value)
+                            {
+                                toastr.error('任务结束时间不能早于任务开始时间')
+                            }
+                            else if (userInfoJson.name == "")
+                            {
+                                toastr.error('未实名，暂时不能发布新任务')
+                            }
+                            else
+                            {
+                                // 权限判断该任务是否需要审核
+                                var adminCheck = 0
+                                if (userInfoJson.permit < 2)
+                                {
+                                    adminCheck = 1
+                                }
+
+                                // ajax
+                                // 创建新任务
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewTask.php",
+                                    type: "POST",
+                                    data:{
+                                        headPerson: userInfoJson.id,
+                                        createTime: getNowTime(),
+                                        taskTitle: document.getElementById('taskTitle').value,
+                                        taskType: $('#taskType option:selected').val(),
+                                        taskMoney: document.getElementById('taskMoney').value,
+                                        taskPoint: document.getElementById('taskPoint').value,
+                                        adminCheck: adminCheck,
+                                        phone: userInfoJson.mobile,
+                                        taskIntro: document.getElementById('taskIntro').innerHTML,
+                                        beginDateTime: document.getElementById('beginDateTime').value,
+                                        endDateTime: document.getElementById('endDateTime').value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('新任务发布成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                toPublishTasks()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            // console.log("发布新任务失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+
+
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            // console.log("1")
+                        }
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#beginDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#endDateTime', //指定元素
+                            type: 'datetime'
+                        });
+                    </script>

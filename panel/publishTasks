@@ -1,0 +1,258 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">我发布的任务</h1>
+                        <a href="javascript:toCreateNewTask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> 发布新任务
+                        </a>
+                    </div>
+
+                    <p class="mb-4">对已发布的任务进行管理</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">可报名任务</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="unfinishedPublishTasks_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input type="search" class="form-control form-control-sm" aria-controls="dataTable">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <table class="table table-bordered" id="unfinishedPublishTasksTable" onclick="unfinishedPublishTasksClick()" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>任务序号</th>
+                                                <th>任务标题</th>
+                                                <th>任务类型</th>
+                                                <th>任务标签</th>
+                                                <th>发布时间</th>
+                                                <th>审核状态</th>
+                                                <th>审核人</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JS脚本 -->
+                    <script type="text/javascript">
+                        // 初始化页码
+                        var unfinishedPage = 1
+                        var finishedPage = 1
+                        // var taskType
+                        // var unfinishedPublishTasksList
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+
+                                    // 储存
+                                    taskType = res_json.message
+
+                                    // 回调
+                                    getUnfinishedPublicTasks()
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+
+
+                        // 获取未截止数据
+                        function getUnfinishedPublicTasks()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/unfinishedPublishTasks.php",
+                                type: "POST",
+                                data:{
+                                    page: unfinishedPage,
+                                    length: $('#unfinishedPublishTasks_length option:selected').val(),
+                                    headPerson: userInfoJson.id
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        unfinishedPublishTasksList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, task) {
+                                            
+                                            // 判断审核
+                                            if (task.adminCheck == 1)
+                                            {
+                                                adminCheckLabel = "<font color=\"green\">审核通过</font>"
+                                            }
+                                            else
+                                            {
+                                                adminCheckLabel = "<font color=\"red\">审核中</font>"
+                                            }
+
+                                            // 显示标签
+                                            var taskLabelText = ""
+                                            $.each(task.labels, function(i, taskLabel) {
+                                                // console.log(taskLabel.label)
+                                                taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                                // console.log(taskLabelText)
+                                            })
+
+                                            // console.log(task)
+                                            var index = (unfinishedPage - 1) * $('#unfinishedPublishTasks_length option:selected').val() + Number(i) + 1
+                                            // console.log(index)
+                                            
+                                            // console.log(task.projectType)
+                                            // console.log(taskType['0'])
+                                            // console.log(taskType[task.projectType - 1])
+                                            // console.log(taskType[task.projectType - 1].projectType)
+
+                                            // 查找任务类型
+                                            var pos = 0;
+                                            var hasProType = false;
+                                            while (pos < getJsonLength(taskType))
+                                            {
+                                                // console.log(task.projectType)
+                                                // console.log(taskType[pos].id)
+                                                if (task.projectType == taskType[pos].id)
+                                                {
+                                                    hasProType = true;
+                                                    break;
+                                                }
+                                                pos = pos + 1;
+                                            }
+                                            // console.log(hasProType);
+                                            if (hasProType)
+                                            {
+                                                var proTypeText = "<td>" + taskType[pos].projectType + "</td>";
+                                            }
+                                            else
+                                            {
+                                                var proTypeText = "<td> 未分类 </td>"
+                                            }
+
+                                            let str="<tr>"            
+                                                + "<td>" + index +"</td>"
+                                                + "<td>" + task.proName+"</td>"
+                                                + proTypeText                        
+                                                + "<td>" + taskLabelText + "</td>"
+                                                + "<td>" + task.createTime + "</td>"
+                                                + "<td>" + adminCheckLabel + "</td>"
+                                                + "<td>" + task.checkPerson + "</td>"
+                                                + "</tr>";
+
+                                            $("#unfinishedPublishTasksTable").append(str);
+
+                                            // console.log(str)
+
+
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("拉取任务列表失败")
+                                        let str="<tr><td colspan=\"7\" align=\"center\"> 暂无已发布的任务 </td></tr>"
+                                        $("#unfinishedPublishTasksTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 未截止任务点击事件
+                        function unfinishedPublishTasksClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            // console.log(td.parentElement.rowIndex + 1)
+                            // console.log(td.parentElement.children[1].innerHTML)
+                            clickId = unfinishedPublishTasksList[td.parentElement.rowIndex - 1].id
+                            // console.log(clickId)
+
+                            toManegeTask(clickId)
+                        }
+
+                        function toCreateNewTask()
+                        {
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=createNewTask";
+                        }
+
+                        function toManegeTask(taskId)
+                        {
+                            // localStorage.setItem("nowPage", "manageTask");
+                            localStorage.setItem("taskId", taskId);
+                            // console.log(localStorage.getItem("taskId"))
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=manageTask";
+                        }
+                    </script>
