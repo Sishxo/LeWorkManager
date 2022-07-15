@@ -1,0 +1,2072 @@
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-bottom:0!important">
+                        <h1 class="h3 mb-2 text-gray-800">任务管理平台</h1>
+                        <a href="javascript:toPublishTasks()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-reply fa-sm text-white-50"></i> 返回列表
+                        </a>
+                    </div>
+                    
+                    <p class="mb-4">
+                        通过各个角度对任务进行管理<br>
+                        <font color="red">注意：泺研币和泺学分必须有一项不为0，才能请管理员审核任务</font>
+                    </p>
+
+                    <!-- 任务基础信息管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">任务基础信息管理</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updateTaskModal">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 修改提交
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 任务标题 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标题<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input id="taskTitle" class="form-control" placeholder="请输入任务标题" />
+                                    </div>
+                                </div>
+
+                                <!-- 任务类型 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务类型<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:10%">
+                                        <select id="taskTypeSelect" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 泺研币 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺研币<font color="red">*</font>：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input type="number" id="taskMoney" class="form-control" placeholder="请输入泺研币数量" />
+                                    </div>
+                                </div>
+
+                                <!-- 泺学分 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>泺学分<font color="red">*</font>：&nbsp;&nbsp;&nbsp;</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input type="number" id="taskPoint" class="form-control" placeholder="请输入泺学分数量" />
+                                    </div>
+                                </div>
+
+                                <!-- 计划开始时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划开始时间<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="beginDateTime">
+                                    </div>
+                                </div>
+
+                                <!-- 计划结束时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划结束时间<font color="red">*</font>：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="endDateTime">
+                                    </div>
+                                </div>
+
+                                <!-- 上传附件 -->
+                                <div style="margin-top:10px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>上传附件：</font>
+                                    </div>
+                                </div>
+
+                                <!-- 文件列表 -->
+                                <div id="uploadFileList" style="width:50%;margin-top:20px">
+                                    <table class="table table-bordered" id="fileList" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>文件名</th>
+                                                <th>上传者</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- 任务简介 -->
+                                <div style="padding-top:8px;margin-bottom:8px">
+                                    <font>任务简介：</font>
+                                </div>
+
+                                <div class="document-editor">
+                                    <div id="toolbar-container" class="document-editor__toolbar"></div>
+                                    <div class="document-editor__editable-container">
+                                        <div id="taskIntro" class="document-editor__editable">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 角色管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">角色管理<font color="red">*</font></h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updateRole" onclick="getRoleId()">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 新增角色
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="roles" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>角色序号</th>
+                                                <th>角色名称</th>
+                                                <th>最多参与人数</th>
+                                                <th>期望参与人数</th>
+                                                <th>已参与人数</th>
+                                                <th>报名开始时间</th>
+                                                <th>报名截止时间</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 子任务管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">子任务管理</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updateChildTask" onclick="getChildTaskId()">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 新增子任务
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="childTasks" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>子任务序号</th>
+                                                <th>子任务内容</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 标签管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">任务标签管理</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#updateTaskLabel" onclick="getLabelId()">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 新增标签
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="taskLabels" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>标签序号</th>
+                                                <th>标签名称</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 报名管理 DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">报名/指派管理</h6>
+                            </div>
+                            <div style="float:right;margin-left:5px">
+                                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="toHeadScore()">
+                                    <i class="fas fa-upload fa-sm text-white-50"></i> 评价打分
+                                </a>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#assignTask">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> 指派任务
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <table class="table table-bordered" id="signUps" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>报名序号</th>
+                                                <th>报名角色</th>
+                                                <th>报名人</th>
+                                                <th>报名/指派时间</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!------------------------- Modal 模态框 --------------------->
+
+                    <!-- 基础信息修改确认 Modal-->
+                    <div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">任务基础信息修改确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要提交修改吗？</font>
+                                    <font>普通用户提交修改后，需管理员再次审核</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:updateTask()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 标签 -->
+
+                    <!-- 标签新增 修改 Modal-->
+                    <div class="modal fade" id="updateTaskLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="labelId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeLabelTitle" class="modal-title">标签修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 标签 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>标签名称：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="labelChanged" class="form-control" placeholder="请输入标签名称">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeLabelButton" class="btn btn-primary" href="javascript:updateTaskLabel()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 标签删除确认 Modal-->
+                    <div class="modal fade" id="deleteTaskLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">标签删除确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要删除此标签吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:deleteLabel()">确认删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 标签 -->
+
+                    <!-- 子任务 -->
+
+                    <!-- 子任务新增 修改 Modal-->
+                    <div class="modal fade" id="updateChildTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="childTaskId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeChildTaskTitle" class="modal-title">子任务修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 标签 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>子任务内容：</font>
+                                        </div>
+                                        <div style="float:right;width:75%">
+                                            <input id="childTaskChanged" class="form-control" placeholder="请输入子任务内容">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeChildTaskButton" class="btn btn-primary" href="javascript:updateChildTask()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 子任务删除确认 Modal-->
+                    <div class="modal fade" id="deleteChildTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">子任务删除确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要删除此子任务吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:deleteChildTask()">确认删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 子任务 -->
+
+                    <!-- 角色 -->
+
+                    <!-- 角色新增 修改 Modal-->
+                    <div class="modal fade" id="updateRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="roleId">
+
+                                <div class="modal-header">
+                                    <h5 id="changeRoleTitle" class="modal-title">角色修改</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- 角色名称 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>角色名称：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input id="roleNameChanged" class="form-control" placeholder="请输入角色名称">
+                                        </div>
+                                    </div>
+
+                                    <!-- 期望参与人数 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>最多参与人数：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input id="wantPersonNumChanged" class="form-control" placeholder="请输入最多参与人数">
+                                        </div>
+                                    </div>
+
+                                    <!-- 最少参与人数 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>期望参与人数：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input id="leastPersonNumChanged" class="form-control" placeholder="请输入期望参与人数">
+                                        </div>
+                                    </div>
+
+                                    <!-- 报名开始时间 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>报名开始时间：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input type="text" class="form-control layui-input" id="signUpBeginDateTime" placeholder="请输入报名开始时间">
+                                        </div>
+                                    </div>
+
+                                    <!-- 报名截止时间 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>报名截止时间：</font>
+                                        </div>
+                                        <div style="float:right;width:70%">
+                                            <input type="text" class="form-control layui-input" id="signUpEndDateTime" placeholder="请输入报名截止时间">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeRoleButton" class="btn btn-primary" href="javascript:updateRole()">确认修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 角色删除确认 Modal-->
+                    <div class="modal fade" id="deleteRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">角色删除确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要删除此角色吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:deleteRole()">确认删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 角色 -->
+
+                    <!-- 强制清退 Modal-->
+                    <div class="modal fade" id="dropModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- 传参 -->
+                                    <input type="hidden" id="dropId">
+
+                                    <h5 class="modal-title" id="exampleModalLabel">强制清退确认</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font>您确定要强制清退此角色吗？</font>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="javascript:dropMember()">确认清退</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 指派任务 -->
+                    <div class="modal fade" id="assignTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">任务指派</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <!-- 角色名称 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>角色<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%;margin-top:5px">
+                                            <select id="roleSelect" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onChange="usersInfoReload()">
+                                            
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- 用户检索 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>用户<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:70%;margin-top:5px">
+                                            <input id="userInfoCondition" class="form-control" placeholder="用户检索" onKeyUp="usersInfoReload()">
+                                        </div>
+                                    </div>
+
+                                    <!-- 用户列表 -->
+                                    <label id="userCheck" class="checkbox-inline" style="margin-top:10px;width:100%">
+                                                
+                                    </label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeRoleButton" class="btn btn-primary" href="javascript:taskAllocation()">确认指派</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 文件上传脚本 -->
+                    <!--script type="text/javascript" src="js/pekeUpload.js"></script-->
+
+                    <!-- JS脚本 -->
+                    <script type="text/javascript">
+                        // console.log(localStorage.getItem("taskId"))
+                        // var taskType
+                        // var taskInfo
+                        // var taskLabels
+                        // var childTasks
+                        var oldUserInfoCondition = ""
+                        var oldRoleSelected = ""
+
+                        // 复杂输入框
+                        DecoupledEditor
+                            .create( document.querySelector( '#taskIntro' ), {
+                                //工具栏，可选择添加或去除
+                                //toolbar: ['headings', 'bold', 'italic', 'blockQuote', 'bulletedList', 'numberedList', 'link', 'ImageUpload', 'undo'],
+                                //editor加载中文简体，默认是英文
+                                language: 'zh-cn',
+                                ckfinder: {
+                                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                                }
+                            } )
+                            .then( taskIntro => {
+                                const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                                toolbarContainer.appendChild( taskIntro.ui.view.toolbar.element );
+
+                                window.taskIntro = taskIntro
+
+                                // console.log(Array.from( taskIntro.ui.componentFactory.names() ))
+                            } )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+                                    taskType = res_json.message
+
+                                    // 回调
+                                    getTaskInfoById()
+                                    getTaskLabelsById()
+                                    getChildTasksById()
+                                    getRolesById()
+                                    getSignUpsById()
+                                    getFileListByTaskId()
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+                        
+                        // 获取任务基础信息
+                        function getTaskInfoById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getTaskInfoById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        taskInfo = res_json.message
+
+                                        // 显示到文本框
+                                        document.getElementById('taskTitle').value = taskInfo.proName
+                                        document.getElementById('taskMoney').value = taskInfo.taskMoney
+                                        document.getElementById('taskPoint').value = taskInfo.taskPoint
+                                        // document.getElementById('taskIntro').value = taskInfo.introduction
+                                        taskIntro.setData(taskInfo.introduction)
+                                        document.getElementById('beginDateTime').value = taskInfo.startTime
+                                        document.getElementById('endDateTime').value = taskInfo.endTime
+                                        // 显示类型到下拉菜单
+                                        // console.log(res_json.message)
+                                        if (taskType.id == 0)
+                                        {
+                                            $('#taskTypeSelect').append
+                                            (
+                                                $('<option>').text("-- 未分类 --").attr('value', 0).attr('selected', 'selected')
+                                            )
+                                        }
+                                        else
+                                        {
+                                            $('#taskTypeSelect').append
+                                            (
+                                                $('<option>').text("-- 未分类 --").attr('value', 0)
+                                            )
+                                        }
+                                        $.each(taskType, function(i, taskType) {
+                                            // console.log(taskType)
+                                            // 设置默认
+                                            if (taskType.id == taskInfo.projectType)
+                                            {
+                                                $('#taskTypeSelect').append
+                                                (
+                                                    $('<option>').text(taskType.projectType).attr('value', taskType.id).attr('selected', 'selected')
+                                                )
+                                            }
+                                            else
+                                            {
+                                                $('#taskTypeSelect').append
+                                                (
+                                                    $('<option>').text(taskType.projectType).attr('value', taskType.id)
+                                                )
+                                            }
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取任务类型失败")
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 任务标签 -------------*/
+
+                        // 获取任务标签
+                        function getTaskLabelsById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getTaskLabelsById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        taskLabels = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, taskLabel) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + taskLabel.label + " </td>"                        
+                                                + "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateTaskLabel\" onclick=\"getLabelId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTaskLabel\" onclick=\"getLabelId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+                                                + "</tr>";
+
+                                            $("#taskLabels").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取标签失败")
+                                        let str="<tr><td colspan=\"3\" align=\"center\"> 暂无标签 </td></tr>"
+                                        $("#taskLabels").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 标签模态框获取数据
+                        function getLabelId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // console.log(arguments)
+                                $("#labelId").val(taskLabels[arguments[0]].id)
+                                $("#labelChanged").val(taskLabels[arguments[0]].label)
+                                document.getElementById('changeLabelTitle').innerHTML = "标签修改"
+                                document.getElementById('changeLabelButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                $("#labelId").val("")
+                                $("#labelChanged").val("")
+                                document.getElementById('changeLabelTitle').innerHTML = "标签新增"
+                                document.getElementById('changeLabelButton').innerHTML = "确认新增"
+                            }
+                        }
+
+                        // 新增 修改标签
+                        function updateTaskLabel()
+                        {
+                            // 权限判断该任务是否需要审核
+                            var adminCheck = 0
+                            if (userInfoJson.permit < 2)
+                            {
+                                adminCheck = 1
+                            }
+                            
+                            // 判空
+                            if (document.getElementById('labelChanged').value == "")
+                            {
+                                toastr.error('标签名称不能为空')
+                            }
+                            else if (document.getElementById('labelId').value == "")
+                            {
+                                // 增加
+                                // console.log("新增标签")
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewLabel.php",
+                                    type: "POST",
+                                    data:{
+                                        label: document.getElementById('labelChanged').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('标签新增成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            console.log("标签新增失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                // 修改
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateTaskLabel.php",
+                                    type: "POST",
+                                    data:{
+                                        labelId: document.getElementById('labelId').value,
+                                        label: document.getElementById('labelChanged').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('标签修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            // console.log("标签修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        // 删除标签
+                        function deleteLabel()
+                        {
+                            console.log(document.getElementById('labelId').value)
+                            toastr.error("本功能暂未开通")
+                        }
+
+                        /* ------------- 任务标签 -------------*/
+
+                        /* ------------- 子任务 -------------*/
+
+                        // 获取子任务
+                        function getChildTasksById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getChildTasksById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        childTasks = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, childTask) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + childTask.name + " </td>"                        
+                                                + "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateChildTask\" onclick=\"getChildTaskId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteChildTask\" onclick=\"getChildTaskId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+                                                + "</tr>";
+
+                                            $("#childTasks").append(str);
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取子任务失败")
+                                        let str="<tr><td colspan=\"3\" align=\"center\"> 暂无子任务 </td></tr>"
+                                        $("#childTasks").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 子任务模态框获取数据
+                        function getChildTaskId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // console.log(arguments)
+                                $("#childTaskId").val(childTasks[arguments[0]].id)
+                                $("#childTaskChanged").val(childTasks[arguments[0]].name)
+                                document.getElementById('changeChildTaskTitle').innerHTML = "子任务修改"
+                                document.getElementById('changeChildTaskButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                $("#childTaskId").val("")
+                                $("#childTaskChanged").val("")
+                                document.getElementById('changeChildTaskTitle').innerHTML = "子任务新增"
+                                document.getElementById('changeChildTaskButton').innerHTML = "确认新增"
+                            }
+                        }
+
+                        // 新增 修改子任务
+                        function updateChildTask()
+                        {
+                            // 权限判断该任务是否需要审核
+                            var adminCheck = 0
+                            if (userInfoJson.permit < 2)
+                            {
+                                adminCheck = 1
+                            }
+                            
+                            // 判空
+                            if (document.getElementById('childTaskChanged').value == "")
+                            {
+                                toastr.error('子任务内容不能为空')
+                            }
+                            else if (document.getElementById('childTaskId').value == "")
+                            {
+                                // 增加
+                                console.log("新增子任务")
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewChildTask.php",
+                                    type: "POST",
+                                    data:{
+                                        childTaskName: document.getElementById('childTaskChanged').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('子任务新增成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            console.log("子任务新增失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                // 修改
+                                console.log("修改子任务")
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateChildTask.php",
+                                    type: "POST",
+                                    data:{
+                                        childTaskId: document.getElementById('childTaskId').value,
+                                        childTaskName: document.getElementById('childTaskChanged').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('子任务修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            // console.log("子任务修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        // 删除子任务
+                        function deleteChildTask()
+                        {
+                            console.log(document.getElementById('childTaskId').value)
+                            toastr.error("本功能暂未开通")
+                        }
+
+                        /* ------------- 子任务 -------------*/
+
+                        /* ------------- 角色 -------------*/
+
+                        // 获取角色信息
+                        function getRolesById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getRolesById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        roles = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, role) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + role.roleName + " </td>"
+                                                + "<td> " + role.wantPersonNum + " </td>"
+                                                + "<td> " + role.leastPersonNum + " </td>"
+                                                + "<td> " + role.joinedPersonNum + " </td>"
+                                                + "<td> " + role.signUpBeginTime + " </td>"
+                                                + "<td> " + role.signUpEndTime + " </td>"                        
+                                                + "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#updateRole\" onclick=\"getRoleId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 修改 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteRole\" onclick=\"getRoleId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+                                                + "</tr>";
+
+                                            $("#roles").append(str);
+
+                                            $('#roleSelect').append
+                                            (
+                                                $('<option>').text(role.roleName).attr('value', role.id)
+                                            )
+                                        })
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取角色失败")
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无角色 </td></tr>"
+                                        $("#roles").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 角色模态框获取数据
+                        function getRoleId()
+                        {
+                            if (arguments.length > 0)
+                            {
+                                // console.log(arguments)
+                                $("#roleId").val(roles[arguments[0]].id)
+                                $("#roleNameChanged").val(roles[arguments[0]].roleName)
+                                $("#wantPersonNumChanged").val(roles[arguments[0]].wantPersonNum)
+                                $("#leastPersonNumChanged").val(roles[arguments[0]].leastPersonNum)
+                                $("#signUpBeginDateTime").val(roles[arguments[0]].signUpBeginTime)
+                                $("#signUpEndDateTime").val(roles[arguments[0]].signUpEndTime)
+                                document.getElementById('changeRoleTitle').innerHTML = "角色修改"
+                                document.getElementById('changeRoleButton').innerHTML = "确认修改"
+                            }
+                            else
+                            {
+                                $("#roleId").val("")
+                                $("#roleNameChanged").val("")
+                                $("#wantPersonNumChanged").val("")
+                                $("#leastPersonNumChanged").val("")
+                                $("#signUpBeginDateTime").val("")
+                                $("#signUpEndDateTime").val("")
+                                document.getElementById('changeRoleTitle').innerHTML = "角色新增"
+                                document.getElementById('changeRoleButton').innerHTML = "确认新增"
+                            }
+                        }
+
+                        // 新增 修改角色
+                        function updateRole()
+                        {
+                            // 权限判断该任务是否需要审核
+                            var adminCheck = 0
+                            var isNumber = /^[0-9]*[1-9][0-9]*$/
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            var isDateTime = /^(?:19|20|21)[0-9][0-9]-(?:(?:0[1-9])|(?:1[0-2]))-(?:(?:[0-2][1-9])|(?:[1-3][0-1])) (?:(?:[0-2][0-3])|(?:[0-1][0-9])):[0-5][0-9]:[0-5][0-9]$/
+
+                            if (userInfoJson.permit < 2)
+                            {
+                                adminCheck = 1
+                            }
+                            
+                            // 判空
+                            if (document.getElementById('roleNameChanged').value == "")
+                            {
+                                toastr.error('角色名称不能为空')
+                            }
+                            else if (document.getElementById('wantPersonNumChanged').value == "")
+                            {
+                                toastr.error('最多参与人数不能为空')
+                            }
+                            else if (!isNumber.test(document.getElementById('wantPersonNumChanged').value))
+                            {
+                                toastr.error('最多参与人数只能为正整数')
+                            }
+                            else if (document.getElementById('leastPersonNumChanged').value == "")
+                            {
+                                toastr.error('期望参与人数不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('leastPersonNumChanged').value))
+                            {
+                                toastr.error('期望参与人数只能为自然数')
+                            }
+                            else if (Number(document.getElementById('leastPersonNumChanged').value) > Number(document.getElementById('wantPersonNumChanged').value))
+                            {
+                                toastr.error('期望参与人数不能多于最多参与人数')
+                            }
+                            else if (document.getElementById('signUpBeginDateTime').value == "")
+                            {
+                                toastr.error('报名开始时间不能为空')
+                            }
+                            else if (!isDateTime.test(document.getElementById('signUpBeginDateTime').value))
+                            {
+                                toastr.error('报名开始时间格式不正确')
+                            }
+                            else if (document.getElementById('signUpEndDateTime').value == "")
+                            {
+                                toastr.error('报名结束时间不能为空')
+                            }
+                            else if (!isDateTime.test(document.getElementById('signUpEndDateTime').value))
+                            {
+                                toastr.error('报名结束时间格式不正确')
+                            }
+                            else if (document.getElementById('signUpEndDateTime').value <= document.getElementById('signUpBeginDateTime').value)
+                            {
+                                toastr.error('报名结束时间不能早于报名开始时间')
+                            }
+                            else if (document.getElementById('roleId').value == "")
+                            {
+                                // 增加
+                                console.log("新增角色")
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewRole.php",
+                                    type: "POST",
+                                    data:{
+                                        roleName: document.getElementById('roleNameChanged').value,
+                                        wantPersonNumChanged: document.getElementById('wantPersonNumChanged').value,
+                                        leastPersonNumChanged: document.getElementById('leastPersonNumChanged').value,
+                                        signUpBeginDateTime: document.getElementById('signUpBeginDateTime').value,
+                                        signUpEndDateTime: document.getElementById('signUpEndDateTime').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('角色新增成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            console.log("角色新增失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                // 修改
+                                console.log("修改角色")
+                                // ajax
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateRole.php",
+                                    type: "POST",
+                                    data:{
+                                        roleId: document.getElementById('roleId').value,
+                                        roleName: document.getElementById('roleNameChanged').value,
+                                        wantPersonNumChanged: document.getElementById('wantPersonNumChanged').value,
+                                        leastPersonNumChanged: document.getElementById('leastPersonNumChanged').value,
+                                        signUpBeginDateTime: document.getElementById('signUpBeginDateTime').value,
+                                        signUpEndDateTime: document.getElementById('signUpEndDateTime').value,
+                                        taskId: taskInfo.id,
+                                        adminCheck: adminCheck
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('角色修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            // console.log("角色修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        // 删除角色
+                        function deleteRole()
+                        {
+                            console.log(document.getElementById('roleId').value)
+                            toastr.error("本功能暂未开通")
+                        }
+
+                        /* ------------- 角色 -------------*/
+
+                        /* ------------- 报名信息 -------------*/
+
+                        // 获取报名信息
+                        function getSignUpsById()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getSignUpsById.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        signUps = res_json.message
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, signUp) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            // 这一行
+                                            var buttonText = "<td> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" onclick=\"toScheduleView(" + i + ")\"> \
+                                                            <i class=\"fas fa-eye fa-sm text-white-50\"></i> 查看进度 \
+                                                        </a> \
+                                                        <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#dropModal\" onclick=\"getDropId(" + signUp.id + ", " + signUp.roleId + ")\"> \
+                                                            <i class=\"fas fa-minus-circle fa-sm text-white-50\"></i> 强制清退 \
+                                                        </a> \
+                                                    </td>"
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + signUp.roleName + "</td>"
+                                                + "<td> " + signUp.userRealName + "</td>"
+                                                + "<td> " + signUp.signUpTime + "</td>"
+                                                + buttonText +
+                                                + "</tr>";
+
+                                            $("#signUps").append(str);
+                                        })
+ 
+                                        getUsersInfo("")
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取报名信息失败")
+                                        // console.log(res)
+                                        let str="<tr><td colspan=\"5\" align=\"center\"> 暂无报名信息 </td></tr>"
+                                        $("#signUps").append(str);
+                                        getUsersInfo("")
+                                    }
+                                }
+                            })
+                        }
+
+                        // 角色模态框获取数据
+                        function getDropId()
+                        {
+                            $("#dropId").val(arguments[0])
+                            $("#roleId").val(arguments[1])
+                        }
+
+                        function dropMember()
+                        {
+                            // 删除报名信息
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/dropSignUp.php",
+                                type: "POST",
+                                data:{
+                                    signUpId: document.getElementById('dropId').value,
+                                    roleId: document.getElementById('roleId').value
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 删除成功
+                                        toastr.success('强制清退成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 发布失败，显示原因
+                                        // console.log("强制清退失败")
+                                        toastr.error('强制清退失败')
+                                    }
+                                }
+                            })
+                        }
+
+                        /* ------------- 报名信息 -------------*/
+
+                        /* ------------- 任务指派 -------------*/
+
+                        // 获取用户信息列表（指派任务）
+                        function getUsersInfo(userInfoCondition)
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getUsersInfo.php",
+                                type: "POST",
+                                data:{
+                                    userInfoCondition: userInfoCondition
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 查询成功
+                                        // console.log(res_json.message)
+
+                                        let str = ""
+                                        var cont = 0
+                                        usersInfo = res_json.message
+
+                                        $.each(res_json.message, function(i, userInfo) {
+                                            
+                                            // console.log(i)
+
+                                            // console.log(signUps)
+
+                                            var userDisplay = true;
+                                            var roleSelected = $("#roleSelect").find("option:selected").val()
+
+                                            // console.log(typeof(signUps))
+                                            if (typeof(signUps) == "object")
+                                            {
+                                                SignUps = 0
+                                            }
+
+                                            if ((SignUps))
+                                            {
+                                                $.each(signUps, function(i, signUp) {
+
+                                                    // console.log(i)
+                                                    // console.log(signUp)
+                                                    //console.log(userInfo.id)
+
+                                                    if ((signUp.userId == userInfo.id) && (roleSelected == signUp.roleId))
+                                                    {
+                                                        userDisplay = false
+                                                        return false
+                                                    }
+                                                })
+                                            }
+
+                                            // console.log(userDisplay)
+
+                                            if ((userInfo.name) && (userInfo.name != "新用户") && (Number(userInfo.permit) <= 4) && (userDisplay))
+                                            {
+                                                if (cont % 3 == 0)
+                                                {
+                                                    str = str + "<ul>"
+                                                }
+
+                                                str = str
+                                                + "<li style=\"list-style:none;float:left;width:30%\"><input type=\"checkbox\" name=\"userSelect\" value=\""
+                                                + userInfo.id    
+                                                + "\">&nbsp;"
+                                                + userInfo.name
+                                                + "</input></li>"
+
+                                                if (cont % 3 == 2)
+                                                {
+                                                    str = str + "</ul>"
+                                                }
+                                                
+                                                cont = cont + 1
+                                            }
+                                            else if ((userInfo.name) && (userInfo.name != "新用户") && (Number(userInfo.permit) <= 4))
+                                            {
+                                                if (cont % 3 == 0)
+                                                {
+                                                    str = str + "<ul>"
+                                                }
+
+                                                str = str
+                                                + "<li style=\"list-style:none;float:left;width:30%\"><input type=\"checkbox\" name=\"userSelected\" disabled=\"disabled\" checked=\"checked\" value=\""
+                                                + userInfo.id    
+                                                + "\">&nbsp;"
+                                                + userInfo.name
+                                                + "</input></li>"
+
+                                                if (cont % 3 == 2)
+                                                {
+                                                    str = str + "</ul>"
+                                                }
+                                                
+                                                cont = cont + 1
+                                            }
+                                        })
+
+                                        document.getElementById("userCheck").innerHTML = ""
+                                        $("#userCheck").append(str);
+                                    }
+                                    else
+                                    {
+                                        // 发布失败，显示原因
+                                        console.log("获取用户信息列表失败")
+                                        document.getElementById("userCheck").innerHTML = ""
+                                        // toastr.error('未检索到用户')
+                                    }
+                                }
+                            })
+                        }
+
+                        // 用户信息重载
+                        function usersInfoReload()
+                        {
+                            var nowUserInfoCondition = document.getElementById("userInfoCondition").value
+
+                            var nowRoleSelected = $("#roleSelect").find("option:selected").val()
+
+                            if ((oldUserInfoCondition != nowUserInfoCondition) || (oldRoleSelected != nowRoleSelected))
+                            {
+                                // console.log(nowUserInfoCondition)
+                                // console.log(oldUserInfoCondition)
+                                // console.log(nowRoleSelected)
+                                // var userInfoCondition = document.getElementById("userInfoCondition").value
+                                // console.log(userInfoCondition)
+                                getUsersInfo(nowUserInfoCondition)
+
+                                oldUserInfoCondition = nowUserInfoCondition
+                                oldRoleSelected = nowRoleSelected
+
+                            }
+                        }
+
+                        function taskAllocation()
+                        {
+                            var roleSelected = $("#roleSelect").find("option:selected").val()
+                            // console.log(roleSelected)
+
+                            var userSelectedList =[];
+                                $('input[name="userSelect"]:checked').each(function(){
+                                    userSelectedList.push($(this).val());
+                            });
+                            
+                            // console.log(userSelectedList)
+
+                            // console.log(userSelectedList.length)
+
+                            if (!userSelectedList.length)
+                            {
+                                toastr.error("最少需要指派一位用户")
+                            }
+                            else
+                            {
+                                userSelectedList.forEach((item,index,array)=>{
+                                    //执行代码
+                                    // console.log(item)
+                                    signUpTask(roleSelected, item)
+                                })
+                            }
+                        }
+
+                        // 任务领取
+                        function signUpTask(roleId, userId)
+                        {
+                            // console.log(roleId, userId)
+
+                            userName = ""
+                            // console.log(usersInfo)
+
+                            $.each(usersInfo, function(i, userInfo) {
+                                if (userId == userInfo.id)
+                                {
+                                    userName = userInfo.name
+                                    return false
+                                }
+                            })
+
+                            // toastr.success('向 ' + userName + ' 指派任务成功')
+
+                            // console.log(userName)
+
+                            // ajax
+                            // 修改任务基础信息
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/signUpTask.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId"),
+                                    userId: userId,
+                                    roleId: roleId,
+                                    nowTime: getCurrentTime()
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 任务指派成功
+                                        toastr.success('向 ' + res_json.userRealName + ' 指派任务成功')
+
+                                        // 延时
+                                        setTimeout( function(){
+                                            // 刷新
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }
+                                    else
+                                    {
+                                        // 显示原因
+                                        // console.log("任务领取失败")
+                                        toastr.error(res_json.message)
+                                    }
+                                }
+                            })
+
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            // console.log("1")
+                        }
+                        
+                        /* ------------- 任务指派 -------------*/
+
+                        // 提交任务修改
+                        function updateTask()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            if (document.getElementById('taskTitle').value == "")
+                            {
+                                toastr.error('任务标题不能为空')
+                            }
+                            else if (document.getElementById('taskMoney').value == "")
+                            {
+                                toastr.error('泺研币数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskMoney').value))
+                            {
+                                toastr.error('泺研币数量只能为自然数')
+                            }
+                            else if (document.getElementById('taskPoint').value == "")
+                            {
+                                toastr.error('泺学分数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskPoint').value))
+                            {
+                                toastr.error('泺学分数量只能为自然数')
+                            }
+                            else if (document.getElementById('beginDateTime').value == "")
+                            {
+                                toastr.error('任务开始时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value == "")
+                            {
+                                toastr.error('任务结束时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value <= document.getElementById('beginDateTime').value)
+                            {
+                                toastr.error('任务结束时间不能早于任务开始时间')
+                            }
+                            else
+                            {
+                                // 权限判断该任务是否需要审核
+                                var adminCheck = 0
+                                if (userInfoJson.permit < 2)
+                                {
+                                    adminCheck = 1
+                                }
+
+                                // ajax
+                                // 修改任务基础信息
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/updateTask.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: localStorage.getItem("taskId"),
+                                        taskTitle: document.getElementById('taskTitle').value,
+                                        taskType: $('#taskTypeSelect option:selected').val(),
+                                        taskMoney: document.getElementById('taskMoney').value,
+                                        taskPoint: document.getElementById('taskPoint').value,
+                                        adminCheck: adminCheck,
+                                        taskIntro: taskIntro.getData(),
+                                        beginDateTime: document.getElementById('beginDateTime').value,
+                                        endDateTime: document.getElementById('endDateTime').value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('任务基础信息修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            // console.log("任务基础信息修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+
+
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            // console.log("1")
+                        }
+
+                        function toScheduleView(i)
+                        {
+                            // console.log(roles)
+                            // console.log(i)
+                            // console.log(signUps[i].roleId)
+                            localStorage.setItem("roleId", signUps[i].roleId);
+                            localStorage.setItem("userId", signUps[i].userId);
+                            // console.log(signUps[i])
+                            // localStorage.setItem("nowPage", "scheduleView");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=scheduleView";
+                        }
+
+                        function toHeadScore(i)
+                        {
+                            // localStorage.setItem("nowPage", "headScore");
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=headScore";
+                        }
+
+
+                        // 手机号格式判断
+                        function isMobile(mobileInput)
+                        {
+                            // 手机号码格式验证 正则表达式
+                            var rightMobile = /^1[3|4|5|7|8][0-9]\d{8,11}$/
+
+                            if (!rightMobile.test(mobileInput))
+                            {
+                                return false
+                            }
+                            else
+                            {
+                                return true
+                            }
+                        }
+
+                        // 获取客户端当前时间
+                        function getCurrentTime()
+                        {
+                            var date = new Date();
+			
+                            var year = date.getFullYear();        //年 ,从 Date 对象以四位数字返回年份
+                            var month = date.getMonth() + 1;      //月 ,从 Date 对象返回月份 (0 ~ 11) ,date.getMonth()比实际月份少 1 个月
+                            var day = date.getDate();             //日 ,从 Date 对象返回一个月中的某一天 (1 ~ 31)
+                            
+                            var hours = date.getHours();          //小时 ,返回 Date 对象的小时 (0 ~ 23)
+                            var minutes = date.getMinutes();      //分钟 ,返回 Date 对象的分钟 (0 ~ 59)
+                            var seconds = date.getSeconds();      //秒 ,返回 Date 对象的秒数 (0 ~ 59)   
+                            
+                            //修改月份格式
+                            if (month >= 1 && month <= 9) {
+                                month = "0" + month;
+                                }
+                            
+                            //修改日期格式
+                            if (day >= 0 && day <= 9) {
+                                day = "0" + day;
+                                }
+                            
+                            //修改小时格式
+                            if (hours >= 0 && hours <= 9) {
+                                hours = "0" + hours;
+                                }
+                            
+                            //修改分钟格式
+                            if (minutes >= 0 && minutes <= 9) {
+                                minutes = "0" + minutes;
+                                }
+                            
+                            //修改秒格式
+                            if (seconds >= 0 && seconds <= 9) {
+                                seconds = "0" + seconds;
+                                }
+                            
+                            //获取当前系统时间  格式(yyyy-mm-dd hh:mm:ss)
+                            var currentFormatDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+                            return currentFormatDate
+                        }
+                        
+
+                        /* ------------- 任务指派 -------------*/
+                        // 上传文件名、用户名以及任务名
+                        function uploadFileName()
+                        {
+                            if(document.getElementById('files').value=="")
+                            {
+                                toastr.error('文件尚未选择')
+                            }
+                            else
+                            {
+                                var userInfo=localStorage.getItem('userInfo')
+                                var userInfoJson = JSON.parse(userInfo)
+                                console.log(userInfoJson)
+                                console.log("上传新文件文件名、项目ID、用户ID")
+                                $.ajax({
+                                    url:'../api/fileNameUpload.php',
+                                    type:'POST',
+                                    data:{
+                                        taskId: localStorage.getItem("taskId"),
+                                        taskTitle: document.getElementById('taskTitle').value,
+                                        userId: userInfoJson.id,
+                                        name: userInfoJson.name,
+                                        fileName: $('#files')[0].files[0].name,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        if (res_json.code == 200)
+                                        {
+                                            uploadFile();
+                                        }
+                                        else
+                                        {
+                                            // 文件信息上传失败，显示原因
+                                            // console.log("任务基础信息修改失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        //文件上传
+                        function uploadFile()
+                        {   
+                            var file_data=$('#files')[0].files[0];
+                            var form_data=new FormData();
+                            form_data.append('files',file_data);
+                            //alert(form_data);
+                            console.log("上传新文件")
+                            
+                            $.ajax({
+                                url:'../api/fileUpload.php',
+                                type:'POST',
+                                contentType:false,
+                                processData:false,
+                                //dataType:'JSON',
+                                cache:false,
+                                data:form_data,
+                                success:function(res){
+                                    console.log(res)
+                                    var res_json=JSON.parse(res);
+                                    console.log(res_json)
+                                    if(res_json.code==200){
+                                        // alert(res_json.message);
+                                        toastr.success(res_json.message);
+										
+										// 延时
+                                        setTimeout( function(){
+                                            // 跳转
+                                            // toPublishTasks()
+                                            location.reload()
+                                        }, 2 * 1000 );//延迟2000毫秒
+                                    }else{
+                                        console.log("文件上传失败");
+                                        toastr.error(res_json.message);
+                                    }
+                                }
+                            })
+                        }
+
+                        //获取文件列表
+                        function getFileListByTaskId()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getFileListByTaskId.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // files = res_json.message
+                                        
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, file) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + file.fileName + " </td>"
+                                                + "<td> " + file.userName + " </td>"                      
+                                                + "</tr>";
+
+                                            $("#fileList").append(str);
+                                        })
+
+                                        // 插入文件上传按钮
+                                        let str = "<tr><td colspan=\"3\" align=\"center\">"
+                                            + "<form id=\"fileUploadForm\" name=\"fileUploadForm\" enctype=\"multipart/form-data\">"
+                                            + "<div style=\"display:inline-block;width:100%\">"
+                                            + "<input id=\"files\" type=\"file\" name=\"files\" />"
+                                            + "<input type=\"button\" class=\"btn btn-primary\" value=\"上传文件\" onclick=\"uploadFileName()\"></div></form>"
+                                            + "</td></tr>"
+
+                                        $("#fileList").append(str);
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取文件列表失败")
+
+                                        // 插入文件上传按钮
+                                        let str = "<tr><td colspan=\"3\" align=\"center\">"
+                                            + "<form id=\"fileUploadForm\" name=\"fileUploadForm\" enctype=\"multipart/form-data\">"
+                                            + "<div style=\"display:inline-block;width:100%\">"
+                                            + "<input id=\"files\" type=\"file\" name=\"files\" />"
+                                            + "<input type=\"button\" class=\"btn btn-primary\" value=\"上传文件\" onclick=\"uploadFileName()\"></div></form>"
+                                            + "</td></tr>"
+
+                                        $("#fileList").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#beginDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#endDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#signUpBeginDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#signUpEndDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // $("#file").pekeUpload();
+                    </script>

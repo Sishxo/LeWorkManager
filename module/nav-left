@@ -1,0 +1,160 @@
+<!-- 左边栏 Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+<!-- 图标 标题 Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:toIndex()">
+    
+    <div class="sidebar-brand-icon">
+        <img  style="height:2.5em!important" src="img/global/icon-white.png" />
+        <!--
+        <i class="fas fa-laugh-wink"></i>
+        -->
+    </div>
+
+    <div class="sidebar-brand-text mx-3" style="margin-right:0!important;width:70%;">
+        数字孪生工作平台
+        <!--<sup>2</sup>-->
+    </div>
+</a>
+
+<!-- 普通用户显示 -->
+<div id="normalUserDisplay" style="display:none">
+    <!-- 分割线 Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        任务平台
+    </div>
+
+    <!-- Nav Item - taskList -->
+    <li id="indexNav" class="nav-item">
+        <a class="nav-link" href="javascript:toIndex()">
+            <i class="fas fa-fw fa-table"></i>
+            <span>任务大厅</span></a>
+    </li>
+
+    <!-- Nav Item - publishTaskList -->
+    <li id="publishTasksNav" class="nav-item">
+        <a class="nav-link" href="javascript:toPublishTasks()">
+            <i class="fas fa-fw fa-table"></i>
+            <span>我发布的任务</span></a>
+    </li>
+
+    <!-- Nav Item - joinTaskList -->
+    <li id="joinedTasksNav" class="nav-item">
+        <a class="nav-link" href="javascript:toJoinedTasks()">
+            <i class="fas fa-fw fa-table"></i>
+            <span>我报名的任务</span></a>
+    </li>
+
+    <!-- 分割线 Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        积分平台
+    </div>
+
+    <!-- Nav Item - 工作量统计 -->
+    <li id="tasksStatisticsNav" class="nav-item">
+        <a class="nav-link" href="javascript:toTasksStatistics()">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>工作量统计</span></a>
+    </li>
+
+    <!-- Nav Item - 积分明细 -->
+    <li id="pointsStatisticsNav" class="nav-item">
+        <a class="nav-link" href="javascript:toPointsStatistics()">
+            <i class="fas fa-fw fa-table"></i>
+            <span>积分获得明细</span></a>
+    </li>
+
+    <!-- Nav Item - 简历生成 -->
+    <li id="cvCreateNav" class="nav-item">
+        <a class="nav-link" href="javascript:tocvCreate()">
+            <i class="fa fa-address-card"></i>
+            <span>简历生成</span></a>
+    </li>
+</div>
+
+<!-- 管理员以上显示 -->
+<div id="adminDisplay" style="display:none">
+
+    <!-- 分割线 Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        管理员平台
+    </div>
+
+    <!-- Nav Item - 任务管理 -->
+    <li id="tasksAdminNav" class="nav-item" style="margin-bottom:0">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTasks"
+            aria-expanded="true" aria-controls="collapseTasks">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>任务管理</span>
+        </a>
+        <div id="collapseTasks" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">任务管理系统</h6>
+                <a id="checkTasksNav" class="collapse-item" href="javascript:toCheckTasks()">任务发布审核</a>
+                <a  class="collapse-item" href="">任务类型管理</a>
+                <a class="collapse-item" href="">积分复核</a>
+                <a id="allUsersTasksStatisticsNav" class="collapse-item" href="javascript:toAllUsersTasksStatistics()">工作量统计汇总</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - 用户管理 -->
+    <li class="nav-item" style="margin-bottom:0">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+            aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>用户管理</span>
+        </a>
+        <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">用户管理系统</h6>
+                <a class="collapse-item" href="">用户信息管理</a>
+                <a class="collapse-item" href="">用户权限管理</a>
+            </div>
+        </div>
+    </li>
+</div>
+
+<!-- 分割线 Divider -->
+<hr class="sidebar-divider my-0">
+
+<!-- Nav Item - 标研算平台 -->
+<li class="nav-item">
+    <a class="nav-link" target="_blank" href="http://server.researchfun.ac.cn:8888/cvdf/">
+        <i class="fas fa-fw fa-code"></i>
+        <span>标研算平台 8888</span></a>
+</li>
+
+<!-- 分割线 Divider -->
+<hr class="sidebar-divider my-0">
+
+<!-- Nav Item - 标研算平台 -->
+<li class="nav-item">
+    <a class="nav-link" target="_blank" href="http://42.192.8.225:48888/cvdf/">
+        <i class="fas fa-fw fa-code"></i>
+        <span>标研算平台 48888</span></a>
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider d-none d-md-block">
+
+<!-- 缩放按钮 Sidebar Toggler (Sidebar) -->
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
+
+</ul>
+<!-- 左边栏结束 End of Sidebar -->
+
+<script type="text/javascript">
+    $("#footerJs").load("module/footerJs");
+</script>

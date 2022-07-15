@@ -1,0 +1,255 @@
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">任务管理平台</h1>
+                    <p class="mb-4">通过各个角度对任务进行管理</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div style="display:inline-block">
+                                <h6 class="m-0 font-weight-bold text-primary">任务基础信息管理</h6>
+                            </div>
+                            <div style="display:inline-block">
+                                <a href="javascript:createNewTask()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 修改提交
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <!-- 任务标题 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标题：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input id="taskTitle" class="form-control" placeholder="请输入任务标题" />
+                                    </div>
+                                </div>
+
+                                <!-- 任务类型 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务类型：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:10%">
+                                        <select id="taskType" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 任务标签 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务标签：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%">
+                                        <input id="taskLabel" class="form-control" placeholder="请输入任务标签" />
+                                    </div>
+                                </div>
+
+                                <!-- 任务简介 -->
+                                <div style="height:80px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>任务简介：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:40%;margin-top: 10px">
+                                        <textarea id="taskIntro" class="form-control" placeholder="请输入任务简介">
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 计划开始时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划开始时间：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="beginDateTime">
+                                    </div>
+                                </div>
+
+                                <!-- 计划结束时间 -->
+                                <div style="height:40px">
+                                    <div style="display:inline-block;padding-top:8px">
+                                        <font>计划结束时间：</font>
+                                    </div>
+                                    <div style="display:inline-block;width:38%">
+                                        <input type="text" class="form-control layui-input" id="endDateTime">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JS脚本 -->
+                    <script type="text/javascript">
+                        // 默认文本区域为空
+                        document.getElementById('taskIntro').value =""
+
+                        // 获取任务类型
+                        $.ajax({
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"../api/getTaskType.php",
+                            type: "POST",
+                            data:{},
+                            success:function(res){
+                                // console.log(res)
+                                var res_json = JSON.parse(res)
+                                // console.log(res_json)
+                                // console.log(res_json.code)
+                                if (res_json.code == 200)
+                                {
+                                    // 获取成功
+                                    // console.log(res_json.message)
+
+                                    // 显示到下拉菜单
+                                    $.each(res_json.message, function(i, taskType) {
+                                        // console.log(taskType)
+                                        // 设置默认
+                                        if (taskType.projecttype == "数据标注任务")
+                                        {
+                                            $('#taskType').append
+                                            (
+                                                $('<option>').text(taskType.projecttype).attr('value', taskType.id).attr('selected', 'selected')
+                                            )
+                                        }
+                                        else
+                                        {
+                                            $('#taskType').append
+                                            (
+                                                $('<option>').text(taskType.projecttype).attr('value', taskType.id)
+                                            )
+                                        }
+                                    })
+                                }
+                                else
+                                {
+                                    // 获取失败，显示原因
+                                    console.log("获取任务类型失败")
+                                }
+                            }
+                        })
+
+                        // 获取系统当前时间
+                        function getNowTime() {
+                            let dateTime
+                            let yy = new Date().getFullYear()
+                            let mm = new Date().getMonth() + 1
+                            let dd = new Date().getDate()
+                            let hh = new Date().getHours()
+                            let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes()
+                                :
+                                new Date().getMinutes()
+                            let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds()
+                                :
+                                new Date().getSeconds()
+                            dateTime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss
+                            // console.log(dateTime)
+                            return dateTime
+                        }
+                        
+                        // 提交创建新任务
+                        function createNewTask()
+                        {
+                            if (document.getElementById('taskTitle').value == "")
+                            {
+                                toastr.error('任务标题不能为空')
+                            }
+                            else if (document.getElementById('taskLabel').value == "")
+                            {
+                                toastr.error('任务标签不能为空')
+                            }
+                            else if (document.getElementById('taskIntro').value == "")
+                            {
+                                toastr.error('任务简介不能为空')
+                            }
+                            else if (document.getElementById('beginDateTime').value == "")
+                            {
+                                toastr.error('任务开始时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value == "")
+                            {
+                                toastr.error('任务结束时间不能为空')
+                            }
+                            else if (document.getElementById('endDateTime').value <= document.getElementById('beginDateTime').value)
+                            {
+                                toastr.error('任务结束时间不能早与任务开始时间')
+                            }
+                            else if (userInfoJson.name == "")
+                            {
+                                toastr.error('未实名，暂时不能发布新任务')
+                            }
+                            else
+                            {
+                                // 权限判断该任务是否需要审核
+                                var adminCheck = 0
+                                if (userInfoJson.permit < 2)
+                                {
+                                    adminCheck = 1
+                                }
+
+                                // ajax
+                                // 创建新任务
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/createNewTask.php",
+                                    type: "POST",
+                                    data:{
+                                        headPerson: userInfoJson.id,
+                                        createTime: getNowTime(),
+                                        taskTitle: document.getElementById('taskTitle').value,
+                                        taskType: $('#taskType option:selected').val(),
+                                        taskLabel: document.getElementById('taskLabel').value,
+                                        adminCheck: adminCheck,
+                                        phone: userInfoJson.mobile,
+                                        taskIntro: document.getElementById('taskIntro').value,
+                                        beginDateTime: document.getElementById('beginDateTime').value,
+                                        endDateTime: document.getElementById('endDateTime').value,
+                                    },
+                                    success:function(res){
+                                        console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 发布成功
+                                            toastr.success('新任务发布成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                toPublishTasks()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 发布失败，显示原因
+                                            console.log("发布新任务失败")
+                                            toastr.error(res_json.message)
+                                        }
+                                    }
+                                })
+                            }
+
+
+                            // localStorage.setItem("nowPage", "createNewTask");
+                            // location.reload();
+                            // console.log("1")
+                        }
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#beginDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#endDateTime', //指定元素
+                            type: 'datetime'
+                        });
+                    </script>

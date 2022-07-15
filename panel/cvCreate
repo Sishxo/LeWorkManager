@@ -1,0 +1,224 @@
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">简历生成</h1>
+                    <p class="mb-4">生成指定时间内的个人简历</p>
+
+                    <!-- DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">统计时间</h6>
+                            </div>
+                            <div style="float:right">
+                                <a href="javascript:statisticsChange()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <i class="fas fa-pen fa-sm text-white-50"></i> 开始统计
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <!-- 统计时间 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 统计开始时间 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="">
+                                                <label>
+                                                    <div style="height:40px">
+                                                        <div style="display:inline-block;padding-top:8px">
+                                                            <font>统计开始时间<font color="red">*</font>：</font>
+                                                        </div>
+                                                        <div style="display:inline-block;width:60%">
+                                                            <input type="text" class="form-control layui-input" id="startDateTime">
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 统计结束时间 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="">
+                                                <label>
+                                                    <div style="height:40px">
+                                                        <div style="display:inline-block;padding-top:8px">
+                                                            <font>统计结束时间<font color="red">*</font>：</font>
+                                                        </div>
+                                                        <div style="display:inline-block;width:60%">
+                                                            <input type="text" class="form-control layui-input" id="endDateTime">
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DataTales -->
+                    <div class="card shadow mb-4">
+                        <!-- 卡片标题 -->
+                        <div class="card-header py-3">
+                            <div style="display:inline-block;margin-top:8px">
+                                <h6 class="m-0 font-weight-bold text-primary">个人简历</h6>
+                            </div>
+                            <div style="float:right">
+                                <button onclick="printCV()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <i class="fa fa-print"></i> 点击打印
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片内容 -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <!-- 简历 -->
+                                    <div class="document-editor">
+                                        <div id="toolbar-container" class="document-editor__toolbar"></div>
+                                        <div class="document-editor__editable-container">
+                                            <div id="cvContent" class="document-editor__editable">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JS脚本 -->
+                    <script src="../js/echarts.js"></script>
+                    <script type="text/JavaScript" src="../js/jQuery.print.min.js"></script>
+                    <script type="text/javascript">
+                        // 复杂输入框
+                        DecoupledEditor
+                            .create( document.querySelector( '#cvContent' ), {
+                                //工具栏，可选择添加或去除
+                                //toolbar: ['headings', 'bold', 'italic', 'blockQuote', 'bulletedList', 'numberedList', 'link', 'ImageUpload', 'undo'],
+                                toolbar: [],
+                                //editor加载中文简体，默认是英文
+                                language: 'zh-cn',
+                                ckfinder: {
+                                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                                }
+                            })
+                            .then( cvContent => {
+                                const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                                toolbarContainer.appendChild( cvContent.ui.view.toolbar.element );
+
+                                window.cvContent = cvContent
+
+                                cvContent.isReadOnly = true
+
+                                // 填简历
+                                var cvContentText = "<h3 style=\"text-align:center;\">个人简历</h3><h4><u>基本信息 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4> \
+                                    <ul><li>姓名：XX</li><li>籍贯：江苏南通</li><li>政治面貌：中共党员</li><li>出生年月：1999年10月1日</li><li>地址：江苏省南京市东南大学九龙湖校区 \
+                                    </li><li><a href=\"电子邮箱：XX0817@gmail.com\">电子邮箱：XX0817@gmail.com</a></li></ul><h4><u>教育背景 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4><p>2018年09月至今 \
+                                    </p><ul style=\"list-style-type:disc;\"><li>学校：东南大学</li><li>专业：工商管理专业</li><li>加权均分：87/100</li><li>专业排名：3/37（本科前五学期）</li> \
+                                    <li>工商管理专业前10%（连续两年）</li><li>教育部颁发“国家奖学金”</li><li>大三赴台湾国立成功大学交流半年</li></ul><h4><u>项目/竞赛经历 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4><ul style=\"list-style-type:disc;\"><li>2018.12 &nbsp;参加挑战杯比赛</li><li>2019.4 &nbsp; &nbsp;东南大学第四届数学建模大赛 &nbsp; &nbsp;担任组长</li><li>2019.7 &nbsp; &nbsp;参加校级项目：东南大学经济管理学院人事管理系统的设计</li><li>2019.12 &nbsp;台湾电子商务创业策划大赛</li></ul><h4><u>实践经历 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4><ul style=\"list-style-type:disc;\"><li>2019.6.29~7.10 &nbsp;代表东南大学赴内蒙古“文化三下乡”</li><li>2019.9~2020.5 &nbsp; 担任东南大学学生职业发展协会管理发展部部长（校五星社团）</li><li>2020.1.23~1.31 &nbsp;校团委在苏州举办的“创业冬令营”</li></ul><h4><u>所获奖项 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4><ul><li>2019学年 国家教育部颁发的国家奖学金</li><li>2019学年 东南大学“三好学生称号”</li><li>2019学年 高数、管理学 单科奖学金</li></ul><h4><u>个人小结 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</u></h4><ul><li>品性优秀，对人热情、诚恳、做事认真、踏实，学习上进、钻研。</li><li>英语应用能力强，能英语即兴演讲：接受全英文课堂半年，适应英语环境下学习，交流。</li><li>思维活跃，丰富的实践经验使我看问题视角更广、更深、更新，团队讨论中常有新颖的思路和想法。</li></ul>"
+                                cvContent.setData(cvContentText)
+
+                                // console.log(Array.from( taskIntro.ui.componentFactory.names() ))
+                            })
+                            .catch( error => {
+                                console.error(error);
+                            });
+                        
+
+                        // 计算起止时间并自动填上
+                        function calcuTime()
+                        {
+                            var date = new Date()
+                            var day_30 = new Date().setMonth((new Date().getMonth()-1))    //日期是30天前的对应时间戳
+                            date_30 = new Date(day_30)       //转换成标准时间
+			
+                            var endYear = date.getFullYear()        //年 ,从 Date 对象以四位数字返回年份
+                            var endMonth = date.getMonth() + 1      //月 ,从 Date 对象返回月份 (0 ~ 11) ,date.getMonth()比实际月份少 1 个月
+                            var endDay = date.getDate()             //日 ,从 Date 对象返回一个月中的某一天 (1 ~ 31)
+                            var startYear = date_30.getFullYear()
+                            var startMonth = date_30.getMonth() + 1
+                            var startDay = date_30.getDate()             
+                            
+                            //修改月份格式
+                            if (startMonth >= 1 && startMonth <= 9)
+                            {
+                                startMonth = "0" + startMonth;
+                            }
+
+                            if (endMonth >= 1 && endMonth <= 9)
+                            {
+                                endMonth = "0" + endMonth;
+                            }
+                            
+                            //修改日期格式
+                            if (startDay >= 1 && startDay <= 9)
+                            {
+                                startDay = "0" + startDay;
+                            }
+
+                            if (endDay >= 1 && endDay <= 9)
+                            {
+                                endDay = "0" + endDay;
+                            }
+                            
+                            //格式化
+                            var endDate = endYear + "-" + endMonth + "-" + endDay + " 23:59:59"
+                            var startDate = startYear + "-" + startMonth + "-" + startDay + " 00:00:00"
+                            document.getElementById("startDateTime").value = startDate
+                            document.getElementById("endDateTime").value = endDate
+
+                            // 调用
+                        }
+
+                        calcuTime()
+
+                        // 打印简历
+                        function printCV()
+                        {
+                            // 打印
+                            $("#cvContent").print({
+                                globalStyles: true,
+                                mediaPrint: false,
+                                stylesheet: null,
+                                noPrintSelector: ".no-print",
+                                iframe: true,
+                                append: null,
+                                prepend: null,
+                                manuallyCopyFormValues: true,
+                                deferred: $.Deferred(),
+                                timeout: 750,
+                                title: null,
+                                doctype: '<!doctype html>'
+                            });
+                        }
+
+                        // 统计时间改变
+                        function statisticsChange()
+                        {
+                            // 重新获取表格
+                            moneyStatistics_lengthChange()
+                            pointsStatistics_lengthChange()
+                        }
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#startDateTime', //指定元素
+                            type: 'datetime'
+                        });
+
+                        // 日期时间选择器
+                        laydate.render({
+                            elem: '#endDateTime', //指定元素
+                            type: 'datetime'
+                        });
+                    </script>
