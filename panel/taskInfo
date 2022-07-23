@@ -111,6 +111,21 @@
                                     </div>
                                 </div>
 
+                                <div id="uploadFileList" style="width:50%;margin-top:20px">
+                                    <table class="table table-bordered" id="fileList" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>文件名</th>
+                                                <th>上传者</th>
+                                                <th>下载</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                                 <!-- 任务简介 -->
                                 <div style="padding-top:8px;margin-bottom:8px">
                                     <font>任务简介(只读）：</font>
@@ -412,6 +427,7 @@
                                     getSignUpsById()
                                     getTaskLabelsById()
                                     getChildTasksById()
+                                    getFileListByTaskId()
                                 }
                                 else
                                 {
@@ -1115,5 +1131,60 @@
                             // localStorage.setItem("nowPage", "score");
                             // location.reload();
                             window.location.href = "index.php?nowPage=score";
+                        }
+
+                        function getFileListByTaskId()
+                        {
+                            // ajax
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getFileListByTaskId.php",
+                                type: "POST",
+                                data:{
+                                    taskId: localStorage.getItem("taskId")
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // files = res_json.message
+                                        
+                                        
+                                        // 填充表格
+                                        $.each(res_json.message, function(i, file) {
+                                            
+                                            // index
+                                            var index = Number(i) + 1
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td> " + file.fileName + " </td>"
+                                                + "<td> " + file.userName + " </td>"
+                                                + "<td><a type=\"button\" class=\"btn btn-primary\" value=\"下载\" href=\"./uploads/"+file.taskId+"/"+file.userId+"/"+file.fileName+"\" download>下载</td>"                      
+                                                + "</tr>";
+
+                                            $("#fileList").append(str);
+                                        })
+
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        console.log("获取文件列表失败")
+
+                                    }
+                                }
+                            })
+                        }
+
+                        function downloadFile(filePath)
+                        {
+                            filePath="../uploads/"+filePath;
+                            window.open(filePath)
                         }
                     </script>

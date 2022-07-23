@@ -490,6 +490,9 @@
                                             // 加徽章
                                             if (task.createTime > lastDateTime)
                                             {
+                                                // console.log(task.createTime)
+                                                // console.log(lastDateTime)
+                                                // console.log(task.proName)
                                                 taskNameText = task.proName + "&nbsp;<span class=\"badge badge-success\">新任务</span>"
                                             }
                                             else
@@ -546,7 +549,7 @@
                                             }
 
                                             // console.log(taskNameText)
-                                            console.log(task.taskMoney)
+                                            // console.log(task.taskMoney)
 
                                             let str="<tr>"            
                                                 + "<td>" + index + "</td>"
@@ -1313,7 +1316,7 @@
                             }
                             else if (i == 3)
                             {
-                                var dateStamp = new Date().setDate(new Date().getDate() - 1);
+                                var dateStamp = new Date().setDate(new Date().getDate() - 3);
                                 var date = new Date(dateStamp)
                             }
                             else

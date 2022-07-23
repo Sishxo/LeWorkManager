@@ -40,7 +40,7 @@
 		$sql = "INSERT INTO `platform_project` (proName, projectType, headPerson, introduction, createTime, startTime, endTime, adminCheck, checkPerson, taskMoney, taskPoint) 
         VALUES ('".$taskTitle."', ".$taskType.", ".$headPerson.", '".$taskIntro."', '".$createTime."', '".$beginDateTime."', '".$endDateTime."', ".$adminCheck.", ".$checkPerson.", ".$taskMoney.", ".$taskPoint.")";
 		// $res = $sql;
-        // echo $sql;
+        // echo $headPerson;
 		
 		$result = mysqli_query($conn, $sql);
         // $result = true;
