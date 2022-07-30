@@ -365,7 +365,9 @@
                         <font>标签名称：</font>
                     </div>
                     <div style="float:right;width:80%">
-                        <input id="labelChanged" class="form-control" placeholder="请输入标签名称">
+                        <input id="labelChanged" class="form-control" placeholder="请输入标签名称" list="projectLabelList">
+                        <datalist id="projectLabelList">
+                        </datalist>
                     </div>
                 </div>
             </div>
@@ -702,6 +704,7 @@
                 getRolesById()
                 getSignUpsById()
                 getFileListByTaskId()
+                getAllTaskLabels()
             }
             else {
                 // 获取失败，显示原因
@@ -804,7 +807,7 @@
 
                     // 填充表格
                     $.each(res_json.message, function (i, taskLabel) {
-
+                        
                         // index
                         var index = Number(i) + 1
 
@@ -822,6 +825,43 @@
                             + "</tr>";
 
                         $("#taskLabels").append(str);
+                    })
+                }
+                else {
+                    // 获取失败，显示原因
+                    console.log("获取标签失败")
+                    let str = "<tr><td colspan=\"3\" align=\"center\"> 暂无标签 </td></tr>"
+                    $("#taskLabels").append(str);
+                }
+            }
+        })
+    }
+
+    function getAllTaskLabels() {
+        // ajax
+        $.ajax({
+            contentType: "application/x-www-form-urlencoded",
+            url: "../api/getAllTaskLabels.php",
+            type: "POST",
+            success: function (res) {
+
+                var res_json = JSON.parse(res)
+
+                if (res_json.code == 200) {
+
+                    Labels = res_json.message
+
+                    $.each(res_json.message, function (i, Label) {
+
+                        var index = Number(i) + 1
+
+                        console.log(Label.label)
+
+                        let str = "<option> "
+                                + Label.label
+                                + " </option>";
+
+                        $("#projectLabelList").append(str);
                     })
                 }
                 else {
