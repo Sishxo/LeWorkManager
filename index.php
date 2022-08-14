@@ -45,7 +45,7 @@
                     <!-- Page Heading -->
                     <div style="height:200px"></div>
                     <div style="text-align:center">
-                        <h1 class="h3 mb-4 text-gray-800"><font color="red">对不起，您是临时用户，请联系管理员提升您的使用权限，谢谢!</font></h1>
+                        <h1 class="h3 mb-4 text-gray-800"><font color="black">正在加载中！</font></h1>
                     </div>
                 </div>
 
