@@ -45,7 +45,7 @@
                     <!-- Page Heading -->
                     <div style="height:200px"></div>
                     <div style="text-align:center">
-                        <h1 class="h3 mb-4 text-gray-800"><font color="black">正在加载中！</font></h1>
+                        <h1 class="h3 mb-4 text-gray-800"><font color="yellow">正在加载中！</font></h1>
                     </div>
                 </div>
 
