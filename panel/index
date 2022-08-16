@@ -23,7 +23,7 @@
                                                     </div>
 
                                                     <div style="display:inline-block">
-                                                        <select id="DevelopTasks_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="ManagerAllTasks_lengthChange()">
+                                                        <select id="DevelopAllTasks_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="DevelopAllTasks_lengthChange()">
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
@@ -706,7 +706,6 @@
                         function getDevelopPublicTasks()
                         {
                             // console.log($('#signUpAllTasks_length option:selected').val())
-
                             $.ajax({
                                 contentType: "application/x-www-form-urlencoded",
                                 url:"../api/DevelopAllTasks.php",
@@ -717,7 +716,7 @@
                                     DevelopCondition: document.getElementById("DevelopCondition").value
                                 },
                                 success:function(res){
-                                    // console.log(res)
+                                    console.log(res)
                                     var res_json = JSON.parse(res)
                                     // console.log(res_json)
                                     // console.log(res_json.code)
@@ -735,7 +734,7 @@
                                             $.each(task.labels, function(i, taskLabel) {
                                                 // console.log(taskLabel.label)
                                                 taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
-                                                // console.log(taskLabelText)
+                                                //console.log(taskLabelText)
                                             })
 
                                             // console.log(task)
@@ -833,7 +832,7 @@
                                                 + "</tr>";
 
                                             $("#DevelopAllTasksTable").append(str);
-                                            // console.log(str)
+                                            console.log(str)
                                         })
 
                                         // 翻页按钮禁用判断
@@ -877,7 +876,7 @@
                                         document.getElementById('DevelopPageReduct').className = "page-link disabled"
                                         document.getElementById('DevelopPagePlus').disabled = "disabled"
                                         document.getElementById('DevelopPagePlus').className = "page-link disabled"
-                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无管理层任务 </td></tr>"
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无开发任务 </td></tr>"
                                         $("#DevelopAllTasksTable").append(str);
                                     }
                                 }

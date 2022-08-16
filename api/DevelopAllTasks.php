@@ -24,8 +24,9 @@
         $nowDateTime = date('Y-m-d H:i:s');
         // echo $nowDateTime;
 		$sqlInSelect = "SELECT taskId FROM `platform_signUp`";
+		// echo $sqlInSelect;
 		$sql = "SELECT * FROM `platform_project` WHERE ((adminCheck = 1) and (signUpEndTime <> '0000-00-00 00:00:00') and ((signUpEndTime >= '".$nowDateTime.
-			"') OR (id NOT IN (".$sqlInSelect."))) and proName LIKE '%".$signUpCondition."%' and realEndFlag = 0 and projectType = 10) ORDER BY createTime DESC LIMIT ".$startNum.", ".$length;
+			"') OR (id NOT IN (".$sqlInSelect."))) and proName LIKE '%".$DevelopCondition."%' and realEndFlag = 0 and projectType = 10) ORDER BY createTime DESC LIMIT ".$startNum.", ".$length;
 		// echo $sql;
 		
 		$result = mysqli_query($conn, $sql);
@@ -132,7 +133,7 @@
 			}
 
 			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 1) and (signUpEndTime <> '0000-00-00 00:00:00') and ((signUpEndTime >= '".$nowDateTime.
-				"') OR (id NOT IN (".$sqlInSelect."))) and proName LIKE '%".$signUpCondition."%' and realEndFlag = 0 and projectType = 9)";
+				"') OR (id NOT IN (".$sqlInSelect."))) and proName LIKE '%".$signUpCondition."%' and realEndFlag = 0 and projectType = 10)";
 			// $sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 1) and (signUpEndTime <> '0000-00-00 00:00:00') and (signUpEndTime >= '".$nowDateTime.
 			// "') and proName LIKE '%".$signUpCondition."%' and realEndFlag = 0)";
 
