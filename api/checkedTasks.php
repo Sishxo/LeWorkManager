@@ -84,7 +84,7 @@
 				$resMessage[] = $row;
 			}
 
-			$sqlNew = "SELECT * FROM `platform_project` WHERE ((adminCheck = 1) and (checkPerson = ".$checkPerson.") AND (proName LIKE '%"
+			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 1) and (checkPerson = ".$checkPerson.") AND (proName LIKE '%"
 				.$checkedAllCondition."%'))";
 
 			$resultNew = mysqli_query($conn, $sqlNew);

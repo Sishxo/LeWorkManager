@@ -60,7 +60,7 @@
                                     <!-- 表格本体 -->
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered" id="uncheckedAllTasksTable" width="100%" cellspacing="0">
+                                            <table class="table table-bordered" id="uncheckedAllTasksTable" width="100%" cellspacing="0" onclick="uncheckedAllTasksClick()">
                                                 <thead>
                                                     <tr>
                                                         <th>任务序号</th>
@@ -182,7 +182,7 @@
                                     <!-- 表格本体 -->
                                     <div class="row">
                                         <div class="col-sm-12">    
-                                            <table class="table table-bordered" id="checkedAllTasksTable" width="100%" cellspacing="0">
+                                            <table class="table table-bordered" id="checkedAllTasksTable" width="100%" cellspacing="0" onclick="checkedAllTasksClick()">
                                                 <thead>
                                                     <tr>
                                                         <th>任务序号</th>
@@ -470,6 +470,7 @@
                                         }
 
                                         var maxUncheckedPage = Math.ceil(Number(res_json.listLength) / Number($('#uncheckedAllTasks_length option:selected').val()))
+                                        // console.log(maxUncheckedPage)
 
                                         if (uncheckedAllPage >= maxUncheckedPage)
                                         {
@@ -602,6 +603,30 @@
                             }
                         }
 
+                        function uncheckedAllTasksClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            if (isNaN(td.parentElement.rowIndex))
+                            {
+                                var tdd = td.parentElement.parentElement.rowIndex
+                            }
+                            else
+                            {
+                                var tdd = td.parentElement.rowIndex
+                            }
+                            // console.log(td.parentElement.rowIndex + 1)
+                            // console.log(td.parentElement.children[1].innerHTML)
+                            // console.log(tdd)
+                            console.log(document.getElementById('maxUncheckedPage').innerHTML)
+                            if ((tdd > 0) && (document.getElementById('maxUncheckedPage').innerHTML > 0))
+                            {
+                                clickId = uncheckedAllTasksList[tdd - 1].id
+                                // console.log(clickId)
+                                toManegeTask(clickId)
+                            }
+                        }
+
                         /* ------------- 未审核 -------------*/
 
                         // 任务审核模态框获取数据
@@ -701,6 +726,7 @@
                                         // console.log(res_json.message)
                                         // console.log(taskType['0'].projectType)
                                         checkedTasksList = res_json.message
+                                        console.log(res_json.listLength)
 
                                         // 显示到下拉菜单
                                         $.each(res_json.message, function(i, task) {
@@ -776,6 +802,8 @@
                                         }
 
                                         var maxCheckedPage = Math.ceil(Number(res_json.listLength) / Number($('#checkedAllTasks_length option:selected').val()))
+                                        console.log(res_json)
+                                        console.log(maxCheckedPage)
 
                                         if (checkedAllPage >= maxCheckedPage)
                                         {
@@ -907,7 +935,41 @@
                             }
                         }
 
+                        function checkedAllTasksClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            if (isNaN(td.parentElement.rowIndex))
+                            {
+                                var tdd = td.parentElement.parentElement.rowIndex
+                            }
+                            else
+                            {
+                                var tdd = td.parentElement.rowIndex
+                            }
+                            console.log(td.parentElement.rowIndex + 1)
+                            console.log(td.parentElement.children[1].innerHTML)
+                            console.log(tdd)
+                            console.log(checkedTasksList[tdd-1])
+                            console.log(document.getElementById('maxCheckedPage').innerHTML)
+                            if ((tdd > 0) && (document.getElementById('maxCheckedPage').innerHTML > 0))
+                            {
+                                // console.log("break")
+                                clickId = checkedTasksList[tdd - 1].id
+                                console.log(clickId)
+                                toManegeTask(clickId)
+                            }
+                        }
+
                         /* ------------- 已审核 -------------*/
 
+                        function toManegeTask(taskId)
+                        {
+                            // localStorage.setItem("nowPage", "manageTask");
+                            localStorage.setItem("taskId", taskId);
+                            // console.log(localStorage.getItem("taskId"))
+                            // location.reload();
+                            window.location.href = "index.php?nowPage=manageTask";
+                        }
                         
                     </script>
