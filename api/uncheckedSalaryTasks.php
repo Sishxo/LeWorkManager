@@ -83,7 +83,7 @@
 				$resMessage[] = $row;
 			}
 
-			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) AND (projectType == 12) AND (proName LIKE '%"
+			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) AND (projectType = 12) AND (proName LIKE '%"
 				.$uncheckedSalaryCondition."%'))";
 
 			$resultNew = mysqli_query($conn, $sqlNew);

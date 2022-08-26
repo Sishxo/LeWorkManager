@@ -932,10 +932,10 @@
 
                                             // 按钮
                                             var buttonText = "<td> \
-                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedAllTasksClick()\"> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedSalaryTasksClick()\"> \
                                                         <i class=\"fas fa-regular fa-eye text-white-50\"></i> 详情 \
                                                     </a> \
-                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getSalaryTaskId(" + i + ")\"> \
                                                         <i class=\"fas fa-pen fa-sm text-white-50\"></i> 审核 \
                                                     </a> \
                                                     <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTask\" onclick=\"getTaskId(" + i + ")\"> \
@@ -993,9 +993,7 @@
                                             document.getElementById('uncheckedSalaryPageReduct').disabled = ""
                                             document.getElementById('uncheckedSalaryPageReduct').className = "page-link"
                                         }
-
                                         var maxUncheckedSalaryPage = Math.ceil(Number(res_json.listLength) / Number($('#uncheckedSalary_length option:selected').val()))
-                                        // console.log(maxUncheckedPage)
 
                                         if (uncheckedSalaryPage >= maxUncheckedSalaryPage)
                                         {
@@ -1009,9 +1007,10 @@
                                         }
 
                                         // 页码填进去框里
-                                        document.getElementById('uncheckedSalaryPageInput').value = uncheckedAllPage
+                                        document.getElementById('uncheckedSalaryPageInput').value = uncheckedSalaryPage
                                         document.getElementById('uncheckedSalaryPageInput').disabled = ""
-                                        document.getElementById('maxUncheckedSalaryPage').innerHTML = maxUncheckedPage
+                                        document.getElementById('maxUncheckedSalaryPage').innerHTML = maxUncheckedSalaryPage
+                                        console.log(maxUn)
                                     }
                                     else
                                     {
@@ -1136,11 +1135,11 @@
                             // console.log(td.parentElement.rowIndex + 1)
                             // console.log(td.parentElement.children[1].innerHTML)
                             // console.log(tdd)
-                            // console.log(document.getElementById('maxUncheckedSalaryPage').innerHTML)
+                            console.log(document.getElementById('maxUncheckedSalaryPage').innerHTML)
                             if ((tdd > 0) && (document.getElementById('maxUncheckedSalaryPage').innerHTML > 0))
                             {
                                 clickId = uncheckedSalaryTasksList[tdd - 1].id
-                                // console.log(clickId)
+                                console.log(clickId)
                                 toManegeTask(clickId)
                             }
                         }
@@ -1204,10 +1203,10 @@
 
                                             // 按钮
                                             var buttonText = "<td> \
-                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedAllTasksClick()\"> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedReimburseTasksClick()\"> \
                                                         <i class=\"fas fa-regular fa-eye text-white-50\"></i> 详情 \
                                                     </a> \
-                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getReimburseTaskId(" + i + ")\"> \
                                                         <i class=\"fas fa-pen fa-sm text-white-50\"></i> 审核 \
                                                     </a> \
                                                     <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTask\" onclick=\"getTaskId(" + i + ")\"> \
@@ -1267,7 +1266,7 @@
                                         }
 
                                         var maxUncheckedReimbursePage = Math.ceil(Number(res_json.listLength) / Number($('#uncheckedReimburse_length option:selected').val()))
-                                        // console.log(maxUncheckedPage)
+                                        //console.log(maxUncheckedReimbursePage)
 
                                         if (uncheckedReimbursePage >= maxUncheckedReimbursePage)
                                         {
@@ -1281,9 +1280,9 @@
                                         }
 
                                         // 页码填进去框里
-                                        document.getElementById('uncheckedReimbursePageInput').value = uncheckedAllPage
+                                        document.getElementById('uncheckedReimbursePageInput').value = uncheckedReimbursePage
                                         document.getElementById('uncheckedReimbursePageInput').disabled = ""
-                                        document.getElementById('maxUncheckedReimbursePage').innerHTML = maxUncheckedPage
+                                        document.getElementById('maxUncheckedReimbursePage').innerHTML = maxUncheckedReimbursePage
                                     }
                                     else
                                     {
@@ -1408,7 +1407,7 @@
                             // console.log(td.parentElement.rowIndex + 1)
                             // console.log(td.parentElement.children[1].innerHTML)
                             // console.log(tdd)
-                            // console.log(document.getElementById('maxUncheckedReimbursePage').innerHTML)
+                            console.log(document.getElementById('maxUncheckedReimbursePage').innerHTML)
                             if ((tdd > 0) && (document.getElementById('maxUncheckedReimbursePage').innerHTML > 0))
                             {
                                 clickId = uncheckedReimburseTasksList[tdd - 1].id
@@ -1690,6 +1689,22 @@
                             $("#taskId").val(uncheckedAllTasksList[i].id)
                             $("#taskMoneyChanged").val(uncheckedAllTasksList[i].taskMoney)
                             $("#taskPointChanged").val(uncheckedAllTasksList[i].taskPoint)
+                        }
+
+                        function getSalaryTaskId(i)
+                        {
+                            // console.log(arguments)
+                            $("#taskId").val(uncheckedSalaryTasksList[i].id)
+                            $("#taskMoneyChanged").val(uncheckedSalaryTasksList[i].taskMoney)
+                            $("#taskPointChanged").val(uncheckedSalaryTasksList[i].taskPoint)
+                        }
+
+                        function getReimburseTaskId(i)
+                        {
+                            // console.log(arguments)
+                            $("#taskId").val(uncheckedReimburseTasksList[i].id)
+                            $("#taskMoneyChanged").val(uncheckedReimburseTasksList[i].taskMoney)
+                            $("#taskPointChanged").val(uncheckedReimburseTasksList[i].taskPoint)
                         }
 
                         // 任务审核
