@@ -6,7 +6,7 @@
     // 页码和每页显示几条
     $page = $_POST['page'];
     $length = $_POST['length'];
-	$uncheckedAllCondition = $_POST['uncheckedAllCondition'];
+	$uncheckedReimburseCondition = $_POST['uncheckedReimburseCondition'];
 
     // 计算
     $startNum = ($page - 1) * $length;
@@ -22,8 +22,8 @@
 	{
         $nowDateTime = date('Y-m-d H:i:s');
         // echo $nowDateTime;
-		$sql = "SELECT * FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) and (projectType < 11) AND (proName LIKE '%"
-			.$uncheckedAllCondition."%')) ORDER BY createTime DESC LIMIT ".$startNum.", ".$length;
+		$sql = "SELECT * FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) AND (projectType = 11) AND (proName LIKE '%"
+			.$uncheckedReimburseCondition."%')) ORDER BY createTime DESC LIMIT ".$startNum.", ".$length;
 		// echo $sql;
 		
 		$result = mysqli_query($conn, $sql);
@@ -83,8 +83,8 @@
 				$resMessage[] = $row;
 			}
 
-			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) and (projectType < 11) AND (proName LIKE '%"
-				.$uncheckedAllCondition."%'))";
+			$sqlNew = "SELECT COUNT(*) AS total FROM `platform_project` WHERE ((adminCheck = 0) and ((taskMoney > 0) or (taskPoint > 0)) AND (projectType == 11) AND (proName LIKE '%"
+				.$uncheckedReimburseCondition."%'))";
 
 			$resultNew = mysqli_query($conn, $sqlNew);
 			

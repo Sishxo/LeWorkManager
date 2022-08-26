@@ -2,7 +2,7 @@
                     <h1 class="h3 mb-2 text-gray-800">任务审核</h1>
                     <p class="mb-4">管理员可以对未审核的任务进行审核</p>
 
-                    <!-- DataTales Example -->
+                    <!-- 未审核任务卡片 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">未审核的任务</h6>
@@ -124,7 +124,251 @@
                         </div>
                     </div>
 
-                    <!-- DataTales Example -->
+                    <!-- 补助预支卡片 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">补助预支</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="uncheckedSalary_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="uncheckedSalary_lengthChange()">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input id="uncheckedSalaryCondition" type="search" class="form-control form-control-sm" aria-controls="dataTable" onKeyUp="uncheckedSalaryConditionChange()">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格本体 -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="uncheckedSalaryTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>任务序号</th>
+                                                        <th>任务分类</th>
+                                                        <th>任务标题</th>
+                                                        <th>任务标签</th>
+                                                        <th>发布人</th>
+                                                        <th>泺研币</th>
+                                                        <th>泺学分</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格下方 -->
+                                    <div class=row>
+                                        
+                                        <!-- 显示编号 -->
+                                        <div class="col-sm-12 col-md-5">
+                                            <label>
+                                                <div style="display:inline-block; margin-right:5px">
+                                                    <font>第</font>
+                                                </div>
+
+                                                <div style="display:inline-block;width:20%">
+                                                    <input id="uncheckedSalaryPageInput" class="form-control form-control-sm" onchange="uncheckedSalaryPageInputChange()">
+                                                    </input>
+                                                </div>
+
+                                                <div style="display:inline-block; margin-left: 5px">
+                                                    <font>页</font>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <!-- 上一页 下一页 -->
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="uncheckedSalaryPageReduct" onclick="uncheckedSalaryPageReduct()" class="page-link">
+                                                            上一页
+                                                        </button>
+                                                    </li>
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="uncheckedSalaryPagePlus" onclick="uncheckedSalaryPagePlus()" class="page-link">
+                                                            下一页
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 财务报销卡片 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">财务报销</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="uncheckedReimburse_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="uncheckedReimburse_lengthChange()">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input id="uncheckedReimburseCondition" type="search" class="form-control form-control-sm" aria-controls="dataTable" onKeyUp="uncheckedReimburseConditionChange()">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格本体 -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="uncheckedReimburseTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>任务序号</th>
+                                                        <th>任务分类</th>
+                                                        <th>任务标题</th>
+                                                        <th>任务标签</th>
+                                                        <th>发布人</th>
+                                                        <th>泺研币</th>
+                                                        <th>泺学分</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格下方 -->
+                                    <div class=row>
+                                        
+                                        <!-- 显示编号 -->
+                                        <div class="col-sm-12 col-md-5">
+                                            <label>
+                                                <div style="display:inline-block; margin-right:5px">
+                                                    <font>第</font>
+                                                </div>
+
+                                                <div style="display:inline-block;width:20%">
+                                                    <input id="uncheckedReimbursePageInput" class="form-control form-control-sm" onchange="uncheckedReimbursePageInputChange()">
+                                                    </input>
+                                                </div>
+
+                                                <div style="display:inline-block; margin-left: 5px">
+                                                    <font>页</font>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <!-- 上一页 下一页 -->
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="uncheckedReimbursePageReduct" onclick="uncheckedReimbursePageReduct()" class="page-link">
+                                                            上一页
+                                                        </button>
+                                                    </li>
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="uncheckedReimbursePagePlus" onclick="uncheckedReimbursePagePlus()" class="page-link">
+                                                            下一页
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 审核通过任务卡片 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">我审核通过的任务</h6>
@@ -292,13 +536,19 @@
 
                     <div id="maxUncheckedPage" style="display:none"></div>
                     <div id="maxCheckedPage" style="display:none"></div>
+                    <div id="maxUncheckedSalaryPage" style="display:none"></div>
+                    <div id="maxUncheckedReimbursePage" style="display:none"></div>
 
                     <script type="text/javascript">
                         // 初始化页码
                         var uncheckedAllPage = 1  // 未审核任务页码
+                        var uncheckedSalaryPage = 1 // 未审核预支工资页码
+                        var uncheckedReimbursePage = 1 // 未审核财务报销页码
                         var checkedAllPage = 1    // 已审核任务页码
 
                         var oldUncheckedCondition = ""
+                        var oldUncheckedSalaryCondition = ""
+                        var oldUncheckedReimburseCondition = ""
                         var oldCheckedCondition = ""
 
                         if (localStorage.getItem("goingPage"))
@@ -344,6 +594,8 @@
 
                                     // 回调
                                     getUncheckedPublicTasks()
+                                    getUncheckedSalaryTasks()
+                                    getUncheckedReimburseTasks()
                                     getCheckedPublicTasks()
                                 }
                                 else
@@ -509,13 +761,6 @@
                             })
                         }
 
-                        // 每页显示条数修改
-                        function uncheckedAllTasks_lengthChange()
-                        {
-                            uncheckedAllPage = 1
-                            uncheckedAllReload()
-                        }
-
                         function uncheckedAllTasksReload()
                         {
                             document.getElementById('uncheckedAllTasksTable').innerHTML = "<thead> \
@@ -632,76 +877,548 @@
 
                         /* ------------- 未审核 -------------*/
 
-                        // 任务审核模态框获取数据
-                        function getTaskId(i)
+                        /* ------------- 预支补助 -------------*/
+                        // 获取未审核数据
+                        function getUncheckedSalaryTasks()
                         {
-                            // console.log(arguments)
-                            $("#taskId").val(uncheckedAllTasksList[i].id)
-                            $("#taskMoneyChanged").val(uncheckedAllTasksList[i].taskMoney)
-                            $("#taskPointChanged").val(uncheckedAllTasksList[i].taskPoint)
-                        }
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/uncheckedSalaryTasks.php",
+                                type: "POST",
+                                data:{
+                                    page: uncheckedSalaryPage,
+                                    length: $('#uncheckedSalary_length option:selected').val(),
+                                    uncheckedSalaryCondition: document.getElementById("uncheckedSalaryCondition").value
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        uncheckedSalaryTasksList = res_json.message
 
-                        // 任务审核
-                        function checkTask()
-                        {
-                            // 自然数正则
-                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, task) {
+                                            // 显示标签
+                                            var taskLabelText = ""
+                                            $.each(task.labels, function(i, taskLabel) {
+                                                // console.log(taskLabel.label)
+                                                taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                                // console.log(taskLabelText)
+                                            })
+                                            if (taskLabelText == "")
+                                            {
+                                                taskLabelText = "无"
+                                            }
 
-                            if (document.getElementById('taskMoneyChanged').value == "")
-                            {
-                                toastr.error('泺研币数量不能为空')
-                            }
-                            else if (!isNumber0.test(document.getElementById('taskMoneyChanged').value))
-                            {
-                                toastr.error('泺研币数量只能为自然数')
-                            }
-                            else if (document.getElementById('taskPointChanged').value == "")
-                            {
-                                toastr.error('泺学分数量不能为空')
-                            }
-                            else if (!isNumber0.test(document.getElementById('taskPointChanged').value))
-                            {
-                                toastr.error('泺学分数量只能为自然数')
-                            }
-                            else
-                            {
-                                $.ajax({
-                                    contentType: "application/x-www-form-urlencoded",
-                                    url:"../api/checkTask.php",
-                                    type: "POST",
-                                    data:{
-                                        taskId: document.getElementById('taskId').value,
-                                        taskMoney: document.getElementById('taskMoneyChanged').value,
-                                        taskPoint: document.getElementById('taskPointChanged').value,
-                                        userId: userInfoJson.id
-                                    },
-                                    success:function(res){
-                                        // console.log(res)
-                                        var res_json = JSON.parse(res)
-                                        // console.log(res_json)
-                                        // console.log(res_json.code)
-                                        if (res_json.code == 200)
+                                            // console.log(task)
+                                            var index = (uncheckedSalaryPage - 1) * $('#uncheckedSalary_length option:selected').val() + Number(i) + 1
+                                            // console.log(index)
+                                            
+                                            // console.log(task.projectType)
+                                            // console.log(taskType['0'])
+                                            // console.log(taskType[task.projectType - 1])
+                                            // console.log(taskType[task.projectType - 1].projectType)
+
+                                            // 显示提示框
+                                            // taskNameText = "<span data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + task.introduction + "\">" + task.proName + "</span>"
+                                            taskNameText = task.proName
+                                            // console.log(taskNameText)
+
+                                            // 按钮
+                                            var buttonText = "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedAllTasksClick()\"> \
+                                                        <i class=\"fas fa-regular fa-eye text-white-50\"></i> 详情 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 审核 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+
+                                            // 查找任务类型
+                                            var pos = 0;
+                                            var hasProType = false;
+                                            while (pos < getJsonLength(taskType))
+                                            {
+                                                // console.log(task.projectType)
+                                                // console.log(taskType[pos].id)
+                                                if (task.projectType == taskType[pos].id)
+                                                {
+                                                    hasProType = true;
+                                                    break;
+                                                }
+                                                pos = pos + 1;
+                                            }
+                                            // console.log(hasProType);
+                                            if (hasProType)
+                                            {
+                                                var proTypeText = "<td>" + taskType[pos].projectType + "</td>";
+                                            }
+                                            else
+                                            {
+                                                var proTypeText = "<td> 未分类 </td>"
+                                            }
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + proTypeText
+                                                + "<td>" + taskNameText + "</td>"                        
+                                                + "<td>" + taskLabelText + "</td>"
+                                                + "<td>" + task.headPersonName + "</td>"
+                                                + "<td>" + task.taskMoney + "</td>"
+                                                + "<td>" + task.taskPoint + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#uncheckedSalaryTable").append(str);
+                                            // console.log(str)
+                                        })
+
+                                        // 翻页按钮禁用判断
+                                        if (uncheckedAllPage == 1)
                                         {
-                                            // 成功
-                                            toastr.success('任务审核成功')
-
-                                            // 延时
-                                            setTimeout( function(){
-                                                // 跳转
-                                                // toPublishTasks()
-                                                location.reload()
-                                            }, 2 * 1000 );//延迟2000毫秒
+                                            document.getElementById('uncheckedSalaryPageReduct').disabled = "disabled"
+                                            document.getElementById('uncheckedSalaryPageReduct').className = "page-link disabled"
                                         }
                                         else
                                         {
-                                            // 失败，显示原因
-                                            console.log("任务审核失败")
-                                            
+                                            document.getElementById('uncheckedSalaryPageReduct').disabled = ""
+                                            document.getElementById('uncheckedSalaryPageReduct').className = "page-link"
                                         }
+
+                                        var maxUncheckedSalaryPage = Math.ceil(Number(res_json.listLength) / Number($('#uncheckedSalary_length option:selected').val()))
+                                        // console.log(maxUncheckedPage)
+
+                                        if (uncheckedSalaryPage >= maxUncheckedSalaryPage)
+                                        {
+                                            document.getElementById('uncheckedSalaryPagePlus').disabled = "disabled"
+                                            document.getElementById('uncheckedSalaryPagePlus').className = "page-link disabled"
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('uncheckedSalaryPagePlus').disabled = ""
+                                            document.getElementById('uncheckedSalaryPagePlus').className = "page-link"
+                                        }
+
+                                        // 页码填进去框里
+                                        document.getElementById('uncheckedSalaryPageInput').value = uncheckedAllPage
+                                        document.getElementById('uncheckedSalaryPageInput').disabled = ""
+                                        document.getElementById('maxUncheckedSalaryPage').innerHTML = maxUncheckedPage
                                     }
-                                })
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        // console.log("拉取任务列表失败")
+                                        document.getElementById('maxUncheckedSalaryPage').innerHTML = 0
+                                        document.getElementById('uncheckedSalaryPageInput').disabled = "disabled"
+                                        document.getElementById('uncheckedSalaryPageInput').value = ""
+                                        document.getElementById('uncheckedSalaryPageReduct').disabled = "disabled"
+                                        document.getElementById('uncheckedSalaryPageReduct').className = "page-link disabled"
+                                        document.getElementById('uncheckedSalaryPagePlus').disabled = "disabled"
+                                        document.getElementById('uncheckedSalaryPagePlus').className = "page-link disabled"
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无未审核的任务 </td></tr>"
+                                        $("#uncheckedSalaryTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function uncheckedSalaryReload()
+                        {
+                            document.getElementById('uncheckedSalaryTable').innerHTML = "<thead> \
+                                                    <tr> \
+                                                        <th>任务序号</th> \
+                                                        <th>任务分类</th> \
+                                                        <th>任务标题</th> \
+                                                        <th>任务标签</th> \
+                                                        <th>发布人</th> \
+                                                        <th>泺研币</th> \
+                                                        <th>泺学分</th> \
+                                                        <th>操作</th> \
+                                                    </tr> \
+                                                </thead> \
+                                                <tbody> \
+                                                </tbody>"
+                            getUncheckedSalaryTasks()
+                        }
+
+                        // 数据页码改变
+                        function uncheckedSalary_lengthChange()
+                        {
+                            uncheckedSalaryPage = 1
+                            uncheckedSalaryReload()
+                        }
+
+                        // 筛选条件改变
+                        function uncheckedSalaryConditionChange()
+                        {
+                            var nowUncheckedSalaryCondition = document.getElementById("uncheckedSalaryCondition").value
+
+                            if (oldUncheckedSalaryCondition != nowUncheckedSalaryCondition)
+                            {
+                                uncheckedSalaryReload()
+
+                                oldUncheckedSalaryCondition = nowUncheckedSalaryCondition
                             }
                         }
+
+                        // 页码加减
+                        function uncheckedSalaryPageReduct()
+                        {
+                            uncheckedSalaryPage = uncheckedSalaryPage - 1
+                            uncheckedSalaryTasksReload()
+                        }
+
+                        function uncheckedSalaryPagePlus()
+                        {
+                            uncheckedSalaryPage = uncheckedSalaryPage + 1
+                            uncheckedSalaryTasksReload()
+                        }
+
+                        // 页码突变
+                        function uncheckedSalaryPageInputChange()
+                        {
+                            if (!(/(^[0-9]*[1-9][0-9]*$)/.test(document.getElementById('uncheckedSalaryPageInput').value)))
+                            {
+                                // 非正整数
+                                if (document.getElementById('maxUncheckedSalaryPage').innerHTML == 0)
+                                {
+                                    document.getElementById('uncheckedSalaryPageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('uncheckedSalaryPageInput').value = uncheckedSalaryPage
+                                }
+
+                                toastr.error("页码格式错误")
+                            }
+                            else if (document.getElementById('uncheckedSalaryPageInput').value > document.getElementById('maxUncheckedSalaryPage').innerHTML)
+                            {
+                                // 页码超出了最大页
+                                if (document.getElementById('maxUncheckedSalaryPage').innerHTML == 0)
+                                {
+                                    document.getElementById('uncheckedSalaryPageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('uncheckedSalaryPageInput').value = uncheckedSalaryPage
+                                }
+
+                                toastr.error("页码已超出总数")
+                            }
+                            else
+                            {
+                                uncheckedSalaryPage = Number(document.getElementById('uncheckedSalaryPageInput').value)
+                                uncheckedSalaryReload()
+                            }
+                        }
+
+                        function uncheckedSalaryTasksClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            if (isNaN(td.parentElement.rowIndex))
+                            {
+                                var tdd = td.parentElement.parentElement.rowIndex
+                            }
+                            else
+                            {
+                                var tdd = td.parentElement.rowIndex
+                            }
+                            // console.log(td.parentElement.rowIndex + 1)
+                            // console.log(td.parentElement.children[1].innerHTML)
+                            // console.log(tdd)
+                            // console.log(document.getElementById('maxUncheckedSalaryPage').innerHTML)
+                            if ((tdd > 0) && (document.getElementById('maxUncheckedSalaryPage').innerHTML > 0))
+                            {
+                                clickId = uncheckedSalaryTasksList[tdd - 1].id
+                                // console.log(clickId)
+                                toManegeTask(clickId)
+                            }
+                        }
+
+                        /* ------------- 预支补助 -------------*/
+
+
+                        /* ------------- 财务报销 -------------*/
+
+                        // 获取未审核数据
+                        function getUncheckedReimburseTasks()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/uncheckedReimburseTasks.php",
+                                type: "POST",
+                                data:{
+                                    page: uncheckedReimbursePage,
+                                    length: $('#uncheckedReimburse_length option:selected').val(),
+                                    uncheckedReimburseCondition: document.getElementById("uncheckedReimburseCondition").value
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        uncheckedReimburseTasksList = res_json.message
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, task) {
+                                            // 显示标签
+                                            var taskLabelText = ""
+                                            $.each(task.labels, function(i, taskLabel) {
+                                                // console.log(taskLabel.label)
+                                                taskLabelText = taskLabelText + "<span class=\"label label-info\">" + taskLabel.label + "</span>&nbsp;"
+                                                // console.log(taskLabelText)
+                                            })
+                                            if (taskLabelText == "")
+                                            {
+                                                taskLabelText = "无"
+                                            }
+
+                                            // console.log(task)
+                                            var index = (uncheckedReimbursePage - 1) * $('#uncheckedReimburse_length option:selected').val() + Number(i) + 1
+                                            // console.log(index)
+                                            
+                                            // console.log(task.projectType)
+                                            // console.log(taskType['0'])
+                                            // console.log(taskType[task.projectType - 1])
+                                            // console.log(taskType[task.projectType - 1].projectType)
+
+                                            // 显示提示框
+                                            // taskNameText = "<span data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + task.introduction + "\">" + task.proName + "</span>"
+                                            taskNameText = task.proName
+                                            // console.log(taskNameText)
+
+                                            // 按钮
+                                            var buttonText = "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\"  onclick=\"uncheckedAllTasksClick()\"> \
+                                                        <i class=\"fas fa-regular fa-eye text-white-50\"></i> 详情 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <i class=\"fas fa-pen fa-sm text-white-50\"></i> 审核 \
+                                                    </a> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm\" data-toggle=\"modal\" data-target=\"#deleteTask\" onclick=\"getTaskId(" + i + ")\"> \
+                                                        <span aria-hidden=\"true\">×</span> 删除 \
+                                                    </a> \
+                                                </td>"
+
+                                            // 查找任务类型
+                                            var pos = 0;
+                                            var hasProType = false;
+                                            while (pos < getJsonLength(taskType))
+                                            {
+                                                // console.log(task.projectType)
+                                                // console.log(taskType[pos].id)
+                                                if (task.projectType == taskType[pos].id)
+                                                {
+                                                    hasProType = true;
+                                                    break;
+                                                }
+                                                pos = pos + 1;
+                                            }
+                                            // console.log(hasProType);
+                                            if (hasProType)
+                                            {
+                                                var proTypeText = "<td>" + taskType[pos].projectType + "</td>";
+                                            }
+                                            else
+                                            {
+                                                var proTypeText = "<td> 未分类 </td>"
+                                            }
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + proTypeText
+                                                + "<td>" + taskNameText + "</td>"                        
+                                                + "<td>" + taskLabelText + "</td>"
+                                                + "<td>" + task.headPersonName + "</td>"
+                                                + "<td>" + task.taskMoney + "</td>"
+                                                + "<td>" + task.taskPoint + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+
+                                            $("#uncheckedReimburseTable").append(str);
+                                            // console.log(str)
+                                        })
+
+                                        // 翻页按钮禁用判断
+                                        if (uncheckedAllPage == 1)
+                                        {
+                                            document.getElementById('uncheckedReimbursePageReduct').disabled = "disabled"
+                                            document.getElementById('uncheckedReimbursePageReduct').className = "page-link disabled"
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('uncheckedReimbursePageReduct').disabled = ""
+                                            document.getElementById('uncheckedReimbursePageReduct').className = "page-link"
+                                        }
+
+                                        var maxUncheckedReimbursePage = Math.ceil(Number(res_json.listLength) / Number($('#uncheckedReimburse_length option:selected').val()))
+                                        // console.log(maxUncheckedPage)
+
+                                        if (uncheckedReimbursePage >= maxUncheckedReimbursePage)
+                                        {
+                                            document.getElementById('uncheckedReimbursePagePlus').disabled = "disabled"
+                                            document.getElementById('uncheckedReimbursePagePlus').className = "page-link disabled"
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('uncheckedReimbursePagePlus').disabled = ""
+                                            document.getElementById('uncheckedReimbursePagePlus').className = "page-link"
+                                        }
+
+                                        // 页码填进去框里
+                                        document.getElementById('uncheckedReimbursePageInput').value = uncheckedAllPage
+                                        document.getElementById('uncheckedReimbursePageInput').disabled = ""
+                                        document.getElementById('maxUncheckedReimbursePage').innerHTML = maxUncheckedPage
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        // console.log("拉取任务列表失败")
+                                        document.getElementById('maxUncheckedReimbursePage').innerHTML = 0
+                                        document.getElementById('uncheckedReimbursePageInput').disabled = "disabled"
+                                        document.getElementById('uncheckedReimbursePageInput').value = ""
+                                        document.getElementById('uncheckedReimbursePageReduct').disabled = "disabled"
+                                        document.getElementById('uncheckedReimbursePageReduct').className = "page-link disabled"
+                                        document.getElementById('uncheckedReimbursePagePlus').disabled = "disabled"
+                                        document.getElementById('uncheckedReimbursePagePlus').className = "page-link disabled"
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无未审核的任务 </td></tr>"
+                                        $("#uncheckedReimburseTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function uncheckedReimburseReload()
+                        {
+                            document.getElementById('uncheckedReimburseTable').innerHTML = "<thead> \
+                                                    <tr> \
+                                                        <th>任务序号</th> \
+                                                        <th>任务分类</th> \
+                                                        <th>任务标题</th> \
+                                                        <th>任务标签</th> \
+                                                        <th>发布人</th> \
+                                                        <th>泺研币</th> \
+                                                        <th>泺学分</th> \
+                                                        <th>操作</th> \
+                                                    </tr> \
+                                                </thead> \
+                                                <tbody> \
+                                                </tbody>"
+                            getUncheckedReimburseTasks()
+                        }
+
+                        // 数据页码改变
+                        function uncheckedReimburse_lengthChange()
+                        {
+                            uncheckedReimbursePage = 1
+                            uncheckedReimburseReload()
+                        }
+
+                        // 筛选条件改变
+                        function uncheckedReimburseConditionChange()
+                        {
+                            var nowUncheckedReimburseCondition = document.getElementById("uncheckedReimburseCondition").value
+
+                            if (oldUncheckedReimburseCondition != nowUncheckedReimburseCondition)
+                            {
+                                uncheckedReimburseReload()
+
+                                oldUncheckedReimburseCondition = nowUncheckedReimburseCondition
+                            }
+                        }
+
+                        // 页码加减
+                        function uncheckedReimbursePageReduct()
+                        {
+                            uncheckedReimbursePage = uncheckedReimbursePage - 1
+                            uncheckedReimburseTasksReload()
+                        }
+
+                        function uncheckedReimbursePagePlus()
+                        {
+                            uncheckedReimbursePage = uncheckedReimbursePage + 1
+                            uncheckedReimburseTasksReload()
+                        }
+
+                        // 页码突变
+                        function uncheckedReimbursePageInputChange()
+                        {
+                            if (!(/(^[0-9]*[1-9][0-9]*$)/.test(document.getElementById('uncheckedReimbursePageInput').value)))
+                            {
+                                // 非正整数
+                                if (document.getElementById('maxUncheckedReimbursePage').innerHTML == 0)
+                                {
+                                    document.getElementById('uncheckedReimbursePageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('uncheckedReimbursePageInput').value = uncheckedReimbursePage
+                                }
+
+                                toastr.error("页码格式错误")
+                            }
+                            else if (document.getElementById('uncheckedReimbursePageInput').value > document.getElementById('maxUncheckedReimbursePage').innerHTML)
+                            {
+                                // 页码超出了最大页
+                                if (document.getElementById('maxUncheckedReimbursePage').innerHTML == 0)
+                                {
+                                    document.getElementById('uncheckedReimbursePageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('uncheckedReimbursePageInput').value = uncheckedReimbursePage
+                                }
+
+                                toastr.error("页码已超出总数")
+                            }
+                            else
+                            {
+                                uncheckedReimbursePage = Number(document.getElementById('uncheckedReimbursePageInput').value)
+                                uncheckedReimburseReload()
+                            }
+                        }
+
+                        function uncheckedReimburseTasksClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            if (isNaN(td.parentElement.rowIndex))
+                            {
+                                var tdd = td.parentElement.parentElement.rowIndex
+                            }
+                            else
+                            {
+                                var tdd = td.parentElement.rowIndex
+                            }
+                            // console.log(td.parentElement.rowIndex + 1)
+                            // console.log(td.parentElement.children[1].innerHTML)
+                            // console.log(tdd)
+                            // console.log(document.getElementById('maxUncheckedReimbursePage').innerHTML)
+                            if ((tdd > 0) && (document.getElementById('maxUncheckedReimbursePage').innerHTML > 0))
+                            {
+                                clickId = uncheckedReimburseTasksList[tdd - 1].id
+                                // console.log(clickId)
+                                toManegeTask(clickId)
+                            }
+                        }
+
+                        /* ------------- 财务报销 -------------*/
+
 
                         /* ------------- 已审核 -------------*/
 
@@ -729,7 +1446,7 @@
                                         // console.log(res_json.message)
                                         // console.log(taskType['0'].projectType)
                                         checkedTasksList = res_json.message
-                                        console.log(res_json.listLength)
+                                        // console.log(res_json.listLength)
 
                                         // 显示到下拉菜单
                                         $.each(res_json.message, function(i, task) {
@@ -805,8 +1522,8 @@
                                         }
 
                                         var maxCheckedPage = Math.ceil(Number(res_json.listLength) / Number($('#checkedAllTasks_length option:selected').val()))
-                                        console.log(res_json)
-                                        console.log(maxCheckedPage)
+                                        // console.log(res_json)
+                                        // console.log(maxCheckedPage)
 
                                         if (checkedAllPage >= maxCheckedPage)
                                         {
@@ -965,6 +1682,77 @@
                         }
 
                         /* ------------- 已审核 -------------*/
+
+                        // 任务审核模态框获取数据
+                        function getTaskId(i)
+                        {
+                            // console.log(arguments)
+                            $("#taskId").val(uncheckedAllTasksList[i].id)
+                            $("#taskMoneyChanged").val(uncheckedAllTasksList[i].taskMoney)
+                            $("#taskPointChanged").val(uncheckedAllTasksList[i].taskPoint)
+                        }
+
+                        // 任务审核
+                        function checkTask()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            if (document.getElementById('taskMoneyChanged').value == "")
+                            {
+                                toastr.error('泺研币数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskMoneyChanged').value))
+                            {
+                                toastr.error('泺研币数量只能为自然数')
+                            }
+                            else if (document.getElementById('taskPointChanged').value == "")
+                            {
+                                toastr.error('泺学分数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('taskPointChanged').value))
+                            {
+                                toastr.error('泺学分数量只能为自然数')
+                            }
+                            else
+                            {
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/checkTask.php",
+                                    type: "POST",
+                                    data:{
+                                        taskId: document.getElementById('taskId').value,
+                                        taskMoney: document.getElementById('taskMoneyChanged').value,
+                                        taskPoint: document.getElementById('taskPointChanged').value,
+                                        userId: userInfoJson.id
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 成功
+                                            toastr.success('任务审核成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 失败，显示原因
+                                            console.log("任务审核失败")
+                                            
+                                        }
+                                    }
+                                })
+                            }
+                        }
 
                         function toManegeTask(taskId)
                         {
