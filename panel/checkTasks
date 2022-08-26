@@ -983,7 +983,7 @@
                                         })
 
                                         // 翻页按钮禁用判断
-                                        if (uncheckedAllPage == 1)
+                                        if (uncheckedSalaryPage == 1)
                                         {
                                             document.getElementById('uncheckedSalaryPageReduct').disabled = "disabled"
                                             document.getElementById('uncheckedSalaryPageReduct').className = "page-link disabled"
@@ -1010,7 +1010,7 @@
                                         document.getElementById('uncheckedSalaryPageInput').value = uncheckedSalaryPage
                                         document.getElementById('uncheckedSalaryPageInput').disabled = ""
                                         document.getElementById('maxUncheckedSalaryPage').innerHTML = maxUncheckedSalaryPage
-                                        console.log(maxUn)
+                                        //console.log(maxUn)
                                     }
                                     else
                                     {
@@ -1073,13 +1073,13 @@
                         function uncheckedSalaryPageReduct()
                         {
                             uncheckedSalaryPage = uncheckedSalaryPage - 1
-                            uncheckedSalaryTasksReload()
+                            uncheckedSalaryReload()
                         }
 
                         function uncheckedSalaryPagePlus()
                         {
                             uncheckedSalaryPage = uncheckedSalaryPage + 1
-                            uncheckedSalaryTasksReload()
+                            uncheckedSalaryReload()
                         }
 
                         // 页码突变
@@ -1254,7 +1254,7 @@
                                         })
 
                                         // 翻页按钮禁用判断
-                                        if (uncheckedAllPage == 1)
+                                        if (uncheckedReimbursePage == 1)
                                         {
                                             document.getElementById('uncheckedReimbursePageReduct').disabled = "disabled"
                                             document.getElementById('uncheckedReimbursePageReduct').className = "page-link disabled"
@@ -1345,13 +1345,13 @@
                         function uncheckedReimbursePageReduct()
                         {
                             uncheckedReimbursePage = uncheckedReimbursePage - 1
-                            uncheckedReimburseTasksReload()
+                            uncheckedReimburseReload()
                         }
 
                         function uncheckedReimbursePagePlus()
                         {
                             uncheckedReimbursePage = uncheckedReimbursePage + 1
-                            uncheckedReimburseTasksReload()
+                            uncheckedReimburseReload()
                         }
 
                         // 页码突变
