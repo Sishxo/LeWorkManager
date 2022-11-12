@@ -101,7 +101,7 @@
                 <h6 class="collapse-header">任务管理系统</h6>
                 <a id="checkTasksNav" class="collapse-item" href="javascript:toCheckTasks()">任务发布审核</a>
                 <a  class="collapse-item" href="">任务类型管理</a>
-                <a class="collapse-item" href="">积分复核</a>
+                <a id="checkScoreNav" class="collapse-item"  href="javascript:toCheckScore()">积分复核</a>
                 <a id="allUsersTasksStatisticsNav" class="collapse-item" href="javascript:toAllUsersTasksStatistics()">工作量统计汇总</a>
             </div>
         </div>

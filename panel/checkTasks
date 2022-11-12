@@ -681,15 +681,31 @@
                             $("#AllTasksCard").hide()
                         }
 
-                        if (localStorage.getItem("goingPage"))
+                        if (localStorage.getItem("uncheckedAllPage"))
                         {
-                            goingPage = localStorage.getItem("goingPage")
+                            uncheckedAllPage = localStorage.getItem("uncheckedAllPage")
                         }
 
-                        if (localStorage.getItem("finishedPage"))
+                        if (localStorage.getItem("uncheckedSalaryPage"))
                         {
-                            finishedPage = localStorage.getItem("finishedPage")
+                            uncheckedSalaryPage = localStorage.getItem("uncheckedSalaryPage")
                         }
+
+                        if (localStorage.getItem("uncheckedReimbursePage"))
+                        {
+                            uncheckedReimbursePage = localStorage.getItem("uncheckedReimbursePage")
+                        }
+
+                        if (localStorage.getItem("checkedAllPage"))
+                        {
+                            checkedAllPage = localStorage.getItem("checkedAllPage")
+                        }
+
+                        if (localStorage.getItem("AllPage"))
+                        {
+                            AllPage = localStorage.getItem("AllPage")
+                        }
+
 
                         if (userInfoJson.permit > 2)
                         {

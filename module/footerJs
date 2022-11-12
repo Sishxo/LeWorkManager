@@ -1,6 +1,6 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
+
     <script type="text/javascript">
         function logout()
         {
@@ -83,6 +83,7 @@
                     case "cvCreate": $("#mainPageLogin").load("panel/cvCreate"); $("li#cvCreateNav").addClass("active"); break;
                     case "allUsersTasksStatistics": $("#mainPageLogin").load("panel/allUsersTasksStatistics"); $("li#tasksAdminNav").addClass("active"); $("a#allUsersTasksStatisticsNav").addClass("active"); $("div#collapseTasks").addClass("show"); break;
                     case "checkTasks": $("#mainPageLogin").load("panel/checkTasks"); $("li#tasksAdminNav").addClass("active"); $("a#checkTasksNav").addClass("active"); $("div#collapseTasks").addClass("show"); break;
+                    case "checkScore": $("#mainPageLogin").load("panel/checkScore"); $("li#tasksAdminNav").addClass("active"); $("a#checkScoreNav").addClass("active"); $("div#collapseTasks").addClass("show"); break;
                 }
             }
         }
@@ -155,6 +156,11 @@
             // localStorage.setItem("nowPage", "checkTasks");
             window.location.href = "index.php?nowPage=checkTasks";
             // location.reload();
+        }
+
+        function toCheckScore()
+        {
+            window.location.href = "index.php?nowPage=checkScore";
         }
 
         function toTasksStatistics()

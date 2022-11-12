@@ -1,0 +1,498 @@
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">积分复核</h1>
+                    <p class="mb-4">管理员可以对未审核的任务进行审核</p>
+
+                    <!-- 未审核任务卡片 -->
+                    <div class="card shadow mb-4" id="checkScoreCard">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">全部人员泺研币、泺学分列表</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                    <!-- 表格上方 -->
+                                    <div class="row" style="margin-bottom:0.5rem">
+                                        
+                                        <!-- 每页显示几条 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    <div style="display:inline-block; margin-right:5px">
+                                                        <font>每页显示</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <select id="checkScore_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="checkScore_lengthChange()">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="display:inline-block; margin-left: 5px">
+                                                        <font>条</font>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 搜索框 -->
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter">
+                                                <label>
+                                                    <div style="display:inline-block">
+                                                        <font>筛选查找：</font>
+                                                    </div>
+
+                                                    <div style="display:inline-block">
+                                                        <input id="checkScoreCondition" type="search" class="form-control form-control-sm" aria-controls="dataTable" onKeyUp="checkScoreConditionChange()">
+                                                        </input>
+                                                    </div>
+
+                    
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格本体 -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="checkScoreTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>人员序号</th>
+                                                        <th>姓名</th>
+                                                        <th>泺研币</th>
+                                                        <th>泺学分</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- 表格下方 -->
+                                    <div class=row>
+                                        
+                                        <!-- 显示编号 -->
+                                        <div class="col-sm-12 col-md-5">
+                                            <label>
+                                                <div style="display:inline-block; margin-right:5px">
+                                                    <font>第</font>
+                                                </div>
+
+                                                <div style="display:inline-block;width:20%">
+                                                    <input id="checkScorePageInput" class="form-control form-control-sm" onchange="checkScorePageInputChange()">
+                                                    </input>
+                                                </div>
+
+                                                <div style="display:inline-block; margin-left: 5px">
+                                                    <font>页</font>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <!-- 上一页 下一页 -->
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="checkScorePageReduct" onclick="checkScorePageReduct()" class="page-link">
+                                                            上一页
+                                                        </button>
+                                                    </li>
+                                                    <li class="paginate_button page-item" id="dataTable_previous">
+                                                        <button id="checkScorePagePlus" onclick="checkScorePagePlus()" class="page-link">
+                                                            下一页
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+                    
+
+                  
+
+                    <!-- 任务审核 Modal-->
+                    <div class="modal fade" id="checkScore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <!-- 传参 -->
+                                <input type="hidden" id="PersonId">
+
+                                <div class="modal-header">
+                                    <h5 id="checkScoreTitle" class="modal-title">任务审核</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <font color="red">请对泺研币和泺学分进行修改</font>
+                                    <!-- 泺研币 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>泺研币<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="MoneyChanged" class="form-control" placeholder="请输入泺研币数量">
+                                        </div>
+                                    </div>
+
+                                    <!-- 泺学分 -->
+                                    <div style="height:40px">
+                                        <div style="float:left;padding-top:8px">
+                                            <font>泺学分<font color="red">*</font>：</font>
+                                        </div>
+                                        <div style="float:right;width:80%">
+                                            <input id="PointsChanged" class="form-control" placeholder="请输入泺学分数量">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a id="changeChildTaskButton" class="btn btn-primary" href="javascript:checkScore()">确认通过</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="maxCheckScorePage" style="display:none"></div>
+
+                    <script type="text/javascript">
+                        // 初始化页码
+                        var checkScorePage = 1  // 未审核任务页码
+
+                        var oldCheckScoreCondition = ""
+
+                        if(userInfoJson.permit >1)
+                        {
+                            //console.log(userInfoJson.permit)
+                            $("#CheckScoreCard").hide()
+                        }
+
+                        if (localStorage.getItem("checkScorePage"))
+                        {
+                            checkScorePage = localStorage.getItem("checkScorePage")
+                        }
+
+                        if (userInfoJson.permit > 1)
+                        {
+                            toastr.error("没有访问权限")
+                            // 延时
+                            setTimeout( function(){
+                                // 跳转
+                                window.location.href="../index.php?nowPage=index"
+                            }, 0 * 2000 );//延迟2000毫秒
+                        }
+
+                        $('[data-toggle="tooltip"]').tooltip()
+                        getAllMoneyPoints()
+
+
+                        /* ------------- 未审核 -------------*/
+
+                        // 获取未审核数据
+                        function getAllMoneyPoints()
+                        {
+                            $.ajax({
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"../api/getAllMoneyPoints.php",
+                                type: "POST",
+                                data:{
+                                    page: checkScorePage,
+                                    length: $('#checkScore_length option:selected').val(),
+                                    checkScoreCondition: document.getElementById("checkScoreCondition").value,
+                                    userPermission: userInfoJson.permit
+                                },
+                                success:function(res){
+                                    // console.log(res)
+                                    var res_json = JSON.parse(res)
+                                    // console.log(res_json)
+                                    // console.log(res_json.code)
+                                    if (res_json.code == 200)
+                                    {
+                                        // 获取成功
+                                        // console.log(res_json.message)
+                                        // console.log(taskType['0'].projectType)
+                                        checkScoreList = res_json.message
+                                        console.log(checkScoreList)
+
+                                        // 显示到下拉菜单
+                                        $.each(res_json.message, function(i, score) {
+                                            // 显示标签
+                                            var scoreLabelText = ""
+
+                                            // console.log(task)
+                                            var index = (checkScorePage - 1) * $('#checkScore_length option:selected').val() + Number(i) + 1
+
+
+                                            // 按钮
+                                            var buttonText = "<td> \
+                                                    <a class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\" data-toggle=\"modal\" data-target=\"#checkScore\" onclick=\"getPersonId(" + i + ")\"> \
+                                                        <i class=\"fas fa-regular fa-eye text-white-50\"></i> 修改 \
+                                                    </a> \
+                                                </td>"
+
+
+                                            let str="<tr>"            
+                                                + "<td>" + index + "</td>"
+                                                + "<td>" + score.name + "</td>"                        
+                                                + "<td>" + score.taskMoney + "</td>"
+                                                + "<td>" + score.taskPoint + "</td>"
+                                                + buttonText
+                                                + "</tr>";
+                                            //console.log(str)
+                                            $("#checkScoreTable").append(str);
+                                        })
+
+                                        // 翻页按钮禁用判断
+                                        if (checkScorePage == 1)
+                                        {
+                                            document.getElementById('checkScorePageReduct').disabled = "disabled"
+                                            document.getElementById('checkScorePageReduct').className = "page-link disabled"
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('checkScorePageReduct').disabled = ""
+                                            document.getElementById('checkScorePageReduct').className = "page-link"
+                                        }
+
+                                        var maxCheckScorePage = Math.ceil(Number(res_json.listLength) / Number($('#checkScore_length option:selected').val()))
+                                        // console.log(maxUncheckedPage)
+
+                                        if (checkScorePage >= maxCheckScorePage)
+                                        {
+                                            document.getElementById('checkScorePagePlus').disabled = "disabled"
+                                            document.getElementById('checkScorePagePlus').className = "page-link disabled"
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('checkScorePagePlus').disabled = ""
+                                            document.getElementById('checkScorePagePlus').className = "page-link"
+                                        }
+
+                                        // 页码填进去框里
+                                        //console.log(checkScorePage)
+                                        document.getElementById('checkScorePageInput').value = checkScorePage
+                                        document.getElementById('checkScorePageInput').disabled = ""
+                                        document.getElementById('maxCheckScorePage').innerHTML = maxCheckScorePage
+                                    }
+                                    else
+                                    {
+                                        // 获取失败，显示原因
+                                        // console.log("拉取任务列表失败")
+                                        document.getElementById('maxCheckScorePage').innerHTML = 0
+                                        document.getElementById('checkScorePageInput').disabled = "disabled"
+                                        document.getElementById('checkScorePageInput').value = ""
+                                        document.getElementById('checkScorePageReduct').disabled = "disabled"
+                                        document.getElementById('checkScorePageReduct').className = "page-link disabled"
+                                        document.getElementById('checkScorePagePlus').disabled = "disabled"
+                                        document.getElementById('checkScorePagePlus').className = "page-link disabled"
+                                        let str="<tr><td colspan=\"8\" align=\"center\"> 暂无人员积分信息 </td></tr>"
+                                        $("#checkScoreTable").append(str);
+                                    }
+                                }
+                            })
+                        }
+
+                        function checkScoreReload()
+                        {
+                            document.getElementById('checkScoreTable').innerHTML = 
+                                                "<thead>\
+                                                    <tr>\
+                                                        <th>人员序号</th>\
+                                                        <th>姓名</th>\
+                                                        <th>泺研币</th>\
+                                                        <th>泺学分</th>\
+                                                        <th>操作</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody> \
+                                                </tbody>"
+                            getAllMoneyPoints()
+                        }
+
+                        // 数据页码改变
+                        function checkScore_lengthChange()
+                        {
+                            checkScorePage = 1
+                            checkScoreReload()
+                        }
+
+                        // 筛选条件改变
+                        function checkScoreConditionChange()
+                        {
+                            var nowCheckScoreCondition = document.getElementById("checkScoreCondition").value
+
+                            if (oldCheckScoreCondition != nowCheckScoreCondition)
+                            {
+                                checkScoreReload()
+
+                                oldCheckScoreCondition = nowCheckScoreCondition
+                            }
+                        }
+
+                        // 页码加减
+                        function checkScorePageReduct()
+                        {
+                            checkScorePage = checkScorePage - 1
+                            checkScoreReload()
+                        }
+
+                        function checkScorePagePlus()
+                        {
+                            checkScorePage = checkScorePage + 1
+                            checkScoreReload()
+                        }
+
+                        // 页码突变
+                        function checkScorePageInputChange()
+                        {
+                            if (!(/(^[0-9]*[1-9][0-9]*$)/.test(document.getElementById('checkScorePageInput').value)))
+                            {
+                                // 非正整数
+                                if (document.getElementById('maxCheckScorePage').innerHTML == 0)
+                                {
+                                    document.getElementById('checkScorePageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('checkScorePageInput').value = checkScorePage
+                                }
+
+                                toastr.error("页码格式错误")
+                            }
+                            else if (document.getElementById('checkScorePageInput').value > document.getElementById('maxCheckScorePage').innerHTML)
+                            {
+                                // 页码超出了最大页
+                                if (document.getElementById('maxCheckScorePage').innerHTML == 0)
+                                {
+                                    document.getElementById('checkScorePageInput').value = ""
+                                }
+                                else
+                                {
+                                    document.getElementById('checkScorePageInput').value = checkScorePage
+                                }
+
+                                toastr.error("页码已超出总数")
+                            }
+                            else
+                            {
+                                checkScorePage = Number(document.getElementById('checkScorePageInput').value)
+                                checkScoreReload()
+                            }
+                        }
+
+                        function checkScoreClick()
+                        {
+                            // 获取点击任务的id号
+                            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+                            if (isNaN(td.parentElement.rowIndex))
+                            {
+                                var tdd = td.parentElement.parentElement.rowIndex
+                            }
+                            else
+                            {
+                                var tdd = td.parentElement.rowIndex
+                            }
+                            // console.log(td.parentElement.rowIndex + 1)
+                            // console.log(td.parentElement.children[1].innerHTML)
+                            // console.log(tdd)
+                            console.log(document.getElementById('maxUncheckedPage').innerHTML)
+                            if ((tdd > 0) && (document.getElementById('maxUncheckedPage').innerHTML > 0))
+                            {
+                                clickId = uncheckedAllTasksList[tdd - 1].id
+                                // console.log(clickId)
+                                toManegeTask(clickId)
+                            }
+                        }
+
+                        // 任务审核模态框获取数据
+                        function getPersonId(i)
+                        {
+                            // console.log(arguments)
+                            $("#PersonId").val(checkScoreList[i].id)
+                            $("#MoneyChanged").val(checkScoreList[i].taskMoney)
+                            $("#PointsChanged").val(checkScoreList[i].taskPoint)
+                        }
+
+                        // 积分审核
+                        function checkScore()
+                        {
+                            // 自然数正则
+                            var isNumber0 = /^(?:0|[1-9][0-9]*)$/
+
+                            if (document.getElementById('MoneyChanged').value == "")
+                            {
+                                toastr.error('泺研币数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('MoneyChanged').value))
+                            {
+                                toastr.error('泺研币数量只能为自然数')
+                            }
+                            else if (document.getElementById('PointsChanged').value == "")
+                            {
+                                toastr.error('泺学分数量不能为空')
+                            }
+                            else if (!isNumber0.test(document.getElementById('PointsChanged').value))
+                            {
+                                toastr.error('泺学分数量只能为自然数')
+                            }
+                            else
+                            {
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded",
+                                    url:"../api/checkScore.php",
+                                    type: "POST",
+                                    data:{
+                                        PersonId: document.getElementById('PersonId').value,
+                                        taskMoney: document.getElementById('MoneyChanged').value,
+                                        taskPoint: document.getElementById('PointsChanged').value,
+                                    },
+                                    success:function(res){
+                                        // console.log(res)
+                                        var res_json = JSON.parse(res)
+                                        // console.log(res_json)
+                                        // console.log(res_json.code)
+                                        if (res_json.code == 200)
+                                        {
+                                            // 成功
+                                            toastr.success('泺学分及泺研币修改成功')
+
+                                            // 延时
+                                            setTimeout( function(){
+                                                // 跳转
+                                                // toPublishTasks()
+                                                location.reload()
+                                            }, 2 * 1000 );//延迟2000毫秒
+                                        }
+                                        else
+                                        {
+                                            // 失败，显示原因
+                                            console.log("泺学分及泺研币修改失败")
+                                            
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                        
+                        
+                    </script>
